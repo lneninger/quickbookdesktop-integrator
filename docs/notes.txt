@@ -1,0 +1,10 @@
+Quickbooks Integration
+
+
+1. Install Quickbooks Web Connector(QBWC)
+	Download from (https://developer.intuit.com/app/developer/qbdesktop/docs/get-started/get-started-with-quickbooks-web-connector)
+
+
+2. QB SDK has two examples of how communicate with Quickbooks.
+
+3. 	
