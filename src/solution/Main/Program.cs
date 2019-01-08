@@ -17,9 +17,14 @@ namespace Main
             ServiceBase[] ServicesToRun;
             ServicesToRun = new ServiceBase[]
             {
-                new Service()
+                new MainService()
             };
+#if(DEBUG)
+            ((MainService)ServicesToRun[0]).DebugStart();
+#else
+
             ServiceBase.Run(ServicesToRun);
+#endif
         }
     }
 }

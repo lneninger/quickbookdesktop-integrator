@@ -1,4 +1,4 @@
-﻿using ApplicationLogic.Repositories.Quickbook;
+﻿using ApplicationLogic.Interfaces.Repositories.Quickbooks;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,5 +9,8 @@ namespace QuickbookRepositories
 {
     public class InventoryRepository: IInventoryRepository
     {
+        public void Request() {
+        }
+
     }
 }

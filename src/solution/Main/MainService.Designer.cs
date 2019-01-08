@@ -1,6 +1,6 @@
 ﻿namespace Main
 {
-    partial class Service
+    partial class MainService
     {
         /// <summary> 
         /// Required designer variable.
