@@ -11,31 +11,40 @@ namespace QuickbookRepositories
 {
     public class AuthenticatorRepository : IAuthenticator
     {
-        public AuthenticatorRepository(/*IWebConnectorQwc webConnectorQwc*/IQbManager qbManager)
+        public AuthenticatorRepository()
         {
             //this.WebConnectorQwc = webConnectorQwc;
-            this.QbManager = qbManager;
+            //this.QbManager = qbManager;
         }
 
+        public static Guid Ticket { get; private set; }
         public IWebConnectorQwc WebConnectorQwc { get; }
         public IQbManager QbManager { get; }
 
         public Task<IAuthenticatedTicket> GetAuthenticationFromLoginAsync(string login, string password)
         {
-            //this.WebConnectorQwc.GetQwcFile()
-            var resultQB = this.QbManager.AuthenticateAsync(login, password);
-            IAuthenticatedTicket result = new AuthenticatedTicketDTO();
+            AuthenticatorRepository.Ticket = Guid.NewGuid();
+            IAuthenticatedTicket result = new AuthenticatedTicketDTO {
+                Authenticated = true,
+                Ticket = AuthenticatorRepository.Ticket.ToString()
+            };
             return Task.FromResult(result);
         }
 
         public Task<IAuthenticatedTicket> GetAuthenticationFromTicketAsync(string ticket)
         {
-            throw new NotImplementedException();
+            IAuthenticatedTicket result = new AuthenticatedTicketDTO
+            {
+                Authenticated = true,
+                Ticket = AuthenticatorRepository.Ticket.ToString(),
+            };
+            return Task.FromResult(result);
         }
 
         public Task SaveTicketAsync(IAuthenticatedTicket ticket)
         {
-            throw new NotImplementedException();
+            AuthenticatorRepository.Ticket = Guid.NewGuid();
+            return Task.FromResult(true);
         }
     }
 }

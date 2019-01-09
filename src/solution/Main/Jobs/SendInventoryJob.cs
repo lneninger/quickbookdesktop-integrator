@@ -23,6 +23,7 @@ namespace Main.Jobs
         {
             try
             {
+                var qbManager = IoCGlobal.Resolve<IQbManager>();
                 var authenticator = IoCGlobal.Resolve<IAuthenticator>();
 
                 throw new NotImplementedException();

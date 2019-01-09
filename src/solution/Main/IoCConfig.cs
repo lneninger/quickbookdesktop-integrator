@@ -1,6 +1,7 @@
 ﻿using Autofac;
 using Autofac.Extras.Quartz;
 using Framework.Autofac;
+using Microsoft.Extensions.Logging;
 using QbSync.WebConnector.Core;
 using QbSync.WebConnector.Impl;
 using QuickbookRepositories;
@@ -120,6 +121,27 @@ namespace Main
                 builder.RegisterType<WebConnectorQwc>()
                 .AsImplementedInterfaces()
                 .TrackInstanceEvents();
+
+                builder.RegisterType<MessageValidatorNoop>()
+                .AsImplementedInterfaces()
+                .TrackInstanceEvents();
+
+                builder.RegisterType<WebConnectorHandlerNoop>()
+                .AsImplementedInterfaces()
+                .TrackInstanceEvents();
+
+                // IAuthentication Customer implementation
+                builder.RegisterType<AuthenticatorRepository>()
+               .AsImplementedInterfaces()
+               .TrackInstanceEvents();
+
+                builder.RegisterType<Logger<QbManager>>()
+               .AsImplementedInterfaces()
+               .TrackInstanceEvents();
+
+                builder.RegisterType<Microsoft.Extensions.Logging.LoggerFactory>()
+               .AsImplementedInterfaces()
+               .TrackInstanceEvents();
 
                 // 1) Register IScheduler
                 builder.RegisterModule(new QuartzAutofacFactoryModule());
