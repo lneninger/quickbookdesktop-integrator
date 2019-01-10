@@ -1,4 +1,5 @@
-﻿using Framework.Autofac;
+﻿using ApplicationLogic.AppConfiguration;
+using Framework.Autofac;
 using QbSync.WebConnector.Core;
 using Quartz;
 using QuickbookRepositories;
@@ -25,6 +26,9 @@ namespace Main.Jobs
             {
                 var qbManager = IoCGlobal.Resolve<IQbManager>();
                 var authenticator = IoCGlobal.Resolve<IAuthenticator>();
+
+                var appConfig = IoCGlobal.Resolve<AppConfig>();
+                qbManager.AuthenticateAsync(appConfig.UserName, appConfig.Password);
 
                 throw new NotImplementedException();
             }

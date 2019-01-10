@@ -169,6 +169,10 @@
       <Project>{3b74d140-df7b-45de-a37b-99fe7cae5266}</Project>
       <Name>ApplicationLogic</Name>
     </ProjectReference>
+    <ProjectReference Include="..\DatabaseSchema\DatabaseSchema.csproj">
+      <Project>{6C9CC9E2-E73F-453C-9A6C-741D6030393D}</Project>
+      <Name>DatabaseSchema</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

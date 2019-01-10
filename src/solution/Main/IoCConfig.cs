@@ -1,5 +1,6 @@
 ﻿using Autofac;
 using Autofac.Extras.Quartz;
+using DatabaseRepositories;
 using Framework.Autofac;
 using Microsoft.Extensions.Logging;
 using QbSync.WebConnector.Core;
@@ -81,19 +82,19 @@ namespace Main
                 //   .GetHubContext())
                 //   .Named<IHubContext>("EventHub");
 
-               // var targetAssembly = Assembly.GetExecutingAssembly();
+                // var targetAssembly = Assembly.GetExecutingAssembly();
 
-               // var controllerTypes = targetAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Controller", StringComparison.InvariantCultureIgnoreCase));
-               // builder.RegisterTypes(controllerTypes.ToArray())
-               //.AsSelf()
-               //.EnableInterfaceInterceptors()
-               //.InterceptedBy(typeof(ExceptionInterceptor));
+                // var controllerTypes = targetAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Controller", StringComparison.InvariantCultureIgnoreCase));
+                // builder.RegisterTypes(controllerTypes.ToArray())
+                //.AsSelf()
+                //.EnableInterfaceInterceptors()
+                //.InterceptedBy(typeof(ExceptionInterceptor));
 
-               // var serviceAssembly = typeof(CustomerGetAllCommand).Assembly;
-               // var serviceTypes = serviceAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Command", StringComparison.InvariantCultureIgnoreCase));
-               // builder.RegisterTypes(serviceTypes.ToArray())
-               // .AsImplementedInterfaces()
-               // .TrackInstanceEvents();
+                // var serviceAssembly = typeof(CustomerGetAllCommand).Assembly;
+                // var serviceTypes = serviceAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Command", StringComparison.InvariantCultureIgnoreCase));
+                // builder.RegisterTypes(serviceTypes.ToArray())
+                // .AsImplementedInterfaces()
+                // .TrackInstanceEvents();
 
                 //var dataProviderAssembly = typeof(MasterDataProvider).Assembly;
                 //var dataProviderTypes = serviceAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("DataProvider", StringComparison.InvariantCultureIgnoreCase));
@@ -135,6 +136,10 @@ namespace Main
                .AsImplementedInterfaces()
                .TrackInstanceEvents();
 
+                builder.RegisterType<QuickbookTrackRepository>()
+               .AsImplementedInterfaces()
+               .TrackInstanceEvents();
+
                 builder.RegisterType<Logger<QbManager>>()
                .AsImplementedInterfaces()
                .TrackInstanceEvents();
@@ -142,6 +147,13 @@ namespace Main
                 builder.RegisterType<Microsoft.Extensions.Logging.LoggerFactory>()
                .AsImplementedInterfaces()
                .TrackInstanceEvents();
+
+                builder.RegisterType<ApplicationLogic.AppConfiguration.AppConfig>()
+                .AsSelf()
+                .SingleInstance()
+              .TrackInstanceEvents();
+
+
 
                 // 1) Register IScheduler
                 builder.RegisterModule(new QuartzAutofacFactoryModule());
