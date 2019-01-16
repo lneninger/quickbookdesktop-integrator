@@ -7,4 +7,54 @@ Quickbooks Integration
 
 2. QB SDK has two examples of how communicate with Quickbooks.
 
-3. 	
+3. 
+-------------------------------------------------------------
+Quickbooks Pro Data Export Using QBFC
+
+
+The scope of the project is implement a system which must extract the data of inventory items from Quickbooks Desktop and store such data in a self-managemend API, allowing external aaplications to consume it. The system will execute the data export every one hour.
+
+System Components
+ - one windows service to connect Quickbooks Desktop and extract the inventory items and it's price.
+ - one windows application to configure service connection data.
+ - one public API to send and retrieve data came from Quickbooks.
+
+Data Security
+ - The API will save only the last(current) batch of data came from Quickboooks, cleaning up the previous data.
+ - The access to the API will be using a predefined token, saved in the implemented Quickbooks data collector, as well as, any other further client connected to the API(Websites, Mobile Apps).
+
+ Hosting
+ - The two windows applications will run standalone in the server where reside the company's Quickbooks installation.
+ - The API will be hosted at the Developer Hosting server. This hosted can be changed as a complete new development agreement.
+
+Tecnical Details
+1. The server must have the assembly Interop.QBFC13 at C:\Windows\assembly if doesn't exists install QBFC13 on Nuget
+2. Request Developer version  at https://developer.intuit.com/nfr
+			Intuit provides QuickBooks Desktop developers with Not for Resale (NFR) copies of QuickBooks Desktop for development, testing and support purposes. 
+			Please call (877) 285-6941 and press option #3 for Not for Resale (NFR) to request your copy and version of QuickBooks Desktop. 
+			Hours are 6AM - 5PM PST Monday - Friday. Please specify which year(s) and version(s) of QuickBooks you need (Point of Sale, Pro, Premier and Enterprise) (US, CA, UK) (2013 - 2017). 
+
+			These licenses are not for resale and cannot be used in a production environment. 
+
+			QuickBooks for Mac is not available through the NFR.
+3. Need to be compiled as x86. Otherwise the  interop will not work at all.
+4. Need to verify that XML data can be parse on any scenario of formatting.
+5. Need to create a service to pick data from Quickbooks and send it to the API. 
+6. Another windows application is needed to Manage AppID and AppName to be used during Quickbooks integration.
+7. The API will be implemented using ASP.Net Core.
+8. The service will be implemented using dotnet Framework 7.1.
+9. To deploy the service and the config application will be created a windows installer.
+10. Version control and source created is privated not been allow by any person the distribution of it.
+11. The execution of the collector will be scheduled to every one hour.
+
+
+
+First Connection Test estimated to be at 01/25. Include:
+	Public API and Data Collector.
+
+Rate: $50/hr.
+Estimated effort: 80 hrs.
+Total estimated: $4000.
+
+
+ The system will execute the data export every one hour.
