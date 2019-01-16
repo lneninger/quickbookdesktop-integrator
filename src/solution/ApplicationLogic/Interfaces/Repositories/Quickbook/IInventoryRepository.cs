@@ -8,5 +8,6 @@ namespace ApplicationLogic.Interfaces.Repositories.Quickbooks
 {
     public interface IInventoryRepository
     {
+        void Request();
     }
 }

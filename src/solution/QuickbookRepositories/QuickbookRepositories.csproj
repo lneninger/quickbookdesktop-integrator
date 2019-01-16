@@ -34,6 +34,10 @@
     <Reference Include="DevDefined.OAuth, Version=1.0.0.0, Culture=neutral, PublicKeyToken=a3261f5b4697e67d, processorArchitecture=MSIL">
       <HintPath>..\..\packages\DevDefined.OAuth.0.2\lib\DevDefined.OAuth.dll</HintPath>
     </Reference>
+    <Reference Include="Interop.QBFC13, Version=13.0.0.23, Culture=neutral, PublicKeyToken=31d8aec643e18259">
+      <HintPath>..\..\packages\Interop.QBFC13.1.0.1\lib\Interop.QBFC13.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Intuit.Ipp.Core, Version=5.9.1.0, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\..\packages\IppDotNetSdkForQuickBooksApiV3.5.9.1\lib\Intuit.Ipp.Core.dll</HintPath>
     </Reference>
@@ -115,12 +119,6 @@
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
     </Reference>
-    <Reference Include="QbSync.QbXml, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QbSync.QbXml.0.1.0\lib\net45\QbSync.QbXml.dll</HintPath>
-    </Reference>
-    <Reference Include="QbSync.WebConnector, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QbSync.WebConnector.1.0.1\lib\netstandard2.0\QbSync.WebConnector.dll</HintPath>
-    </Reference>
     <Reference Include="SoapCore, Version=0.9.9.0, Culture=neutral, PublicKeyToken=092c4b76488e2b26, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SoapCore.0.9.9\lib\net461\SoapCore.dll</HintPath>
     </Reference>
@@ -157,7 +155,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="AuthenticatorRepository.cs" />
+    <Compile Include="_AbstractRespository.cs" />
     <Compile Include="InventoryRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -165,6 +163,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework.Logging\Framework.Logging.csproj">
+      <Project>{18d5392f-f09c-4a77-aa7c-ca04cf40f79e}</Project>
+      <Name>Framework.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj">
       <Project>{3b74d140-df7b-45de-a37b-99fe7cae5266}</Project>
       <Name>ApplicationLogic</Name>

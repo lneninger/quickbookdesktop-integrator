@@ -16,7 +16,7 @@
     </NuGetPackageImportStamp>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugSymbols>true</DebugSymbols>
     <DebugType>full</DebugType>
     <Optimize>false</Optimize>
@@ -26,7 +26,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <PlatformTarget>AnyCPU</PlatformTarget>
+    <PlatformTarget>x86</PlatformTarget>
     <DebugType>pdbonly</DebugType>
     <Optimize>true</Optimize>
     <OutputPath>bin\Release\</OutputPath>
@@ -82,12 +82,6 @@
     </Reference>
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Net.Http.Headers.2.0.2\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
-    </Reference>
-    <Reference Include="QbSync.QbXml, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QbSync.QbXml.0.1.0\lib\net45\QbSync.QbXml.dll</HintPath>
-    </Reference>
-    <Reference Include="QbSync.WebConnector, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QbSync.WebConnector.1.0.1\lib\netstandard2.0\QbSync.WebConnector.dll</HintPath>
     </Reference>
     <Reference Include="Quartz, Version=3.0.5.0, Culture=neutral, PublicKeyToken=f6b8c98a402cc8a4, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Quartz.3.0.5\lib\net452\Quartz.dll</HintPath>
@@ -176,6 +170,10 @@
     <ProjectReference Include="..\..\Framework\Framework.Autofac\Framework.Autofac.csproj">
       <Project>{C36A430E-1BAF-4723-9A4F-8666AC825F1F}</Project>
       <Name>Framework.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Framework.Logging\Framework.Logging.csproj">
+      <Project>{18d5392f-f09c-4a77-aa7c-ca04cf40f79e}</Project>
+      <Name>Framework.Logging</Name>
     </ProjectReference>
     <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj">
       <Project>{3b74d140-df7b-45de-a37b-99fe7cae5266}</Project>

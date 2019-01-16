@@ -59,6 +59,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework.Logging\Framework.Logging.csproj">
+      <Project>{18d5392f-f09c-4a77-aa7c-ca04cf40f79e}</Project>
+      <Name>Framework.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj">
       <Project>{3B74D140-DF7B-45DE-A37B-99FE7CAE5266}</Project>
       <Name>ApplicationLogic</Name>

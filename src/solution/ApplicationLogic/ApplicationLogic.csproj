@@ -31,6 +31,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Interop.QBFC13, Version=13.0.0.23, Culture=neutral, PublicKeyToken=31d8aec643e18259">
+      <HintPath>..\..\packages\Interop.QBFC13.1.0.1\lib\Interop.QBFC13.dll</HintPath>
+      <EmbedInteropTypes>True</EmbedInteropTypes>
+    </Reference>
     <Reference Include="Microsoft.AspNetCore.Http, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.AspNetCore.Http.2.0.2\lib\netstandard2.0\Microsoft.AspNetCore.Http.dll</HintPath>
     </Reference>
@@ -60,12 +64,6 @@
     </Reference>
     <Reference Include="Microsoft.Net.Http.Headers, Version=2.0.2.0, Culture=neutral, PublicKeyToken=adb9793829ddae60, processorArchitecture=MSIL">
       <HintPath>..\..\packages\Microsoft.Net.Http.Headers.2.0.2\lib\netstandard2.0\Microsoft.Net.Http.Headers.dll</HintPath>
-    </Reference>
-    <Reference Include="QbSync.QbXml, Version=0.1.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QbSync.QbXml.0.1.0\lib\net45\QbSync.QbXml.dll</HintPath>
-    </Reference>
-    <Reference Include="QbSync.WebConnector, Version=1.0.1.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\QbSync.WebConnector.1.0.1\lib\netstandard2.0\QbSync.WebConnector.dll</HintPath>
     </Reference>
     <Reference Include="SoapCore, Version=0.9.9.0, Culture=neutral, PublicKeyToken=092c4b76488e2b26, processorArchitecture=MSIL">
       <HintPath>..\..\packages\SoapCore.0.9.9\lib\net461\SoapCore.dll</HintPath>
@@ -125,17 +123,29 @@
     <Compile Include="Interfaces\Repositories\Database\IDbRepository.cs" />
     <Compile Include="Interfaces\Repositories\Database\IQuickbookTrackRepository.cs" />
     <Compile Include="Interfaces\Repositories\Quickbook\IInventoryRepository.cs" />
-    <Compile Include="Interfaces\Repositories\Quickbook\Models\AuthenticatedTicketDTO.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Quickbooks\Defaults.cs" />
+    <Compile Include="Quickbooks\ENEdition.cs" />
+    <Compile Include="Quickbooks\QBException.cs" />
+    <Compile Include="Quickbooks\QBNoResponseException.cs" />
+    <Compile Include="Quickbooks\SessionManager.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework.Logging\Framework.Logging.csproj">
+      <Project>{18d5392f-f09c-4a77-aa7c-ca04cf40f79e}</Project>
+      <Name>Framework.Logging</Name>
+    </ProjectReference>
     <ProjectReference Include="..\DatabaseSchema\DatabaseSchema.csproj">
       <Project>{6C9CC9E2-E73F-453C-9A6C-741D6030393D}</Project>
       <Name>DatabaseSchema</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Commons\Exceptions\" />
+    <Folder Include="Interfaces\Repositories\Quickbook\Models\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

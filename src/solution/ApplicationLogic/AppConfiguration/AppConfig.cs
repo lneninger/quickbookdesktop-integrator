@@ -9,13 +9,26 @@ namespace ApplicationLogic.AppConfiguration
 {
     public class AppConfig
     {
+        private const string QuickbooksApplicationIdKey = "QBAppID";
+        private const string QuickbooksApplicationNameKey = "QBAppName";
+
         public AppConfig()
         {
-            this.UserName = ConfigurationManager.AppSettings["userName"];
-            this.Password = ConfigurationManager.AppSettings["password"];
+            if (!ConfigurationManager.AppSettings.AllKeys.Contains(QuickbooksApplicationIdKey))
+            {
+                throw new ConfigurationErrorsException($"Application configuration key doesn't exists: {QuickbooksApplicationIdKey}. Expected keys: {QuickbooksApplicationIdKey}: Quickbooks client application id, {QuickbooksApplicationNameKey}: Quickbooks client application name");
+            }
+
+            if (!ConfigurationManager.AppSettings.AllKeys.Contains(QuickbooksApplicationNameKey))
+            {
+                throw new ConfigurationErrorsException($"Application configuration key doesn't exists: {QuickbooksApplicationNameKey}");
+            }
+
+            this.QuickbooksApplicationID = ConfigurationManager.AppSettings[QuickbooksApplicationIdKey];
+            this.QuickbooksApplicationName = ConfigurationManager.AppSettings[QuickbooksApplicationNameKey];
         }
 
-        public string UserName { get; set; }
-        public string Password { get; set; }
+        public string QuickbooksApplicationID { get; }
+        public string QuickbooksApplicationName { get; }
     }
 }

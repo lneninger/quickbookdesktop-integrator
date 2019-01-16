@@ -1,10 +1,11 @@
-﻿using Autofac;
+﻿using ApplicationLogic.Quickbooks;
+using Autofac;
 using Autofac.Extras.Quartz;
 using DatabaseRepositories;
 using Framework.Autofac;
 using Microsoft.Extensions.Logging;
-using QbSync.WebConnector.Core;
-using QbSync.WebConnector.Impl;
+//using QbSync.WebConnector.Core;
+//using QbSync.WebConnector.Impl;
 using QuickbookRepositories;
 using System;
 using System.Collections.Generic;
@@ -115,38 +116,39 @@ namespace Main
                 .TrackInstanceEvents();
 
 
-                builder.RegisterType<QbManager>()
-                 .AsImplementedInterfaces()
-                 .TrackInstanceEvents();
+                //builder.RegisterType<QbManager>()
+                // .AsImplementedInterfaces()
+                // .TrackInstanceEvents();
 
-                builder.RegisterType<WebConnectorQwc>()
-                .AsImplementedInterfaces()
-                .TrackInstanceEvents();
+                //builder.RegisterType<WebConnectorQwc>()
+                //.AsImplementedInterfaces()
+                //.TrackInstanceEvents();
 
-                builder.RegisterType<MessageValidatorNoop>()
-                .AsImplementedInterfaces()
-                .TrackInstanceEvents();
+                //builder.RegisterType<MessageValidatorNoop>()
+                //.AsImplementedInterfaces()
+                //.TrackInstanceEvents();
 
-                builder.RegisterType<WebConnectorHandlerNoop>()
-                .AsImplementedInterfaces()
-                .TrackInstanceEvents();
+                //builder.RegisterType<WebConnectorHandlerNoop>()
+                //.AsImplementedInterfaces()
+                //.TrackInstanceEvents();
 
                 // IAuthentication Customer implementation
-                builder.RegisterType<AuthenticatorRepository>()
-               .AsImplementedInterfaces()
-               .TrackInstanceEvents();
+               // builder.RegisterType<AuthenticatorRepository>()
+               //.AsImplementedInterfaces()
+               //.TrackInstanceEvents();
 
                 builder.RegisterType<QuickbookTrackRepository>()
                .AsImplementedInterfaces()
                .TrackInstanceEvents();
 
-                builder.RegisterType<Logger<QbManager>>()
-               .AsImplementedInterfaces()
+                builder.RegisterType<SessionManager>()
+               .AsSelf()
+               .SingleInstance()
                .TrackInstanceEvents();
 
-                builder.RegisterType<Microsoft.Extensions.Logging.LoggerFactory>()
-               .AsImplementedInterfaces()
-               .TrackInstanceEvents();
+               // builder.RegisterType<Microsoft.Extensions.Logging.LoggerFactory>()
+               //.AsImplementedInterfaces()
+               //.TrackInstanceEvents();
 
                 builder.RegisterType<ApplicationLogic.AppConfiguration.AppConfig>()
                 .AsSelf()

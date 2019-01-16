@@ -1,6 +1,7 @@
 ﻿using ApplicationLogic.AppConfiguration;
+using ApplicationLogic.Quickbooks;
 using Framework.Autofac;
-using QbSync.WebConnector.Core;
+//using QbSync.WebConnector.Core;
 using Quartz;
 using QuickbookRepositories;
 using System;
@@ -18,17 +19,23 @@ namespace Main.Jobs
         //    this.Authenticator = authenticator;
         //}
 
-        public IAuthenticator Authenticator { get; }
+        //public IAuthenticator Authenticator { get; }
 
         public Task Execute(IJobExecutionContext context)
         {
             try
             {
-                var qbManager = IoCGlobal.Resolve<IQbManager>();
-                var authenticator = IoCGlobal.Resolve<IAuthenticator>();
+                // Test Quickbook SessionManager
+                var qbManager = IoCGlobal.Resolve<SessionManager>();
 
-                var appConfig = IoCGlobal.Resolve<AppConfig>();
-                qbManager.AuthenticateAsync(appConfig.UserName, appConfig.Password);
+                // Test Inventory Item Request
+                var inventoryRepository = IoCGlobal.Resolve<ApplicationLogic.Interfaces.Repositories.Quickbooks.IInventoryRepository>();
+                inventoryRepository.Request();
+
+                //var authenticator = IoCGlobal.Resolve<IAuthenticator>();
+
+                //var appConfig = IoCGlobal.Resolve<AppConfig>();
+                //qbManager.AuthenticateAsync(appConfig.UserName, appConfig.Password);
 
                 throw new NotImplementedException();
             }
