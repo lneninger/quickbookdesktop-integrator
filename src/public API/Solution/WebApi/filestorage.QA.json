@@ -1,0 +1,16 @@
+﻿{
+  "fileStorage": {
+    "DefaultFileStorageDestination": "FileSystem",
+    "TemporaryFolderPath": "C:\\HostingSpaces\\neninger\\riverdaleapitest.hipalanet.com\\wwwroot\\app_data\\FileUpload\\TemporaryFolder",
+    "FileSystem": {
+      "FileSystemBaseStoragePath": "C:\\HostingSpaces\\neninger\\riverdaleapitest.hipalanet.com\\wwwroot\\app_data\\FileUpload\\BelzonaBaseFileStorage"
+    },
+    "AWS": {
+      "AWSFileRepoAccessKey": "",
+      "AWSFileRepoSecretKey": "",
+      "AWSFileStoreRootURL": "",
+      "AWSFileRepoRegionEndPoint": "",
+      "AWSFileRepoBucketName": ""
+    }
+  }
+}

@@ -1,0 +1,55 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Configurations>Debug;Release;QA</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="FileStorage\interfaces\**" />
+    <Compile Remove="FileStorage\Models\**" />
+    <Compile Remove="FileStorage\StorageImplementations\**" />
+    <EmbeddedResource Remove="FileStorage\interfaces\**" />
+    <EmbeddedResource Remove="FileStorage\Models\**" />
+    <EmbeddedResource Remove="FileStorage\StorageImplementations\**" />
+    <None Remove="FileStorage\interfaces\**" />
+    <None Remove="FileStorage\Models\**" />
+    <None Remove="FileStorage\StorageImplementations\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Compile Include="FileStorage\interfaces\IAWSSettings.cs" />
+    <Compile Include="FileStorage\interfaces\IFileStorageService.cs" />
+    <Compile Include="FileStorage\interfaces\IFileSystemSettings.cs" />
+    <Compile Include="FileStorage\Models\FileArgs.cs" />
+    <Compile Include="FileStorage\Models\FileSourceEnum.cs" />
+    <Compile Include="FileStorage\Models\FileStorageResultDTO.cs" />
+    <Compile Include="FileStorage\Models\FileStorageSettings.cs" />
+    <Compile Include="FileStorage\Models\FileTypeEnum.cs" />
+    <Compile Include="FileStorage\Models\IFileData.cs" />
+    <Compile Include="FileStorage\StorageImplementations\AWSStorage.cs" />
+    <Compile Include="FileStorage\StorageImplementations\AZUREStorage.cs" />
+    <Compile Include="FileStorage\StorageImplementations\FileSystemStorage.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.Core" Version="3.3.25.4" />
+    <PackageReference Include="AWSSDK.S3" Version="3.3.24.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.1.1" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework.Commons.Standard\Framework.Commons.Standard.csproj" />
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\Framework.Logging\Framework.Logging.csproj" />
+    <ProjectReference Include="..\Framework.Web\Framework.Web.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Reference Include="Microsoft.AspNetCore.Http.Features">
+      <HintPath>C:\Program Files\dotnet\sdk\NuGetFallbackFolder\microsoft.aspnetcore.http.features\2.1.1\lib\netstandard2.0\Microsoft.AspNetCore.Http.Features.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+
+</Project>

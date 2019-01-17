@@ -1,0 +1,206 @@
+﻿@import '../Styles/font-awesome-4.7.0/scss/font-awesome.scss';
+
+
+notificattion-widget {
+
+    @mixin flexbox() {
+        display: -webkit-box;
+        display: -moz-box;
+        display: -ms-flexbox;
+        display: -webkit-flex;
+        display: flex;
+    }
+
+    @mixin flex($values) {
+        -webkit-box-flex: $values;
+        -moz-box-flex: $values;
+        -webkit-flex: $values;
+        -ms-flex: $values;
+        flex: $values;
+    }
+
+    @mixin order($val) {
+        -webkit-box-ordinal-group: $val;
+        -moz-box-ordinal-group: $val;
+        -ms-flex-order: $val;
+        -webkit-order: $val;
+        order: $val;
+    }
+
+    @mixin noselect {
+        -webkit-touch-callout: none; /* iOS Safari */
+        -webkit-user-select: none; /* Safari */
+        -khtml-user-select: none; /* Konqueror HTML */
+        -moz-user-select: none; /* Firefox */
+        -ms-user-select: none; /* Internet Explorer/Edge */
+        user-select: none; /* Non-prefixed version, currently
+                                  supported by Chrome and Opera */
+    }
+
+    @mixin size($width, $height: $width) {
+        width: $width;
+        height: $height;
+    }
+
+    @mixin icon($icon) {
+        display: inline-block;
+        font: normal normal normal #{$fa-font-size-base}/1 FontAwesome; // shortening font declaration
+        font-size: inherit; // can't have font-size inherit on line above, so need to override
+        text-rendering: auto; // optimizelegibility throws things off #1094
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        transform: translate(0, 0); // ensures no half-pixel rendering in firefox
+        @extend .fa;
+        @extend .fa-#{$icon};
+        /*@include fa-icon;
+        @extend .fa;
+        @extend .fa-#{$icon}:before;*/
+    }
+
+    $lg-screen: 1200px;
+    $md-screen: 800px;
+    $wrapper-backgroundcolor: #3a7da4;
+    $wrapper-bordercolor: #404d8a;
+    $wrapper-height: 300px;
+    $wrapper-width: 300px;
+    $wrapper-fontsize: 14px;
+    $wrapper-fontfamily: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
+
+    $header-backgroundcolor: #4b8eb5;
+    $header-bordercolor: #404d8a;
+
+    $title-fontsize: 1.0em;
+
+
+
+    position: fixed;
+    bottom: 0;
+    right: 40px;
+    background-color: $wrapper-backgroundcolor;
+    @include flexbox();
+    flex-direction: column;
+    align-items: stretch;
+    height: $wrapper-height;
+    width: $wrapper-width;
+    font-size: $wrapper-fontsize;
+    font-family: $wrapper-fontfamily;
+    border-color: $wrapper-bordercolor;
+    border-width: 2px;
+    border-style: solid;
+    border-radius: 10px 10px 0 0;
+
+    & * {
+        @include flexbox();
+    }
+
+    & notification-header {
+        @include noselect();
+        @include flex(1);
+        /*background: $header-backgroundcolor;*/
+        flex-direction: row;
+        padding: 2px 10px;
+        cursor: pointer;
+        border-radius: 10px 10px 0 0;
+
+        & title {
+            font-size: $title-fontsize;
+            overflow: hidden;
+            /*display: flex;*/
+        }
+    }
+
+    & notification-body {
+        @include flex(10);
+        flex-direction: column;
+        flex-wrap: wrap;
+        /*align-items: stretch;*/
+        align-content: stretch;
+        overflow: hidden;
+        border-color: $wrapper-bordercolor;
+        border-width: 1px;
+        border-style: solid;
+        border-radius: 10px 10px 0 0;
+
+        & historic-area {
+            @include flex(6);
+            background-color: #808080;
+            align-items: flex-start;
+            align-content: flex-start;
+            flex-direction: row;
+            flex-wrap: wrap;
+
+            & message {
+                @include flex(.1 0 90%);
+                border-radius: 5px;
+                padding: 5px 3px;
+                border: 1px solid lighten($wrapper-backgroundcolor, 60%);
+                background-color: lighten($wrapper-backgroundcolor, 90%);
+                margin-bottom: 5px;
+            }
+        }
+
+        & input-area {
+            @include flex(1);
+            /*background-color: #239ca3;*/
+            align-items: center;
+            flex-direction: row;
+            justify-content: space-between;
+
+            & * {
+            }
+
+            & input-element {
+                @include flex(9);
+                font-size: $wrapper-fontsize * .7;
+                overflow: hidden;
+                border: 1 solid lighten($wrapper-backgroundcolor, 90%);
+                background-color: lighten($wrapper-backgroundcolor, 98%);
+                border-radius: 10px 0 0 10px;
+                padding: 2px 5px;
+            }
+
+            & input-send {
+                @include icon(angle-right);
+                /*background-color: darken($wrapper-backgroundcolor, 25%);*/
+                color: lighten($wrapper-backgroundcolor, 85%);
+                padding: 5px 5px;
+                align-content: center;
+                @include flex(1);
+                font-size: $wrapper-fontsize * 2;
+                overflow: hidden;
+                border: 1 solid lighten($wrapper-backgroundcolor, 90%);
+                border-radius: 0 10px 10px 0;
+                padding: 2px 5px;
+            }
+        }
+    }
+
+    &.collapsed {
+        height: 30px;
+        opacity: .5;
+
+        & notification-header {
+            @include flex(1 50%);
+        }
+
+        & notification-body {
+            display: none;
+        }
+    }
+
+    &.expanded {
+        & notification-header {
+            @include flex(1);
+        }
+    }
+
+    @media screen and (min-width: $lg-screen) {
+        /*padding: 40px;*/
+    }
+
+    @media screen and (min-width: $lg-screen) {
+        bottom: 0;
+        right: 40px;
+        /*padding: 40px;*/
+    }
+}

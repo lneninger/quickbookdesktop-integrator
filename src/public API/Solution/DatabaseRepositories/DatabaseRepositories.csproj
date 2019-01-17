@@ -1,0 +1,21 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Configurations>Debug;Release;QA</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="LMB.PredicateBuilderExtension" Version="1.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.6" />
+    <PackageReference Include="NBuilder" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj" />
+    <ProjectReference Include="..\DatabaseMapping\DomainDatabaseMapping\DomainDatabaseMapping.csproj" />
+    <ProjectReference Include="..\DomainModel\DomainModel.csproj" />
+    <ProjectReference Include="..\Framework\Framework.EF\Framework.EF.csproj" />
+  </ItemGroup>
+
+</Project>

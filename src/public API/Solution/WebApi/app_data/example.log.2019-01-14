@@ -1,0 +1,72 @@
+INFO   2019-01-14 08:50:36,594 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-14 08:50:37,114 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2019-01-14 08:50:37,243 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-14 08:50:37,751 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-14 08:50:37,785 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-14 08:50:37,880 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-14 08:50:38,055 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-14 08:50:39,989 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-14 08:50:40,701 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-14 08:50:41,147 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-14 08:50:43,215 14 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-14 08:50:43,215 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-14 11:12:34,181 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-14 11:12:34,747 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2019-01-14 11:12:34,907 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-14 11:12:35,417 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-14 11:12:35,465 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-14 11:12:35,606 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-14 11:12:35,870 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-14 11:12:38,874 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-14 11:12:39,910 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-14 11:12:40,751 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-14 11:12:43,372 8 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-14 11:12:43,372 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-14 11:54:12,310 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-14 11:54:12,704 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2019-01-14 11:54:12,791 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-14 11:54:13,105 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-14 11:54:13,132 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-14 11:54:13,221 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-14 11:54:13,389 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-14 11:54:14,664 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-14 11:54:15,043 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-14 11:54:15,406 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-14 11:54:16,695 17 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-14 11:54:16,695 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-15 01:07:18,926 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-15 01:07:19,681 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2019-01-15 01:07:19,781 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-15 01:07:20,174 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-15 01:07:20,248 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-15 01:07:20,414 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-15 01:07:20,613 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-15 01:07:22,016 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-15 01:07:22,371 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-15 01:07:22,742 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-15 01:07:24,207 15 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-15 01:07:24,207 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-15 01:36:45,235 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-15 01:36:45,485 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2019-01-15 01:36:45,540 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-15 01:36:45,715 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-15 01:36:45,739 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-15 01:36:45,803 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-15 01:36:45,921 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-15 01:36:46,882 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-15 01:36:47,167 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-15 01:36:47,455 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-15 01:36:48,587 7 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-15 01:36:48,587 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-15 01:48:55,281 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-15 01:48:55,747 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2019-01-15 01:48:55,838 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-15 01:48:56,075 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-15 01:48:56,113 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-15 01:48:56,239 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-15 01:48:56,419 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-15 01:48:57,986 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-15 01:48:58,435 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-15 01:48:58,875 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-15 01:49:00,679 13 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-15 01:49:00,679 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration

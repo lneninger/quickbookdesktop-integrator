@@ -1,0 +1,158 @@
+INFO   2018-12-25 08:58:04,049 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2018-12-25 08:58:05,406 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2018-12-25 08:58:05,569 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2018-12-25 08:58:06,279 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2018-12-25 08:58:06,431 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2018-12-25 08:58:06,709 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2018-12-25 08:58:08,348 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2018-12-25 08:58:08,768 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2018-12-25 08:58:09,163 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2018-12-25 08:58:10,704 8 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2018-12-25 08:58:10,705 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2018-12-25 23:43:41,109 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2018-12-25 23:43:41,603 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2018-12-25 23:43:41,697 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2018-12-25 23:43:42,155 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2018-12-25 23:43:42,286 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2018-12-25 23:43:42,472 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2018-12-25 23:43:44,592 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2018-12-25 23:43:44,975 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2018-12-25 23:43:45,325 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2018-12-25 23:43:46,611 9 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2018-12-25 23:43:46,611 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
+ERROR  2018-12-25 23:44:13,109 14 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 15
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-25 23:44:13,227 15 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 14
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-25 23:44:13,380 7 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 10
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-25 23:44:13,332 17 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 19
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-25 23:44:24,039 15 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 20
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+INFO   2018-12-26 01:16:06,264 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2018-12-26 01:16:06,688 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2018-12-26 01:16:06,799 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2018-12-26 01:16:07,155 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2018-12-26 01:16:07,248 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2018-12-26 01:16:07,428 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2018-12-26 01:16:08,787 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2018-12-26 01:16:09,150 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2018-12-26 01:16:09,549 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2018-12-26 01:16:10,801 7 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2018-12-26 01:16:10,801 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
+ERROR  2018-12-26 02:09:30,845 125 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 15
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:09:31,053 113 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 14
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:09:31,135 128 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 19
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:09:31,371 122 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 10
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:11:16,307 113 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 14
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:11:16,374 122 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 15
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:11:16,641 125 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 19
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:11:16,805 110 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 10
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:12:30,109 125 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 21
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:12:52,165 135 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 15
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:12:52,239 137 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 14
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:12:52,454 134 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 19
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:12:52,527 125 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 10
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+ERROR  2018-12-26 02:12:52,745 128 Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage - File Retrieve - 21
+System.InvalidOperationException: Headers are read-only, response has already started.
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.ThrowHeadersReadOnlyException()
+   at Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpHeaders.Microsoft.AspNetCore.Http.IHeaderDictionary.set_Item(String key, StringValues value)
+   at Microsoft.AspNetCore.Http.Internal.DefaultHttpResponse.set_ContentType(String value)
+   at Framework.Storage.FileStorage.TemporaryStorage.TemporaryStorage.RetrieveFile(HttpContext context) in D:\Dev\HIPALANET\riverdale-main-app-2.0\Framework\Framework.FileStorage.AspNetCore\FileStorage\TemporaryStorage\TemporaryStorageHandler.cs:line 192
+INFO   2018-12-26 03:35:37,087 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2018-12-26 03:35:38,044 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
+INFO   2018-12-26 03:35:38,434 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2018-12-26 03:35:39,048 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2018-12-26 03:35:39,156 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2018-12-26 03:35:39,379 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2018-12-26 03:35:41,320 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2018-12-26 03:35:41,952 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2018-12-26 03:35:42,689 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2018-12-26 03:35:44,883 16 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2018-12-26 03:35:44,885 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration

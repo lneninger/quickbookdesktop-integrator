@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="FileStorage\TemporaryStorage\TemporaryStorageHandler.cs" />
+    <Compile Remove="FileStorage\TemporaryStorage\UploadedFileResult.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AWSSDK.S3" Version="3.3.24.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\CommunicationModel\CommunicationModel.csproj" />
+    <ProjectReference Include="..\Framework.Commons.Standard\Framework.Commons.Standard.csproj" />
+    <ProjectReference Include="..\Framework.Core.Standard\Framework.Core.Standard.csproj" />
+    <ProjectReference Include="..\Framework.Core\Framework.Core.csproj" />
+  </ItemGroup>
+
+</Project>

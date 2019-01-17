@@ -1,0 +1,16 @@
+﻿{
+  "FileStorage": {
+    "DefaultFileStorageDestination": "FileSystem",
+    "temporaryFolderPath": "D:\\Temp\\RiverdaleMainApp2_0\\TemporaryFolder",
+    "FileSystem": {
+      "FileSystemBaseStoragePath": "D:\\Temp\\RiverdaleMainApp2_0\\StorageFolder"
+    },
+    "AWS": {
+      "AWSFileRepoAccessKey": "",
+      "AWSFileRepoSecretKey": "",
+      "AWSFileStoreRootURL": "",
+      "AWSFileRepoRegionEndPoint": "",
+      "AWSFileRepoBucketName": ""
+    }
+  }
+}

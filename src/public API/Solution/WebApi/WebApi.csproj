@@ -1,0 +1,88 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
+    <RootNamespace>RiverdaleMainApp2_0</RootNamespace>
+    <Configurations>Debug;Release;QA</Configurations>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <TypeScriptCompileBlocked>True</TypeScriptCompileBlocked>
+  </PropertyGroup>
+
+  <!--Tool to enable web.config transformations. Added manually. Dont use Nuget. After include lines below run 'dotnet restore' and 'dotnet build' at project folder-->
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.DotNet.Xdt.Tools" Version="2.0.0" />
+  </ItemGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
+    <DocumentationFile>bin\Debug\netcoreapp2.1\FocusAIRemote.xml</DocumentationFile>
+  </PropertyGroup>
+
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='QA|AnyCPU'">
+    <PlatformTarget></PlatformTarget>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Pages\**" />
+    <Content Remove="Pages\**" />
+    <EmbeddedResource Remove="Pages\**" />
+    <None Remove="Pages\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Remove="Widget\Scripts\models.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Widget\Scripts\app.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Autofac" Version="4.8.1" />
+    <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.3.0" />
+    <PackageReference Include="Autofac.Extras.DynamicProxy" Version="4.5.0" />
+    <PackageReference Include="ElmahCore" Version="1.2.1" />
+    <PackageReference Include="Microsoft.AspNetCore.App" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.1.2" />
+    <PackageReference Include="Microsoft.AspNetCore.Cors" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.6" />
+    <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.1.4" />
+    <PackageReference Include="NBuilder" Version="6.0.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Framework\Framework.Autofac\Framework.Autofac.csproj" />
+    <ProjectReference Include="..\Framework\Framework.EF\Framework.EF.csproj" />
+    <ProjectReference Include="..\Framework\Framework.FileStorage.AspNetCore\Framework.FileStorage.AspNetCore.csproj" />
+    <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj" />
+    <ProjectReference Include="..\CommunicationModel\CommunicationModel.csproj" />
+    <ProjectReference Include="..\DatabaseRepositories\DatabaseRepositories.csproj" />
+    <ProjectReference Include="..\Framework\Framework.Logging\Framework.Logging.csproj" />
+    <ProjectReference Include="..\FunzaRepositories\FunzaRepositories.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Update="filestorage.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Update="log4net.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+  </ItemGroup>
+
+  <ItemGroup>
+    <TypeScriptCompile Include="Widget\Scripts\models.ts" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="AppSettings\NewFolder\" />
+    <Folder Include="Areas\" />
+  </ItemGroup>
+
+</Project>

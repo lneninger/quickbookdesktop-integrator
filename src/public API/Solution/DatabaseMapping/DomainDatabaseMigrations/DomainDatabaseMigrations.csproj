@@ -1,0 +1,47 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <LangVersion>7.2</LangVersion>
+    <GenerateRuntimeConfigurationFiles>True</GenerateRuntimeConfigurationFiles>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="Migrations\20181123114735_TrackEntity CreatedAtNotNull.cs" />
+    <Compile Remove="Migrations\20181123115158_TrackEntity CreatedAtNotNull.cs" />
+    <Compile Remove="Migrations\20190102043948_SaleOpportunity schema.cs" />
+    <Compile Remove="Migrations\20190103011110_SaleOpportunity schema.cs" />
+    <Compile Remove="Migrations\20190107024613_GrowerType Inflate.cs" />
+    <Compile Remove="Migrations\20190107025008_GrowerType Inflate.cs" />
+    <Compile Remove="Migrations\20190107025602_GrowerType Inflate.cs" />
+    <Compile Remove="Migrations\20190107025913_GrowerType Inflate.cs" />
+    <Compile Remove="Migrations\20190107030215_GrowerType Inflate.cs" />
+    <Compile Remove="Migrations\20190113121655_AddTable ProductAllowedColorType.cs" />
+    <Compile Remove="Migrations\20190113122302_AddTable ProductAllowedColorType.cs" />
+    <Compile Remove="Migrations\20190113122616_AddTable ProductAllowedColorType.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="2.1.6" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.SqlServer" Version="2.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools" Version="2.1.4" />
+    <PackageReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.3" />
+    <PackageReference Include="Microsoft.Extensions.Identity.Stores" Version="2.1.6" />
+    <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.5.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\DomainDatabaseMapping\DomainDatabaseMapping.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="App.config">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Migrations\" />
+  </ItemGroup>
+
+</Project>

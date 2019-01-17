@@ -1,0 +1,37 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <Configurations>Debug;Release;QA</Configurations>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <Compile Remove="%40Commons\**" />
+    <Compile Remove="Business\Commands\AppUser\AuthenticateCommand\**" />
+    <Compile Remove="Business\Commands\AppUser\RegisterCommand\**" />
+    <EmbeddedResource Remove="%40Commons\**" />
+    <EmbeddedResource Remove="Business\Commands\AppUser\AuthenticateCommand\**" />
+    <EmbeddedResource Remove="Business\Commands\AppUser\RegisterCommand\**" />
+    <None Remove="%40Commons\**" />
+    <None Remove="Business\Commands\AppUser\AuthenticateCommand\**" />
+    <None Remove="Business\Commands\AppUser\RegisterCommand\**" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="FluentValidation" Version="8.0.101" />
+    <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.EF\Framework.EF.csproj" />
+    <ProjectReference Include="..\Framework\Framework.Autofac\Framework.Autofac.csproj" />
+    <ProjectReference Include="..\Framework\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\Framework\Framework.EF\Framework.EF.csproj" />
+    <ProjectReference Include="..\DomainModel\DomainModel.csproj" />
+    <ProjectReference Include="..\Framework\Framework.FileStorage.AspNetCore\Framework.FileStorage.AspNetCore.csproj" />
+    <ProjectReference Include="..\Framework\Framework.FluentValidation\Framework.FluentValidation.csproj" />
+    <ProjectReference Include="..\Framework\Framework.SignalR\Framework.SignalR.csproj" />
+  </ItemGroup>
+
+</Project>

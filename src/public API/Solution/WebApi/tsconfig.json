@@ -1,0 +1,41 @@
+{
+  "compileOnSave": true,
+  "compilerOptions": {
+    "module": "none",
+    "noImplicitAny": false,
+    "noEmitOnError": true,
+    "removeComments": false,
+    "sourceMap": true,
+    "target": "es5",
+    "rootDir": "./",
+    "outDir": "wwwroot"
+  },
+  "exclude": [
+    "node_modules",
+    "wwwroot"
+  ],
+  "include": [
+    "widget/**/*",
+    "../DatabaseRepositories/DB/CustomerFreightoutDBRepository.cs",
+    "Controllers/UserRoleController.cs",
+    "Controllers/ProductController.cs",
+    "Controllers/ProductMediaController.cs",
+    "../Framework/Framework.FileStorage.Standard/FileStorage/Models/FileStorageSettings.cs",
+    "../Framework/Framework.Core/Helpers/FileHelpers.cs",
+    "Controllers/ProductBridgeController.cs",
+    "../ApplicationLogic/Business/Commands/ProductBridge/UpddateCommand/Models/ProductBridgeUpdateCommandOutputDTO.cs",
+    "../ApplicationLogic/Business/Commands/ProductBridge/UpddateCommand/ProductBridgeUpdateCommand.cs",
+    "../ApplicationLogic/Business/Commands/ProductBridge",
+    "../Framework/Framework.SignalR/SignalREvents.cs",
+    "../DatabaseMapping/DomainDatabaseMapping/Mappings/SaleOpportunity/SaleOpportunityMap.cs",
+    "../DatabaseMapping/DomainDatabaseMapping/Mappings/SaleOpportunity/SaleSeasonTypeMap.cs",
+    "../DatabaseMapping/DomainDatabaseMapping/Mappings/SaleOpportunity/SaleSeasonCategoryTypeMap.cs",
+    "../ApplicationLogic/Repositories/DB/ISaleOpportunityDBRepository.cs",
+    "../DatabaseRepositories/DB/SaleOpportunityDBRepository.cs",
+    "../DatabaseRepositories/DB/SaleOpportunityProductDBRepository.cs",
+    "../ApplicationLogic/Repositories/DB/ISaleOpportunityProductDBRepository.cs",
+    "../ApplicationLogic/Business/Commands/SaleOpportunityProduct",
+    "../ApplicationLogic/Business/Commands/FunzaIntegrator/AuthenticateCommand",
+    "Controllers/FunzaController.cs", "../ApplicationLogic/Business/Commands/FunzaIntegrator/GetProductsCommand", "../FunzaRepositories/SecurityRepository.cs"
+  ]
+}
