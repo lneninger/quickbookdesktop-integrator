@@ -1,6 +1,8 @@
 ﻿using ApplicationLogic.AppConfiguration;
+using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems;
 using ApplicationLogic.Quickbooks;
 using Framework.Autofac;
+using Framework.Logging.Log4Net;
 //using QbSync.WebConnector.Core;
 using Quartz;
 using QuickbookRepositories;
@@ -14,13 +16,8 @@ namespace Main.Jobs
 {
     public class SendInventoryJob : IJob
     {
-        //public SendInventoryJob(IAuthenticator authenticator)
-        //{
-        //    this.Authenticator = authenticator;
-        //}
-
-        //public IAuthenticator Authenticator { get; }
-
+        protected LoggerCustom Logger = Framework.Logging.Log4Net.LoggerFactory.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+       
         public Task Execute(IJobExecutionContext context)
         {
             try
@@ -29,13 +26,9 @@ namespace Main.Jobs
                 var qbManager = IoCGlobal.Resolve<SessionManager>();
 
                 // Test Inventory Item Request
-                var inventoryRepository = IoCGlobal.Resolve<ApplicationLogic.Interfaces.Repositories.Quickbooks.IInventoryRepository>();
-                inventoryRepository.Request();
-
-                //var authenticator = IoCGlobal.Resolve<IAuthenticator>();
-
-                //var appConfig = IoCGlobal.Resolve<AppConfig>();
-                //qbManager.AuthenticateAsync(appConfig.UserName, appConfig.Password);
+                var getInventoryItemsCommand = IoCGlobal.Resolve<IGetInventoryItemsCommand>();
+                var result = getInventoryItemsCommand.Execute();
+                Logger.Info("Sync Inventory Items with success!");
 
                 throw new NotImplementedException();
             }

@@ -59,6 +59,11 @@ namespace QuickbookRepositories
                     ICustomerMsgQuery custMsgQuery = requestMsgSet.AppendCustomerMsgQueryRq();
                     custMsgQuery.metaData.SetValue(ENmetaData.mdMetaDataOnly);
                     break;
+                case "ItemInventoryQueryRq":
+                    IItemInventoryQuery itemInventoryQuery = requestMsgSet.AppendItemInventoryQueryRq();
+                    itemInventoryQuery.metaData.SetValue(ENmetaData.mdMetaDataOnly);
+                    break;
+                    
                 default:
                     break;
             }

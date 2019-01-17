@@ -1,3 +1,4 @@
+using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,6 +9,6 @@ namespace ApplicationLogic.Interfaces.Repositories.Quickbooks
 {
     public interface IInventoryRepository
     {
-        void Request();
+        IEnumerable<GetInventoryItemsOutputIventoryItemDTO> GetAll();
     }
 }

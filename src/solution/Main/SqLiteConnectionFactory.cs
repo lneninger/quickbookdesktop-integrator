@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Data.Common;
+using System.IO;
 using System.Linq;
 using System.Web;
 
@@ -46,7 +47,8 @@ namespace Main
         /// </summary>
         /// <returns></returns>
         public string GetFilePath() {
-            var sitePath = HttpContext.Current.Server.MapPath("~");
+            var assemblyName = System.Reflection.Assembly.GetEntryAssembly().Location;
+            var sitePath = Path.GetDirectoryName(assemblyName);//  HttpContext.Current.Server.MapPath("~");
             var result = System.IO.Path.Combine(sitePath, RelativeSqlLitePath);
             return result;
         }

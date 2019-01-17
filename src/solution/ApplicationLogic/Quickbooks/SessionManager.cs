@@ -34,12 +34,70 @@ namespace ApplicationLogic.Quickbooks
         public SessionManager(AppConfig appConfig)
         {
             this.AppConfig = appConfig;
-            this.Initialize();
+            this._qbSessionManager = new QBSessionManager();
+            this.initialize();
         }
 
-        private void Initialize()
+        /// <summary>
+        /// Manages the connection with the backend QuickBooks instance. Exceptions are logged and
+        /// subsequently thrown to the caller.
+        /// </summary>
+        /// <param name="appName">The name of the integrated application</param>
+        public void initialize()
         {
-            throw new NotImplementedException();
+            initialize(this.AppConfig.QuickbooksApplicationName, "", Defaults.CONNECTION_TYPE);
+        }
+
+        /// <summary>
+        /// Manages the connection with the backend QuickBooks instance. Exceptions are logged and
+        /// subsequently thrown to the caller.
+        /// </summary>
+        /// <param name="appName">The name of the integrated application</param>
+        /// <param name="connType">The type of connection to open with the backend QuickBooks instance</param>
+        public void initialize(string appName, ENConnectionType connType)
+        {
+            initialize(appName, "", connType);
+        }
+
+        /// <summary>
+        /// Manages the connection with the backend QuickBooks instance. Exceptions are logged and
+        /// subsequently thrown to the caller.
+        /// </summary>
+        /// <param name="appName">The name of the integrated application</param>
+        /// <param name="appId">The ID of the integrated application (assigned by Intuit)</param>
+        public void initialize(string appName, string appId)
+        {
+            initialize(appName, appId, Defaults.CONNECTION_TYPE);
+        }
+
+        /// <summary>
+        /// Manages the connection with the backend QuickBooks instance. Exceptions are logged and
+        /// subsequently thrown to the caller.
+        /// </summary>
+        /// <param name="appName">The name of the integrated application</param>
+        /// <param name="sAppId">The ID of the integrated application (assigned by Intuit)</param>
+        /// <param name="connType">The type of connection to use with the backend QuickBooks instance</param>
+        public void initialize(string appName, string appId, ENConnectionType connType)
+        {
+            try
+            {
+                // Setup access to strings
+                // TODO: finish setting up the rm and then migrate all strings there.
+
+                // Save some of the pertinent information
+                _appId = appId;
+                _appName = appName;
+                _connType = connType;
+
+                // determine the most recent version of the SDK supported by the backend QuickBooks
+                // instance.
+                getBackendSdkVersion();
+            }
+            catch (Exception e)
+            {
+                Logger.Fatal("SessionManager.initialize", e);
+                throw e;
+            }
         }
 
         /// <summary>

@@ -1,4 +1,5 @@
 ﻿using Framework.Autofac;
+using Main.Helpers;
 using Main.Jobs;
 using Quartz;
 using System;
@@ -25,32 +26,51 @@ namespace Main
 
         public void DebugStart()
         {
-            this.OnStart(null);
-            Thread.Sleep(90000);
+            IoCConfig.Init();
+            this.CreateDatabaseFile();
+
+            var scheduler = AsyncHelpers.RunSync<IScheduler>(this.ConfigureJobs);
+            var job = IoCGlobal.Resolve<SendInventoryJob>();
+            job.Execute(null);
         }
 
         protected override void OnStart(string[] args)
         {
             IoCConfig.Init();
             this.CreateDatabaseFile();
-            this.ConfigureJobs().ConfigureAwait(true);
-            
+            var scheduler = AsyncHelpers.RunSync<IScheduler>(this.ConfigureQuartz);
+            scheduler.Start();
+
         }
 
-        private async Task ConfigureJobs()
+        private async Task<IScheduler> ConfigureQuartz()
+        {
+            var scheduler = IoCGlobal.Resolve<IScheduler>();
+            scheduler = await ConfigureJobs(scheduler);
+            return scheduler;
+        }
+
+        private async Task<IScheduler> ConfigureJobs()
+        {
+            return await this.ConfigureJobs(null);
+        }
+
+        private async Task<IScheduler> ConfigureJobs(IScheduler scheduler)
         {
             var job = JobBuilder.Create<SendInventoryJob>().WithIdentity("Heartbeat", "Maintenance").Build();
             var trigger = TriggerBuilder.Create()
                 .WithIdentity("Heartbeat", "Maintenance")
                 .StartNow()
                 .WithSchedule(SimpleScheduleBuilder.RepeatSecondlyForTotalCount(1)).Build();
-                //.WithSchedule(SimpleScheduleBuilder.RepeatSecondlyForever(2)).Build();
+            //.WithSchedule(SimpleScheduleBuilder.RepeatSecondlyForever(2)).Build();
             var cts = new CancellationTokenSource();
 
-            var scheduler = IoCGlobal.Resolve<IScheduler>();
-
+            if (scheduler == null)
+            {
+                scheduler = IoCGlobal.Resolve<IScheduler>();
+            }
             await scheduler.ScheduleJob(job, trigger, cts.Token).ConfigureAwait(true);
-            await scheduler.Start();
+            return scheduler;
         }
 
         protected override void OnStop()

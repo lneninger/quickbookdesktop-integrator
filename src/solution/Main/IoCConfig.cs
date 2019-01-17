@@ -1,4 +1,5 @@
-﻿using ApplicationLogic.Quickbooks;
+﻿using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems;
+using ApplicationLogic.Quickbooks;
 using Autofac;
 using Autofac.Extras.Quartz;
 using DatabaseRepositories;
@@ -91,23 +92,11 @@ namespace Main
                 //.EnableInterfaceInterceptors()
                 //.InterceptedBy(typeof(ExceptionInterceptor));
 
-                // var serviceAssembly = typeof(CustomerGetAllCommand).Assembly;
-                // var serviceTypes = serviceAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Command", StringComparison.InvariantCultureIgnoreCase));
-                // builder.RegisterTypes(serviceTypes.ToArray())
-                // .AsImplementedInterfaces()
-                // .TrackInstanceEvents();
-
-                //var dataProviderAssembly = typeof(MasterDataProvider).Assembly;
-                //var dataProviderTypes = serviceAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("DataProvider", StringComparison.InvariantCultureIgnoreCase));
-                //builder.RegisterTypes(dataProviderTypes.ToArray())
-                //.AsImplementedInterfaces()
-                //.TrackInstanceEvents();
-
-                //var validatorAssembly = typeof(CustomerInsertValidator).Assembly;
-                //var validatorTypes = validatorAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Validator", StringComparison.InvariantCultureIgnoreCase));
-                //builder.RegisterTypes(validatorTypes.ToArray())
-                //.AsImplementedInterfaces()
-                //.TrackInstanceEvents();
+                var serviceAssembly = typeof(GetInventoryItemsCommand).Assembly;
+                var serviceTypes = serviceAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Command", StringComparison.InvariantCultureIgnoreCase));
+                builder.RegisterTypes(serviceTypes.ToArray())
+                .AsImplementedInterfaces()
+                .TrackInstanceEvents();
 
                 var repositoryAssembly = typeof(InventoryRepository).Assembly;
                 var repositoryTypes = repositoryAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Repository", StringComparison.InvariantCultureIgnoreCase));
@@ -115,27 +104,6 @@ namespace Main
                 .AsImplementedInterfaces()
                 .TrackInstanceEvents();
 
-
-                //builder.RegisterType<QbManager>()
-                // .AsImplementedInterfaces()
-                // .TrackInstanceEvents();
-
-                //builder.RegisterType<WebConnectorQwc>()
-                //.AsImplementedInterfaces()
-                //.TrackInstanceEvents();
-
-                //builder.RegisterType<MessageValidatorNoop>()
-                //.AsImplementedInterfaces()
-                //.TrackInstanceEvents();
-
-                //builder.RegisterType<WebConnectorHandlerNoop>()
-                //.AsImplementedInterfaces()
-                //.TrackInstanceEvents();
-
-                // IAuthentication Customer implementation
-               // builder.RegisterType<AuthenticatorRepository>()
-               //.AsImplementedInterfaces()
-               //.TrackInstanceEvents();
 
                 builder.RegisterType<QuickbookTrackRepository>()
                .AsImplementedInterfaces()
