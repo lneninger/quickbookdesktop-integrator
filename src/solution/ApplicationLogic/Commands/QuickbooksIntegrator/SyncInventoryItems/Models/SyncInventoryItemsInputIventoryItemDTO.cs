@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Models
 {
-    public class SyncInventoryItemsOutputIventoryItemDTO
+    public class SyncInventoryItemsInputIventoryItemDTO
     {
         public string FullName { get; set; }
         public string Name { get; set; }

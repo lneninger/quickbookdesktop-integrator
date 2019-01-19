@@ -8,6 +8,7 @@ using Microsoft.Extensions.Logging;
 //using QbSync.WebConnector.Core;
 //using QbSync.WebConnector.Impl;
 using QuickbookRepositories;
+using RemoteRepositories;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -108,6 +109,12 @@ namespace Main
                 builder.RegisterType<QuickbookTrackRepository>()
                .AsImplementedInterfaces()
                .TrackInstanceEvents();
+
+                var remoteRepositoriesAssembly = typeof(PublicRepository).Assembly;
+                var remoteRepositoriesTypes = repositoryAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Repository", StringComparison.InvariantCultureIgnoreCase));
+                builder.RegisterTypes(remoteRepositoriesTypes.ToArray())
+                .AsImplementedInterfaces()
+                .TrackInstanceEvents();
 
                 builder.RegisterType<SessionManager>()
                .AsSelf()

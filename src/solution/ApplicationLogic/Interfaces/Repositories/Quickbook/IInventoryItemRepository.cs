@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace ApplicationLogic.Interfaces.Repositories.Quickbooks
 {
-    public interface IInventoryRepository
+    public interface IInventoryItemRepository
     {
         IEnumerable<GetInventoryItemsOutputIventoryItemDTO> GetAll();
     }

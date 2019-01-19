@@ -7,12 +7,12 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems
 {
     public class GetInventoryItemsCommand : BaseIoCDisposable, IGetInventoryItemsCommand
     {
-        public GetInventoryItemsCommand(IInventoryRepository repository)
+        public GetInventoryItemsCommand(IInventoryItemRepository repository)
         {
             this.Repository = repository;
         }
 
-        public IInventoryRepository Repository { get; }
+        public IInventoryItemRepository Repository { get; }
 
         public IEnumerable<GetInventoryItemsOutputIventoryItemDTO> Execute()
         {

@@ -11,6 +11,7 @@ namespace ApplicationLogic.AppConfiguration
     {
         private const string QuickbooksApplicationIdKey = "QBAppID";
         private const string QuickbooksApplicationNameKey = "QBAppName";
+        private const string APIBaseURLKey = "APIBaseURL";
 
         public AppConfig()
         {
@@ -26,9 +27,11 @@ namespace ApplicationLogic.AppConfiguration
 
             this.QuickbooksApplicationID = ConfigurationManager.AppSettings[QuickbooksApplicationIdKey];
             this.QuickbooksApplicationName = ConfigurationManager.AppSettings[QuickbooksApplicationNameKey];
+            this.APIBaseURL = ConfigurationManager.AppSettings[APIBaseURLKey];
         }
 
         public string QuickbooksApplicationID { get; }
         public string QuickbooksApplicationName { get; }
+        public string APIBaseURL { get; }
     }
 }

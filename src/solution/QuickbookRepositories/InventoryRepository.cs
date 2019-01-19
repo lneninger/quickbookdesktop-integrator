@@ -24,7 +24,7 @@ namespace QuickbookRepositories
     }
 
 
-    public class InventoryRepository : AbstractRespository, IInventoryRepository
+    public class InventoryRepository : AbstractRespository, IInventoryItemRepository
     {
         public InventoryRepository(SessionManager sessionManager) : base(sessionManager)
         {

@@ -26,7 +26,7 @@ namespace DomainDatabaseMapping
 
             ////base.OnConfiguring(optionsBuilder);
             //optionsBuilder.UseSqlServer(connStr);
-            optionsBuilder.UseSqlServer("Data Source=(local)\\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0");
+            optionsBuilder.UseSqlServer("Data Source=(local)\\SQLEXPRESS;Initial Catalog=quickbocksintegrator;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=QuickbooksIntegrator");
         }
     }
 }

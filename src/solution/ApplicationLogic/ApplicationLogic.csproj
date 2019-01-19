@@ -126,13 +126,14 @@
     <Compile Include="Commands\ICommandFunc.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\SyncInventoryItemsCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\ISyncInventoryItemsCommand.cs" />
-    <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\Models\SyncInventoryItemsOutputIventoryItemDTO.cs" />
+    <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\Models\SyncInventoryItemsInputIventoryItemDTO.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetInventoryItems\GetInventoryItemsCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetInventoryItems\IGetInventoryItemsCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetInventoryItems\Models\GetInventoryItemsOutputIventoryItemDTO.cs" />
+    <Compile Include="Interfaces\Repositories\Public\IPublicRepository.cs" />
     <Compile Include="Interfaces\Repositories\Database\IDbRepository.cs" />
     <Compile Include="Interfaces\Repositories\Database\IQuickbookTrackRepository.cs" />
-    <Compile Include="Interfaces\Repositories\Quickbook\IInventoryRepository.cs" />
+    <Compile Include="Interfaces\Repositories\Quickbook\IInventoryItemRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quickbooks\Defaults.cs" />
     <Compile Include="Quickbooks\ENEdition.cs" />

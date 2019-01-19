@@ -23,6 +23,8 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Framework.Logging", "Framew
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Framework.Core", "Framework\Framework.Core\Framework.Core.csproj", "{021FF474-6CCE-4684-A941-A4BBA5CB56A4}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "RemoteRepositories", "solution\RemoteRepositories\RemoteRepositories.csproj", "{7170BA18-49C5-4DE1-B119-B636909A7307}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -78,6 +80,12 @@ Global
 		{021FF474-6CCE-4684-A941-A4BBA5CB56A4}.QA|Any CPU.Build.0 = Release|Any CPU
 		{021FF474-6CCE-4684-A941-A4BBA5CB56A4}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{021FF474-6CCE-4684-A941-A4BBA5CB56A4}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7170BA18-49C5-4DE1-B119-B636909A7307}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7170BA18-49C5-4DE1-B119-B636909A7307}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7170BA18-49C5-4DE1-B119-B636909A7307}.QA|Any CPU.ActiveCfg = Release|Any CPU
+		{7170BA18-49C5-4DE1-B119-B636909A7307}.QA|Any CPU.Build.0 = Release|Any CPU
+		{7170BA18-49C5-4DE1-B119-B636909A7307}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7170BA18-49C5-4DE1-B119-B636909A7307}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -91,6 +99,7 @@ Global
 		{6C9CC9E2-E73F-453C-9A6C-741D6030393D} = {FFA2EF58-47CD-4A7C-B15A-990E5663505F}
 		{18D5392F-F09C-4A77-AA7C-CA04CF40F79E} = {5B547F0A-949F-438E-9BFB-12082A19661B}
 		{021FF474-6CCE-4684-A941-A4BBA5CB56A4} = {5B547F0A-949F-438E-9BFB-12082A19661B}
+		{7170BA18-49C5-4DE1-B119-B636909A7307} = {FFA2EF58-47CD-4A7C-B15A-990E5663505F}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {C02FA34D-7B50-4E4B-A178-C1345B4487B0}
