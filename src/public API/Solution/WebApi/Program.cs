@@ -8,7 +8,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 
-namespace RiverdaleMainApp2_0
+namespace QuickbooksIntegratorAPI
 {
     /// <summary>
     /// 

@@ -17,7 +17,7 @@ using Microsoft.AspNetCore.Mvc;
 using System.Threading.Tasks;
 using Authorization = Microsoft.AspNetCore.Authorization;
 
-namespace RiverdaleMainApp2_0.Controllers
+namespace QuickbooksIntegratorAPI.Controllers
 {
     /// <summary>
     /// AppUser API interface
@@ -124,7 +124,7 @@ namespace RiverdaleMainApp2_0.Controllers
                     var user = await this.UserManager.FindByIdAsync(input.UserId);
                     if (user != null)
                     {
-                        await this.UserManager.AddClaimAsync(user, new System.Security.Claims.Claim(RiverdaleMainApp2_0.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, input.permissionId));
+                        await this.UserManager.AddClaimAsync(user, new System.Security.Claims.Claim(QuickbooksIntegratorAPI.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, input.permissionId));
                     }
                     else
                     {
@@ -137,7 +137,7 @@ namespace RiverdaleMainApp2_0.Controllers
                     var role = await this.RoleManager.FindByIdAsync(input.RoleId);
                     if (role != null)
                     {
-                        await this.RoleManager.AddClaimAsync(role, new System.Security.Claims.Claim(RiverdaleMainApp2_0.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, input.permissionId));
+                        await this.RoleManager.AddClaimAsync(role, new System.Security.Claims.Claim(QuickbooksIntegratorAPI.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, input.permissionId));
                     }
                     else
                     {
@@ -170,7 +170,7 @@ namespace RiverdaleMainApp2_0.Controllers
                     var user = await this.UserManager.FindByIdAsync(input.UserId);
                     if (user != null)
                     {
-                        await this.UserManager.RemoveClaimAsync(user, new System.Security.Claims.Claim(RiverdaleMainApp2_0.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, input.Claim));
+                        await this.UserManager.RemoveClaimAsync(user, new System.Security.Claims.Claim(QuickbooksIntegratorAPI.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, input.Claim));
                     }
                     else
                     {
@@ -183,7 +183,7 @@ namespace RiverdaleMainApp2_0.Controllers
                     var role = await this.RoleManager.FindByIdAsync(input.RoleId);
                     if (role != null)
                     {
-                        await this.RoleManager.RemoveClaimAsync(role, new System.Security.Claims.Claim(RiverdaleMainApp2_0.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, input.Claim));
+                        await this.RoleManager.RemoveClaimAsync(role, new System.Security.Claims.Claim(QuickbooksIntegratorAPI.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, input.Claim));
                     }
                     else
                     {

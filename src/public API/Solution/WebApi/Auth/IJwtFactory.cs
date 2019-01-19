@@ -4,7 +4,7 @@ using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.Auth
+namespace QuickbooksIntegratorAPI.Auth
 {
     public interface IJwtFactory
     {

@@ -1,7 +1,7 @@
 ﻿{
   "fileStorage": {
     "DefaultFileStorageDestination": "FileSystem",
-    "TemporaryFolderPath": "D:\\Temp\\RiverdaleMainApp2_0\\TemporaryFolder",
+    "TemporaryFolderPath": "D:\\Temp\\QuickbooksIntegratorAPI\\TemporaryFolder",
     "FileSystem": {
       "FileSystemBaseStoragePath": "D:\\Temp\\BelzonaBaseFileStorage"
     },

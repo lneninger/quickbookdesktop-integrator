@@ -43,6 +43,7 @@ namespace DomainDatabaseMapping
             new AbstractBaseEntityMap(modelBuilder).Configure();
 
             modelBuilder.ApplyConfiguration(new AppUserMap(modelBuilder));
+            modelBuilder.ApplyConfiguration(new AppUserRoleMap(modelBuilder));
         }
     }
 }

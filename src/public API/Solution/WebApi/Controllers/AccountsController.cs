@@ -1,39 +1,19 @@
-﻿using ApplicationLogic.Business.Commands.AppUser.GetByIdCommand;
-using ApplicationLogic.Business.Commands.Customer.DeleteCommand;
-using ApplicationLogic.Business.Commands.Customer.DeleteCommand.Models;
-using ApplicationLogic.Business.Commands.Customer.GetAllCommand;
-using ApplicationLogic.Business.Commands.Customer.GetByIdCommand;
-using ApplicationLogic.Business.Commands.Customer.InsertCommand;
-using ApplicationLogic.Business.Commands.Customer.InsertCommand.Models;
-using ApplicationLogic.Business.Commands.Customer.PageQueryCommand;
-using ApplicationLogic.Business.Commands.Customer.PageQueryCommand.Models;
-using ApplicationLogic.Business.Commands.Customer.UpdateCommand;
-using ApplicationLogic.Business.Commands.Customer.UpdateCommand.Models;
-using ApplicationLogic.Business.Commands.Security;
-using ApplicationLogic.SignalR;
-using CommunicationModel;
-using DomainDatabaseMapping;
+﻿using ApplicationLogic.Business.Commands.Security;
 using DomainModel.Identity;
-using Framework.EF.DbContextImpl.Persistance.Paging.Models;
 //using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 //using FizzWare.NBuilder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.IdentityModel.Tokens;
-using RiverdaleMainApp2_0.Auth;
-using RiverdaleMainApp2_0.Auth.Helpers;
-using RiverdaleMainApp2_0.Models;
-using System;
-using System.Collections.Generic;
+using QuickbooksIntegratorAPI.Auth;
+using QuickbooksIntegratorAPI.Auth.Helpers;
 using System.IdentityModel.Tokens.Jwt;
 using System.Linq;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.Controllers
+namespace QuickbooksIntegratorAPI.Controllers
 {
     /// <summary>
     /// Customer API interface
@@ -151,7 +131,7 @@ namespace RiverdaleMainApp2_0.Controllers
                 claims = claims.Concat((await this.RoleManager.GetClaimsAsync(await this.RoleManager.FindByNameAsync(roleName))).ToList());
             }
 
-            var permissions = claims.Where(claim => claim.Type == RiverdaleMainApp2_0.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions);
+            var permissions = claims.Where(claim => claim.Type == QuickbooksIntegratorAPI.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions);
             permissions.ToList().ForEach(permission =>
             {
                 identity.AddClaim(permission);

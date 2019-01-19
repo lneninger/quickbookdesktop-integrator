@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.Auth
+namespace QuickbooksIntegratorAPI.Auth
 {
     /// <summary>
     /// 

@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
@@ -12,10 +12,10 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\Framework\Framework.EF\Framework.EF.csproj" />
     <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj" />
     <ProjectReference Include="..\DatabaseMapping\DomainDatabaseMapping\DomainDatabaseMapping.csproj" />
     <ProjectReference Include="..\DomainModel\DomainModel.csproj" />
-    <ProjectReference Include="..\Framework\Framework.EF\Framework.EF.csproj" />
   </ItemGroup>
 
 </Project>

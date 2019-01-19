@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.Auth
+namespace QuickbooksIntegratorAPI.Auth
 {
     public class PermissionPolicies
     {
@@ -16,7 +16,7 @@ namespace RiverdaleMainApp2_0.Auth
 
             foreach (var permissionName in permissionNames)
             {
-                Policies.Add(permissionName, policy => policy.Requirements.Add(new PolicyPermissionRequired(PermissionsEnum.Customer_Read)));
+                Policies.Add(permissionName, policy => policy.Requirements.Add(new PolicyPermissionRequired(PermissionsEnum.InventoryItem_Read)));
             }
         }
     }

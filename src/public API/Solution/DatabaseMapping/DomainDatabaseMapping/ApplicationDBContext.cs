@@ -1,23 +1,7 @@
 ﻿using DomainDatabaseMapping.Mappings;
 using DomainModel;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.Configuration;
-using System;
-using System.Linq;
-using System.Collections.Generic;
-using System.Text;
-using Microsoft.Extensions.Hosting;
-using System.IO;
-using DomainModel.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
-using DomainModel.File;
-using DomainDatabaseMapping.Mappings.File;
-using DomainDatabaseMapping.Mappings.Type;
-using DomainDatabaseMapping.Mappings.Product;
 using Framework.EF.Logging;
-using DomainModel.SaleOpportunity;
-using DomainDatabaseMapping.Mappings.SaleOpportunity;
-using DomainModel.Product;
+using Microsoft.EntityFrameworkCore;
 
 namespace DomainDatabaseMapping
 {
@@ -55,7 +39,7 @@ namespace DomainDatabaseMapping
             new AbstractBaseEntityMap(modelBuilder).Configure();
 
             // Inventory
-            modelBuilder.ApplyConfiguration(new InventoryMap(modelBuilder));
+            modelBuilder.ApplyConfiguration(new InventoryItemMap(modelBuilder));
         }
 
 

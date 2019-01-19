@@ -18,6 +18,11 @@
   </ItemGroup>
 
   <ItemGroup>
+    <Compile Remove="Business\Commons\IMasterDataProvider.cs" />
+    <Compile Remove="Business\Commons\MasterDataProvider.cs" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="FluentValidation" Version="8.0.101" />
     <PackageReference Include="Microsoft.AspNetCore.SignalR" Version="1.0.4" />
   </ItemGroup>
@@ -25,13 +30,13 @@
   <ItemGroup>
     <ProjectReference Include="..\..\Framework\Framework.Core\Framework.Core.csproj" />
     <ProjectReference Include="..\..\Framework\Framework.EF\Framework.EF.csproj" />
-    <ProjectReference Include="..\Framework\Framework.Autofac\Framework.Autofac.csproj" />
-    <ProjectReference Include="..\Framework\Framework.Core\Framework.Core.csproj" />
-    <ProjectReference Include="..\Framework\Framework.EF\Framework.EF.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.Autofac\Framework.Autofac.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.Core\Framework.Core.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.EF\Framework.EF.csproj" />
     <ProjectReference Include="..\DomainModel\DomainModel.csproj" />
-    <ProjectReference Include="..\Framework\Framework.FileStorage.AspNetCore\Framework.FileStorage.AspNetCore.csproj" />
-    <ProjectReference Include="..\Framework\Framework.FluentValidation\Framework.FluentValidation.csproj" />
-    <ProjectReference Include="..\Framework\Framework.SignalR\Framework.SignalR.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.FileStorage.AspNetCore\Framework.FileStorage.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.FluentValidation\Framework.FluentValidation.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.SignalR\Framework.SignalR.csproj" />
   </ItemGroup>
 
 </Project>

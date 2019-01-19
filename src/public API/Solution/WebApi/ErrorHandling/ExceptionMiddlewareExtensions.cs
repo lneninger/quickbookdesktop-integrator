@@ -9,7 +9,7 @@ using System.Linq;
 using System.Net;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.ErrorHandling
+namespace QuickbooksIntegratorAPI.ErrorHandling
 {
     public static class ExceptionMiddlewareExtensions
     {

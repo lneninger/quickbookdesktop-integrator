@@ -9,9 +9,9 @@ using System.Linq;
 
 namespace ApplicationLogic.Business.Commands.AppUser.GetAllCommand
 {
-    public class AppUserGetAllCommand : AbstractDBCommand<DomainModel.Identity.AppUser, IInventoryItemDBRepository>, IAppUserGetAllCommand
+    public class AppUserGetAllCommand : AbstractDBCommand<DomainModel.Identity.AppUser, IAppUserDBRepository>, IAppUserGetAllCommand
     {
-        public AppUserGetAllCommand(IDbContextScopeFactory dbContextScopeFactory, IInventoryItemDBRepository repository) : base(dbContextScopeFactory, repository)
+        public AppUserGetAllCommand(IDbContextScopeFactory dbContextScopeFactory, IAppUserDBRepository repository) : base(dbContextScopeFactory, repository)
         {
         }
 
@@ -20,7 +20,7 @@ namespace ApplicationLogic.Business.Commands.AppUser.GetAllCommand
             var result = new OperationResponse<IEnumerable<AppUserGetAllCommandOutputDTO>>();
             using (var dbContextScope = this.DbContextScopeFactory.Create())
             {
-                var getAllResult = this.Repository.All;
+                var getAllResult = this.Repository.GetAll();
                 result.AddResponse(getAllResult);
                 if (result.IsSucceed)
                 {

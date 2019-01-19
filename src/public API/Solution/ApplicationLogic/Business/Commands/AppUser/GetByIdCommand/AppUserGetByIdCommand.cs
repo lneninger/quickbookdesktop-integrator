@@ -8,10 +8,10 @@ using ApplicationLogic.Business.Commands.AppUserRole.GetByIdCommand.Models;
 
 namespace ApplicationLogic.Business.Commands.AppUser.GetByIdCommand
 {
-    public class AppUserGetByIdCommand : AbstractDBCommand<DomainModel.Identity.AppUser, IInventoryItemDBRepository>, IAppUserGetByIdCommand
+    public class AppUserGetByIdCommand : AbstractDBCommand<DomainModel.Identity.AppUser, IAppUserDBRepository>, IAppUserGetByIdCommand
     {
 
-        public AppUserGetByIdCommand(IDbContextScopeFactory dbContextScopeFactory, IInventoryItemDBRepository repository) : base(dbContextScopeFactory, repository)
+        public AppUserGetByIdCommand(IDbContextScopeFactory dbContextScopeFactory, IAppUserDBRepository repository) : base(dbContextScopeFactory, repository)
         {
         }
 

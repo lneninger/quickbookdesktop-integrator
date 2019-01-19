@@ -1,9 +1,9 @@
 ﻿{
   "FileStorage": {
     "DefaultFileStorageDestination": "FileSystem",
-    "temporaryFolderPath": "D:\\Temp\\RiverdaleMainApp2_0\\TemporaryFolder",
+    "temporaryFolderPath": "D:\\Temp\\QuickbooksIntegratorAPI\\TemporaryFolder",
     "FileSystem": {
-      "FileSystemBaseStoragePath": "D:\\Temp\\RiverdaleMainApp2_0\\StorageFolder"
+      "FileSystemBaseStoragePath": "D:\\Temp\\QuickbooksIntegratorAPI\\StorageFolder"
     },
     "AWS": {
       "AWSFileRepoAccessKey": "",

@@ -9,9 +9,9 @@ using Framework.Core.Messages;
 
 namespace ApplicationLogic.Business.Commands.AppUser.PageQueryCommand
 {
-    public class AppUserPageQueryCommand : AbstractDBCommand<DomainModel.Identity.AppUser, IInventoryItemDBRepository>, IAppUserPageQueryCommand
+    public class AppUserPageQueryCommand : AbstractDBCommand<DomainModel.Identity.AppUser, IAppUserDBRepository>, IAppUserPageQueryCommand
     {
-        public AppUserPageQueryCommand(IDbContextScopeFactory dbContextScopeFactory, IInventoryItemDBRepository repository) : base(dbContextScopeFactory, repository)
+        public AppUserPageQueryCommand(IDbContextScopeFactory dbContextScopeFactory, IAppUserDBRepository repository) : base(dbContextScopeFactory, repository)
         {
         }
 

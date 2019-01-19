@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.Auth
+namespace QuickbooksIntegratorAPI.Auth
 {
     public class PermissionsEnum
     {
@@ -11,33 +11,18 @@ namespace RiverdaleMainApp2_0.Auth
         /// <summary>
         /// 
         /// </summary>
-        public const string Customer_Read = nameof(Enum.Customer_Read);
+        public const string InventoryItem_Read = nameof(Enum.InventoryItem_Read);
 
         /// <summary>
         /// 
         /// </summary>
-        public const string Customer_Modify = nameof(Enum.Customer_Modify);
+        public const string InventoryItem_Modify = nameof(Enum.InventoryItem_Modify);
 
         /// <summary>
         /// 
         /// </summary>
-        public const string Customer_Manage = nameof(Enum.Customer_Manage);
+        public const string InventoryItem_Manage = nameof(Enum.InventoryItem_Manage);
 
-        // Product
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string Product_Read = nameof(Enum.Product_Read);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string Product_Modify = nameof(Enum.Product_Modify);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string Product_Manage = nameof(Enum.Product_Manage);
 
         // User
         /// <summary>
@@ -70,77 +55,27 @@ namespace RiverdaleMainApp2_0.Auth
         /// 
         /// </summary>
         public const string UserRole_Manage = nameof(Enum.UserRole_Manage);
-
-
-        // Sale Opportunity
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string SaleOpportunity_Read = nameof(Enum.SaleOpportunity_Read);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string SaleOpportunity_Modify = nameof(Enum.SaleOpportunity_Modify);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string SaleOpportunity_Manage = nameof(Enum.SaleOpportunity_Manage);
-
-        // Quote
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string Quote_Read = nameof(Enum.Quote_Read);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string Quote_Modify = nameof(Enum.Quote_Modify);
-
-        /// <summary>
-        /// 
-        /// </summary>
-        public const string Quote_Manage = nameof(Enum.Quote_Manage);
-
         /// <summary>
         /// 
         /// </summary>
         public enum Enum
         {
-            // Customer
+            // InventoryItem
             /// <summary>
             /// 
             /// </summary>
-            Customer_Read,
+            InventoryItem_Read,
 
             /// <summary>
             /// 
             /// </summary>
-            Customer_Modify,
+            InventoryItem_Modify,
 
             /// <summary>
             /// 
             /// </summary>
-            Customer_Manage,
+            InventoryItem_Manage,
 
-            // Product
-
-            /// <summary>
-            /// 
-            /// </summary>
-            Product_Read,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            Product_Modify,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            Product_Manage,
 
             // User
             /// <summary>
@@ -174,36 +109,6 @@ namespace RiverdaleMainApp2_0.Auth
             /// </summary>
             UserRole_Manage,
 
-            // Quote
-            /// <summary>
-            /// 
-            /// </summary>
-            Quote_Read,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            Quote_Modify,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            Quote_Manage,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            SaleOpportunity_Read,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            SaleOpportunity_Modify,
-
-            /// <summary>
-            /// 
-            /// </summary>
-            SaleOpportunity_Manage,
         }
     }
 }

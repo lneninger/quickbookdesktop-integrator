@@ -1,84 +1,84 @@
-INFO   2019-01-04 01:26:05,762 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
-INFO   2019-01-04 01:26:06,615 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
-INFO   2019-01-04 01:26:06,827 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
-INFO   2019-01-04 01:26:07,336 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
-INFO   2019-01-04 01:26:07,366 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
-INFO   2019-01-04 01:26:07,448 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 01:26:07,602 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 01:26:09,265 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
-INFO   2019-01-04 01:26:09,671 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
-INFO   2019-01-04 01:26:10,056 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
-INFO   2019-01-04 01:26:11,307 13 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
-INFO   2019-01-04 01:26:11,307 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
-INFO   2019-01-04 01:53:17,730 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
-INFO   2019-01-04 01:53:18,067 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
-INFO   2019-01-04 01:53:18,158 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
-INFO   2019-01-04 01:53:18,349 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
-INFO   2019-01-04 01:53:18,370 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
-INFO   2019-01-04 01:53:18,434 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 01:53:18,560 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 01:53:19,712 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
-INFO   2019-01-04 01:53:20,086 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
-INFO   2019-01-04 01:53:20,453 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
-INFO   2019-01-04 01:53:21,724 7 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
-INFO   2019-01-04 01:53:21,724 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
-INFO   2019-01-04 01:55:30,542 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
-INFO   2019-01-04 01:55:30,828 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
-INFO   2019-01-04 01:55:30,920 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
-INFO   2019-01-04 01:55:31,089 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
-INFO   2019-01-04 01:55:31,112 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
-INFO   2019-01-04 01:55:31,183 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 01:55:31,357 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 01:55:32,472 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
-INFO   2019-01-04 01:55:32,780 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
-INFO   2019-01-04 01:55:33,104 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
-INFO   2019-01-04 01:55:34,277 14 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
-INFO   2019-01-04 01:55:34,278 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
-INFO   2019-01-04 02:03:36,902 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
-INFO   2019-01-04 02:03:37,191 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
-INFO   2019-01-04 02:03:37,288 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
-INFO   2019-01-04 02:03:37,508 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
-INFO   2019-01-04 02:03:37,535 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
-INFO   2019-01-04 02:03:37,607 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 02:03:37,751 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 02:03:38,945 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
-INFO   2019-01-04 02:03:39,253 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
-INFO   2019-01-04 02:03:39,618 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
-INFO   2019-01-04 02:03:40,923 8 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
-INFO   2019-01-04 02:03:40,923 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
-INFO   2019-01-04 02:06:25,582 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
-INFO   2019-01-04 02:06:26,033 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
-INFO   2019-01-04 02:06:26,163 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
-INFO   2019-01-04 02:06:26,735 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
-INFO   2019-01-04 02:06:26,777 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
-INFO   2019-01-04 02:06:26,980 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 02:06:27,225 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 02:06:28,635 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
-INFO   2019-01-04 02:06:29,029 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
-INFO   2019-01-04 02:06:29,414 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
-INFO   2019-01-04 02:06:30,716 15 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
-INFO   2019-01-04 02:06:30,716 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
-INFO   2019-01-04 02:11:07,153 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
-INFO   2019-01-04 02:11:07,459 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
-INFO   2019-01-04 02:11:07,555 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
-INFO   2019-01-04 02:11:07,777 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
-INFO   2019-01-04 02:11:07,803 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
-INFO   2019-01-04 02:11:07,877 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 02:11:08,008 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 02:11:09,070 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
-INFO   2019-01-04 02:11:09,417 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
-INFO   2019-01-04 02:11:09,723 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
-INFO   2019-01-04 02:11:10,898 12 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
-INFO   2019-01-04 02:11:10,904 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
-INFO   2019-01-04 02:28:45,187 1 RiverdaleMainApp2_0.Program+<>c__DisplayClass1_0 - Initializing application configuration
-INFO   2019-01-04 02:28:45,561 1 RiverdaleMainApp2_0.Program+<>c - Initializing application logging
-INFO   2019-01-04 02:28:45,659 1 RiverdaleMainApp2_0.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
-INFO   2019-01-04 02:28:45,939 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Services Configuration
-INFO   2019-01-04 02:28:45,971 1 RiverdaleMainApp2_0.Startup - Application startup - Allowed origins: http://localhost:5002
-INFO   2019-01-04 02:28:46,070 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 02:28:46,298 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
-INFO   2019-01-04 02:28:47,672 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Services Configuration
-INFO   2019-01-04 02:28:48,087 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Infra Application Configuration
-INFO   2019-01-04 02:28:48,496 1 RiverdaleMainApp2_0.Startup - Application startup - Initializing the Authentication Seeding for Administration user
-INFO   2019-01-04 02:28:49,874 7 RiverdaleMainApp2_0.Startup - Application startup - Ending the Authentication Seeding for Administration user
-INFO   2019-01-04 02:28:49,875 1 RiverdaleMainApp2_0.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-04 01:26:05,762 1 QuickbooksIntegratorAPI.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-04 01:26:06,615 1 QuickbooksIntegratorAPI.Program+<>c - Initializing application logging
+INFO   2019-01-04 01:26:06,827 1 QuickbooksIntegratorAPI.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-04 01:26:07,336 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-04 01:26:07,366 1 QuickbooksIntegratorAPI.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-04 01:26:07,448 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 01:26:07,602 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 01:26:09,265 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-04 01:26:09,671 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-04 01:26:10,056 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-04 01:26:11,307 13 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-04 01:26:11,307 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-04 01:53:17,730 1 QuickbooksIntegratorAPI.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-04 01:53:18,067 1 QuickbooksIntegratorAPI.Program+<>c - Initializing application logging
+INFO   2019-01-04 01:53:18,158 1 QuickbooksIntegratorAPI.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-04 01:53:18,349 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-04 01:53:18,370 1 QuickbooksIntegratorAPI.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-04 01:53:18,434 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 01:53:18,560 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 01:53:19,712 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-04 01:53:20,086 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-04 01:53:20,453 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-04 01:53:21,724 7 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-04 01:53:21,724 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-04 01:55:30,542 1 QuickbooksIntegratorAPI.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-04 01:55:30,828 1 QuickbooksIntegratorAPI.Program+<>c - Initializing application logging
+INFO   2019-01-04 01:55:30,920 1 QuickbooksIntegratorAPI.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-04 01:55:31,089 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-04 01:55:31,112 1 QuickbooksIntegratorAPI.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-04 01:55:31,183 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 01:55:31,357 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 01:55:32,472 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-04 01:55:32,780 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-04 01:55:33,104 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-04 01:55:34,277 14 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-04 01:55:34,278 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-04 02:03:36,902 1 QuickbooksIntegratorAPI.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-04 02:03:37,191 1 QuickbooksIntegratorAPI.Program+<>c - Initializing application logging
+INFO   2019-01-04 02:03:37,288 1 QuickbooksIntegratorAPI.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-04 02:03:37,508 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-04 02:03:37,535 1 QuickbooksIntegratorAPI.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-04 02:03:37,607 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 02:03:37,751 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 02:03:38,945 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-04 02:03:39,253 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-04 02:03:39,618 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-04 02:03:40,923 8 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-04 02:03:40,923 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-04 02:06:25,582 1 QuickbooksIntegratorAPI.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-04 02:06:26,033 1 QuickbooksIntegratorAPI.Program+<>c - Initializing application logging
+INFO   2019-01-04 02:06:26,163 1 QuickbooksIntegratorAPI.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-04 02:06:26,735 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-04 02:06:26,777 1 QuickbooksIntegratorAPI.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-04 02:06:26,980 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 02:06:27,225 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 02:06:28,635 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-04 02:06:29,029 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-04 02:06:29,414 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-04 02:06:30,716 15 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-04 02:06:30,716 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-04 02:11:07,153 1 QuickbooksIntegratorAPI.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-04 02:11:07,459 1 QuickbooksIntegratorAPI.Program+<>c - Initializing application logging
+INFO   2019-01-04 02:11:07,555 1 QuickbooksIntegratorAPI.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-04 02:11:07,777 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-04 02:11:07,803 1 QuickbooksIntegratorAPI.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-04 02:11:07,877 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 02:11:08,008 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 02:11:09,070 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-04 02:11:09,417 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-04 02:11:09,723 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-04 02:11:10,898 12 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-04 02:11:10,904 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Application Configuration
+INFO   2019-01-04 02:28:45,187 1 QuickbooksIntegratorAPI.Program+<>c__DisplayClass1_0 - Initializing application configuration
+INFO   2019-01-04 02:28:45,561 1 QuickbooksIntegratorAPI.Program+<>c - Initializing application logging
+INFO   2019-01-04 02:28:45,659 1 QuickbooksIntegratorAPI.Startup - Main Database Connection - RiverdaleModel: Data Source=(local)\SQLEXPRESS;Initial Catalog=riverdale;Integrated Security=SSPI;Persist Security Info=False;MultipleActiveResultSets=True;Application Name=Riverdale2.0
+INFO   2019-01-04 02:28:45,939 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Services Configuration
+INFO   2019-01-04 02:28:45,971 1 QuickbooksIntegratorAPI.Startup - Application startup - Allowed origins: http://localhost:5002
+INFO   2019-01-04 02:28:46,070 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 02:28:46,298 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Authentication/Authorization Configuration
+INFO   2019-01-04 02:28:47,672 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Services Configuration
+INFO   2019-01-04 02:28:48,087 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Infra Application Configuration
+INFO   2019-01-04 02:28:48,496 1 QuickbooksIntegratorAPI.Startup - Application startup - Initializing the Authentication Seeding for Administration user
+INFO   2019-01-04 02:28:49,874 7 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Authentication Seeding for Administration user
+INFO   2019-01-04 02:28:49,875 1 QuickbooksIntegratorAPI.Startup - Application startup - Ending the Infra Application Configuration

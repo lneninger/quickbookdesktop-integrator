@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using DomainDatabaseMapping;
-using RiverdaleMainApp2_0.IoC;
+using QuickbooksIntegratorAPI.IoC;
 using Framework.Autofac;
 using Framework.Storage.FileStorage.TemporaryStorage;
 using Microsoft.AspNetCore.Builder;
@@ -22,9 +22,9 @@ using System.Text;
 using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Identity;
 using DomainModel.Identity;
-using RiverdaleMainApp2_0.Models;
+using QuickbooksIntegratorAPI.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
-using RiverdaleMainApp2_0.Auth;
+using QuickbooksIntegratorAPI.Auth;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
 using ElmahCore.Mvc;
@@ -34,11 +34,11 @@ using Microsoft.AspNetCore.Authorization;
 using Framework.Web.Security;
 using Framework.EF.DbContextImpl;
 using Framework.Logging.Log4Net;
-using RiverdaleMainApp2_0.AppSettings;
-using RiverdaleMainApp2_0.ErrorHandling;
+using QuickbooksIntegratorAPI.AppSettings;
+using QuickbooksIntegratorAPI.ErrorHandling;
 //using Microsoft.AspNet.SignalR;
 
-namespace RiverdaleMainApp2_0
+namespace QuickbooksIntegratorAPI
 {
     /// <summary>
     /// Application Setup class
@@ -391,7 +391,7 @@ namespace RiverdaleMainApp2_0
                         var claimNames = Enum.GetNames(typeof(PermissionsEnum.Enum)).Except(roleClaims);
                         foreach (var permission in claimNames)
                         {
-                            await roleManager.AddClaimAsync(adminRole, new Claim(RiverdaleMainApp2_0.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, permission));
+                            await roleManager.AddClaimAsync(adminRole, new Claim(QuickbooksIntegratorAPI.Auth.Constants.Strings.JwtClaimIdentifiers.Permissions, permission));
                         }
                     }
 

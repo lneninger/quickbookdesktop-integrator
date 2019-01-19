@@ -20,8 +20,8 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 //using FizzWare.NBuilder;
 using Microsoft.AspNetCore.Mvc;
-using RiverdaleMainApp2_0.Auth;
-using RiverdaleMainApp2_0.Auth.Helpers;
+using QuickbooksIntegratorAPI.Auth;
+using QuickbooksIntegratorAPI.Auth.Helpers;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Authorization = Microsoft.AspNetCore.Authorization;
@@ -29,7 +29,7 @@ using ApplicationLogic.Business.Commands.AppUser.UpdateCommand;
 using ApplicationLogic.Business.Commands.AppUser.UpdateCommand.Models;
 using System;
 
-namespace RiverdaleMainApp2_0.Controllers
+namespace QuickbooksIntegratorAPI.Controllers
 {
     /// <summary>
     /// AppUser API interface

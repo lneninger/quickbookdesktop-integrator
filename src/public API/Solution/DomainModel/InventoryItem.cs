@@ -6,7 +6,7 @@ namespace DomainModel
 {
     public class InventoryItem: AbstractBaseEntity, ILogicalDeleteEntity
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
 
         public string FullName { get; set; }
 

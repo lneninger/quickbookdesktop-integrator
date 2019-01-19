@@ -3,44 +3,42 @@ using DomainModel;
 using EntityFrameworkCore.DbContextScope;
 using FizzWare.NBuilder;
 using ApplicationLogic.Repositories.DB;
-using ApplicationLogic.Business.Commands.Product.DeleteCommand.Models;
-using ApplicationLogic.Business.Commands.Product.GetAllCommand.Models;
-using ApplicationLogic.Business.Commands.Product.GetByIdCommand.Models;
-using ApplicationLogic.Business.Commands.Product.InsertCommand.Models;
-using ApplicationLogic.Business.Commands.Product.UpdateCommand.Models;
+using ApplicationLogic.Business.Commands.InventoryItem.DeleteCommand.Models;
+using ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand.Models;
+using ApplicationLogic.Business.Commands.InventoryItem.GetByIdCommand.Models;
+using ApplicationLogic.Business.Commands.InventoryItem.InsertCommand.Models;
+using ApplicationLogic.Business.Commands.InventoryItem.UpdateCommand.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ApplicationLogic.Business.Commands.Product.PageQueryCommand.Models;
+using ApplicationLogic.Business.Commands.InventoryItem.PageQueryCommand.Models;
 using Framework.EF.DbContextImpl.Persistance.Paging.Models;
 using LMB.PredicateBuilderExtension;
 using Framework.EF.DbContextImpl.Persistance;
 using Framework.EF.DbContextImpl.Persistance.Models.Sorting;
 using System.Linq.Expressions;
 using Framework.Core.Messages;
-using DomainModel.Product;
 using ApplicationLogic.Business.Commons.DTOs;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 using Microsoft.EntityFrameworkCore;
-using DomainModel._Commons.Enums;
 
 namespace DatabaseRepositories.DB
 {
-    public class InventoryItemDBRepository : AbstractDBRepository, IProductDBRepository
+    public class InventoryItemDBRepository : AbstractDBRepository, IInventoryItemDBRepository
     {
         public InventoryItemDBRepository(IAmbientDbContextLocator ambientDbContextLocator) : base(ambientDbContextLocator)
         {
         }
 
-        public OperationResponse<IEnumerable<AbstractProduct>> GetAll()
+        public OperationResponse<IEnumerable<InventoryItem>> GetAll()
         {
-            var result = new OperationResponse<IEnumerable<AbstractProduct>>();
+            var result = new OperationResponse<IEnumerable<InventoryItem>>();
             try
             {
-                var dbLocator = AmbientDbContextLocator.Get<RiverdaleDBContext>();
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
                 {
-                    result.Bag = dbLocator.Set<AbstractProduct>().AsEnumerable();
+                    result.Bag = dbLocator.Set<InventoryItem>().AsEnumerable();
                 }
             }
             catch (Exception ex)
@@ -51,13 +49,13 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
-        public OperationResponse<PageResult<ProductPageQueryCommandOutputDTO>> PageQuery(PageQuery<ProductPageQueryCommandInputDTO> input)
+        public OperationResponse<PageResult<InventoryItemPageQueryCommandOutputDTO>> PageQuery(PageQuery<InventoryItemPageQueryCommandInputDTO> input)
         {
-            var result = new OperationResponse<PageResult<ProductPageQueryCommandOutputDTO>>();
+            var result = new OperationResponse<PageResult<InventoryItemPageQueryCommandOutputDTO>>();
             try
             {
                 // predicate construction
-                var predicate = PredicateBuilderExtension.True<AbstractProduct>();
+                var predicate = PredicateBuilderExtension.True<InventoryItem>();
                 if (input.CustomFilter != null)
                 {
                     var filter = input.CustomFilter;
@@ -67,50 +65,44 @@ namespace DatabaseRepositories.DB
                     }
                 }
 
-                using (var dbLocator = this.AmbientDbContextLocator.Get<RiverdaleDBContext>())
+                using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
                 {
-                    var query = dbLocator.Set<AbstractProduct>().AsQueryable();
+                    var query = dbLocator.Set<InventoryItem>().AsQueryable();
 
-                    var advancedSorting = new List<SortItem<AbstractProduct>>();
-                    Expression<Func<AbstractProduct, object>> expression;
-                    if (input.Sort.ContainsKey("productType"))
-                    {
-                        expression = o => o.ProductType.Name;
-                        advancedSorting.Add(new SortItem<AbstractProduct> { PropertyName = "productType", SortExpression = expression, SortOrder = "desc" });
-                    }
+                    var advancedSorting = new List<SortItem<InventoryItem>>();
+                    Expression<Func<InventoryItem, object>> expression;
+                    //if (input.Sort.ContainsKey("productType"))
+                    //{
+                    //    expression = o => o.ProductType.Name;
+                    //    advancedSorting.Add(new SortItem<InventoryItem> { PropertyName = "productType", SortExpression = expression, SortOrder = "desc" });
+                    //}
 
-                    var sorting = new SortingDTO<AbstractProduct>(input.Sort, advancedSorting);
+                    var sorting = new SortingDTO<InventoryItem>(input.Sort, advancedSorting);
 
-                    result.Bag = query.ProcessPagingSort<AbstractProduct, ProductPageQueryCommandOutputDTO>(predicate, input, sorting, o => new ProductPageQueryCommandOutputDTO
+                    result.Bag = query.ProcessPagingSort<InventoryItem, InventoryItemPageQueryCommandOutputDTO>(predicate, input, sorting, o => new InventoryItemPageQueryCommandOutputDTO
                     {
                         Id = o.Id,
                         Name = o.Name,
-                        ColorName = o.ProductTypeId == "FLW" && ((FlowerProduct)o).ProductColorType != null ? ((FlowerProduct)o).ProductColorType.Name : null,
                         CreatedAt = o.CreatedAt,
-                        MainPicture = o.ProductMedias.Select(m => new FileItemRefOutputDTO
-                        {
-                            Id = m.Id,
-                            FullUrl = m.FileRepository.FullFilePath
-                        }).FirstOrDefault()
                     });
                 }
             }
             catch (Exception ex)
             {
-                result.AddException($"Error getting customer page query", ex);
+                result.AddException($"Error getting inventory item page query", ex);
             }
 
             return result;
         }
 
-        public OperationResponse<DomainModel.Product.AbstractProduct> GetById(int id)
+        public OperationResponse<DomainModel.InventoryItem> GetById(int id)
         {
-            var result = new OperationResponse<DomainModel.Product.AbstractProduct>();
+            var result = new OperationResponse<DomainModel.InventoryItem>();
             try
             {
-                var dbLocator = AmbientDbContextLocator.Get<RiverdaleDBContext>();
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
                 {
-                    result.Bag = dbLocator.Set<AbstractProduct>().Where(o => o.Id == id).FirstOrDefault();
+                    result.Bag = dbLocator.Set<InventoryItem>().Where(o => o.Id == id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
@@ -121,30 +113,12 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
-        public OperationResponse<DomainModel.Product.AbstractProduct> GetByIdWithMedias(int id)
-        {
-            var result = new OperationResponse<DomainModel.Product.AbstractProduct>();
-            try
-            {
-                var dbLocator = AmbientDbContextLocator.Get<RiverdaleDBContext>();
-                result.Bag = dbLocator.Set<AbstractProduct>().Include(t => t.ProductMedias).Where(o => o.Id == id).FirstOrDefault();
-            }
-            catch (Exception ex)
-            {
-                result.AddException($"Error getting Product {id}", ex);
-            }
-
-            return result;
-        }
-
-
-
-        public OperationResponse Insert(AbstractProduct entity)
+        public OperationResponse Insert(InventoryItem entity)
         {
             var result = new OperationResponse();
             try
             {
-                var dbLocator = AmbientDbContextLocator.Get<RiverdaleDBContext>();
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
                 dbLocator.Add(entity);
             }
             catch (Exception ex)
@@ -158,9 +132,9 @@ namespace DatabaseRepositories.DB
         //public OperationResponse<ProductUpdateCommandOutputDTO> Update(ProductUpdateCommandInputDTO input)
         //{
         //    var result = new OperationResponse<ProductUpdateCommandOutputDTO>();
-        //    var dbLocator = AmbientDbContextLocator.Get<RiverdaleDBContext>();
+        //    var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
         //    {
-        //        var entity = dbLocator.Set<AbstractProduct>().FirstOrDefault(o => o.Id == input.Id);
+        //        var entity = dbLocator.Set<IInventoryItem>().FirstOrDefault(o => o.Id == input.Id);
         //        if (entity != null)
         //        {
         //            entity.Name = input.Name;
@@ -169,7 +143,7 @@ namespace DatabaseRepositories.DB
         //        dbLocator.SaveChanges();
 
 
-        //        var dbResult = dbLocator.Set<AbstractProduct>().Where(o => o.Id == entity.Id).Select(o => new ProductUpdateCommandOutputDTO
+        //        var dbResult = dbLocator.Set<IInventoryItem>().Where(o => o.Id == entity.Id).Select(o => new ProductUpdateCommandOutputDTO
         //        {
         //            Id = o.Id,
         //            Name = o.Name
@@ -180,28 +154,31 @@ namespace DatabaseRepositories.DB
         //    }
         //}
 
-        public OperationResponse Delete(DomainModel.Product.AbstractProduct entity)
+        public OperationResponse Delete(InventoryItem entity)
         {
             var result = new OperationResponse();
 
-            var dbLocator = this.AmbientDbContextLocator.Get<RiverdaleDBContext>();
-            try
+            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
             {
-                dbLocator.Set<AbstractProduct>().Remove(entity);
-            }
-            catch (Exception ex)
-            {
-                result.AddException("Error deleting Product", ex);
+                try
+                {
+                    dbLocator.Set<InventoryItem>().Remove(entity);
+                }
+                catch (Exception ex)
+                {
+                    result.AddException("Error deleting Inventory Item", ex);
+                }
             }
 
             return null;
+
         }
 
-        public OperationResponse LogicalDelete(AbstractProduct entity)
+        public OperationResponse LogicalDelete(InventoryItem entity)
         {
             var result = new OperationResponse();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<RiverdaleDBContext>())
+            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
             {
                 try
                 {
@@ -213,7 +190,7 @@ namespace DatabaseRepositories.DB
                 }
                 catch (Exception ex)
                 {
-                    result.AddException("Error voiding Product Color Type", ex);
+                    result.AddException("Error voiding Inventory Item", ex);
                 }
             }
 

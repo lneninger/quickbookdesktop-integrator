@@ -1,37 +1,33 @@
-﻿using Autofac;
-using Framework.Commons;
+﻿using ApplicationLogic.AppSettings;
+using ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand;
+using ApplicationLogic.Business.Commands.InventoryItem.InsertCommand;
+using ApplicationLogic.SignalR;
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
+using Autofac.Extras.DynamicProxy;
+using Autofac.Features.AttributeFilters;
+using DatabaseRepositories.DB;
+using DomainDatabaseMapping;
+using EntityFrameworkCore.DbContextScope;
 using Framework.Autofac;
+using Framework.Commons;
+using Framework.Core.ReflectionHelpers;
+using Framework.EF.DbContextImpl;
+using Framework.Storage.FileStorage.interfaces;
+using Framework.Storage.FileStorage.StorageImplementations;
+using Framework.Storage.FileStorage.TemporaryStorage;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
+using QuickbooksIntegratorAPI.AppSettings;
+using QuickbooksIntegratorAPI.Auth;
 using System;
-using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
-using System.Threading.Tasks;
-using Microsoft.Extensions.DependencyInjection;
-using Autofac.Extensions.DependencyInjection;
-using EntityFrameworkCore.DbContextScope;
-using ApplicationLogic.Business.Commands.Customer.GetAllCommand;
-using ApplicationLogic.Business.Commons;
-using RiverdaleMainApp2_0.Auth;
-using DomainDatabaseMapping;
-using DatabaseRepositories.DB;
-using ApplicationLogic.Business.Commands.Customer.InsertCommand;
-using Autofac.Extras.DynamicProxy;
-using RiverdaleMainApp2_0.AppSettings;
-using Framework.EF.DbContextImpl;
-using ApplicationLogic.SignalR;
-using Framework.FileStorage.Standard.FileStorage.Models;
-using Framework.Storage.FileStorage.StorageImplementations;
-using Framework.Storage.FileStorage.interfaces;
-using Framework.Core.ReflectionHelpers;
-using Autofac.Features.AttributeFilters;
-using Framework.Storage.FileStorage.TemporaryStorage;
-using ApplicationLogic.AppSettings;
 //using Microsoft.AspNet.SignalR;
 //using Autofac.Integration.SignalR;
 //using Microsoft.AspNet.SignalR.Infrastructure;
 
-namespace RiverdaleMainApp2_0.IoC
+namespace QuickbooksIntegratorAPI.IoC
 {
     /// <summary>
     /// IoC Containner configuration
@@ -83,7 +79,7 @@ namespace RiverdaleMainApp2_0.IoC
                 builder.RegisterType<IdentityDBContext>().AsSelf()
                 .TrackInstanceEvents();
 
-                builder.RegisterType<RiverdaleDBContext>().AsSelf()
+                builder.RegisterType<ApplicationDBContext>().AsSelf()
                 .TrackInstanceEvents();
 
                 builder.RegisterType<CurrentUserService>().As<ICurrentUserService>()
@@ -115,33 +111,22 @@ namespace RiverdaleMainApp2_0.IoC
                .EnableInterfaceInterceptors()
                .InterceptedBy(typeof(ExceptionInterceptor));
 
-                var serviceAssembly = typeof(CustomerGetAllCommand).Assembly;
+                var serviceAssembly = typeof(InventoryItemGetAllCommand).Assembly;
                 var serviceTypes = serviceAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Command", StringComparison.InvariantCultureIgnoreCase));
                 builder.RegisterTypes(serviceTypes.ToArray())
                 .AsImplementedInterfaces()
                 .TrackInstanceEvents();
 
-                var dataProviderAssembly = typeof(MasterDataProvider).Assembly;
-                var dataProviderTypes = serviceAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("DataProvider", StringComparison.InvariantCultureIgnoreCase));
-                builder.RegisterTypes(dataProviderTypes.ToArray())
-                .AsImplementedInterfaces()
-                .TrackInstanceEvents();
 
-                var validatorAssembly = typeof(CustomerInsertValidator).Assembly;
+                var validatorAssembly = typeof(InventoryItemInsertValidator).Assembly;
                 var validatorTypes = validatorAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Validator", StringComparison.InvariantCultureIgnoreCase));
                 builder.RegisterTypes(validatorTypes.ToArray())
                 .AsImplementedInterfaces()
                 .TrackInstanceEvents();
 
-                var repositoryAssembly = typeof(CustomerDBRepository).Assembly;
+                var repositoryAssembly = typeof(InventoryItemDBRepository).Assembly;
                 var repositoryTypes = repositoryAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Repository", StringComparison.InvariantCultureIgnoreCase));
                 builder.RegisterTypes(repositoryTypes.ToArray())
-                .AsImplementedInterfaces()
-                .TrackInstanceEvents();
-
-                var funzaRepositoriesAssembly = typeof(FunzaRepositories.SecurityRepository).Assembly;
-                var funzaRepositoryTypes = funzaRepositoriesAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Repository", StringComparison.InvariantCultureIgnoreCase));
-                builder.RegisterTypes(funzaRepositoryTypes.ToArray())
                 .AsImplementedInterfaces()
                 .TrackInstanceEvents();
 

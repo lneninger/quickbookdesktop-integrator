@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp2.1</TargetFramework>
     <TypeScriptToolsVersion>3.1</TypeScriptToolsVersion>
-    <RootNamespace>RiverdaleMainApp2_0</RootNamespace>
+    <RootNamespace>QuickbooksIntegratorAPI</RootNamespace>
     <Configurations>Debug;Release;QA</Configurations>
   </PropertyGroup>
 
@@ -57,14 +57,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\Framework\Framework.Autofac\Framework.Autofac.csproj" />
-    <ProjectReference Include="..\Framework\Framework.EF\Framework.EF.csproj" />
-    <ProjectReference Include="..\Framework\Framework.FileStorage.AspNetCore\Framework.FileStorage.AspNetCore.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.Autofac\Framework.Autofac.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.EF\Framework.EF.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.FileStorage.AspNetCore\Framework.FileStorage.AspNetCore.csproj" />
     <ProjectReference Include="..\ApplicationLogic\ApplicationLogic.csproj" />
-    <ProjectReference Include="..\CommunicationModel\CommunicationModel.csproj" />
     <ProjectReference Include="..\DatabaseRepositories\DatabaseRepositories.csproj" />
-    <ProjectReference Include="..\Framework\Framework.Logging\Framework.Logging.csproj" />
-    <ProjectReference Include="..\FunzaRepositories\FunzaRepositories.csproj" />
+    <ProjectReference Include="..\..\Framework\Framework.Logging\Framework.Logging.csproj" />
   </ItemGroup>
 
   <ItemGroup>

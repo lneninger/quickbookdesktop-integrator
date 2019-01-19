@@ -10,12 +10,9 @@ using ApplicationLogic.Business.Commands.AppUserRole.PageQueryCommand;
 using ApplicationLogic.Business.Commands.AppUserRole.PageQueryCommand.Models;
 using ApplicationLogic.Business.Commands.AppUserRole.UpdateCommand;
 using ApplicationLogic.Business.Commands.AppUserRole.UpdateCommand.Models;
-using ApplicationLogic.Business.Commands.Security;
-using ApplicationLogic.SignalR;
-using CommunicationModel;
 using DomainModel.Identity;
-using Framework.EF.DbContextImpl.Persistance.Paging.Models;
 using Framework.Core.Messages;
+using Framework.EF.DbContextImpl.Persistance.Paging.Models;
 //using Microsoft.AspNet.SignalR;
 using Microsoft.AspNetCore.Identity;
 //using FizzWare.NBuilder;
@@ -23,9 +20,8 @@ using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using Authorization = Microsoft.AspNetCore.Authorization;
 
-namespace RiverdaleMainApp2_0.Controllers
+namespace QuickbooksIntegratorAPI.Controllers
 {
     /// <summary>
     /// UserRole API interface

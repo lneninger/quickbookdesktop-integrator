@@ -9,7 +9,7 @@ namespace DomainDatabaseMapping.Mappings
     public class InventoryItemMap : BaseAbstractMap, IEntityTypeConfiguration<InventoryItem>
     {
 
-        public InventoryItemItemMap(ModelBuilder modelBuilder): base(modelBuilder)
+        public InventoryItemMap(ModelBuilder modelBuilder): base(modelBuilder)
         {
         }
 

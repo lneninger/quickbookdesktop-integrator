@@ -1,5 +1,5 @@
 ﻿using Microsoft.Extensions.Options;
-using RiverdaleMainApp2_0.Models;
+using QuickbooksIntegratorAPI.Models;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
@@ -8,7 +8,7 @@ using System.Security.Claims;
 using System.Security.Principal;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.Auth
+namespace QuickbooksIntegratorAPI.Auth
 {
     /// <summary>
     /// 

@@ -1,13 +1,13 @@
 ﻿using Castle.DynamicProxy;
 using Microsoft.Extensions.Logging;
 using Newtonsoft.Json;
-using RiverdaleMainApp2_0.AppSettings;
+using QuickbooksIntegratorAPI.AppSettings;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.IoC
+namespace QuickbooksIntegratorAPI.IoC
 {
     /// <summary>
     /// 

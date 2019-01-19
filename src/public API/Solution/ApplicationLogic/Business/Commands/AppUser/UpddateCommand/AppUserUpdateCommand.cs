@@ -8,9 +8,9 @@ using Framework.Core.Messages;
 
 namespace ApplicationLogic.Business.Commands.AppUser.UpdateCommand
 {
-    public class AppUserUpdateCommand : AbstractDBCommand<DomainModel.Identity.AppUser, IInventoryItemDBRepository>, IAppUserUpdateCommand
+    public class AppUserUpdateCommand : AbstractDBCommand<DomainModel.Identity.AppUser, IAppUserDBRepository>, IAppUserUpdateCommand
     {
-        public AppUserUpdateCommand(IDbContextScopeFactory dbContextScopeFactory, IInventoryItemDBRepository repository) : base(dbContextScopeFactory, repository)
+        public AppUserUpdateCommand(IDbContextScopeFactory dbContextScopeFactory, IAppUserDBRepository repository) : base(dbContextScopeFactory, repository)
         {
         }
 

@@ -5,7 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.Auth.Helpers
+namespace QuickbooksIntegratorAPI.Auth.Helpers
 {
     public static class Errors
     {

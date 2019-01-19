@@ -12,7 +12,7 @@ namespace ApplicationLogic.SignalR
 {
     public class BaseSignalR<T> : Framework.SignalR.BaseHub<T> where T: class
     {
-        public BaseSignalR(ICurrentUserService currentUserService, IDbContextScopeFactory dbContextScopeFactory, IInventoryItemDBRepository repository)
+        public BaseSignalR(ICurrentUserService currentUserService, IDbContextScopeFactory dbContextScopeFactory, IAppUserDBRepository repository)
         {
             this.CurrentUserService = currentUserService;
             this.DbContextScopeFactory = dbContextScopeFactory;
@@ -21,7 +21,7 @@ namespace ApplicationLogic.SignalR
 
         public ICurrentUserService CurrentUserService { get; }
         public IDbContextScopeFactory DbContextScopeFactory { get; }
-        public IInventoryItemDBRepository Repository { get; }
+        public IAppUserDBRepository Repository { get; }
 
         protected override string GetUserName()
         {

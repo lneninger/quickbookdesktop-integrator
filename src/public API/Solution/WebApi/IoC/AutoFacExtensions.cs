@@ -11,7 +11,7 @@ using System.Linq;
 using System.Reflection;
 using System.Threading.Tasks;
 
-namespace RiverdaleMainApp2_0.IoC
+namespace QuickbooksIntegratorAPI.IoC
 {
     /// <summary>
     /// 
