@@ -1,46 +1,81 @@
-<Project Sdk="Microsoft.NET.Sdk">
-
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.1</TargetFramework>
-    <Configurations>Debug;Release;QA</Configurations>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{021FF474-6CCE-4684-A941-A4BBA5CB56A4}</ProjectGuid>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>Framework.Core</RootNamespace>
+    <AssemblyName>Framework.Core</AssemblyName>
+    <TargetFrameworkVersion>v4.7.1</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <Deterministic>true</Deterministic>
   </PropertyGroup>
-
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Helpers\ImageHelper.cs" />
-    <Compile Remove="Helpers\PlatformHelper.cs" />
+    <Reference Include="Ghostscript.NET, Version=1.2.1.0, Culture=neutral, PublicKeyToken=f85051de34525b59, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Ghostscript.NET.1.2.1\lib\net40\Ghostscript.NET.dll</HintPath>
+    </Reference>
+    <Reference Include="MimeTypeMap.List, Version=2.0.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\MimeTypeMap.List.2.0.1\lib\netstandard1.0\MimeTypeMap.List.dll</HintPath>
+    </Reference>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Xml" />
   </ItemGroup>
-
   <ItemGroup>
-    <PackageReference Include="Ghostscript.NET" Version="1.2.1" />
-    <PackageReference Include="Microsoft.AspNetCore.Cryptography.KeyDerivation" Version="2.1.1" />
-    <PackageReference Include="MimeTypeMap.Core" Version="1.0.0" />
-    <PackageReference Include="Newtonsoft.Json" Version="12.0.1" />
-    <PackageReference Include="System.Drawing.Common" Version="4.5.1" />
+    <Compile Include="Crypto\HashHelper.cs" />
+    <Compile Include="GeneralValidations\InternetFieldNormalization.cs" />
+    <Compile Include="Helpers\AsyncHelpers.cs" />
+    <Compile Include="Helpers\FileHelpers.cs" />
+    <Compile Include="Helpers\ImageNativeHelper.cs" />
+    <Compile Include="Helpers\LinqExtensions.cs" />
+    <Compile Include="Helpers\NameReaderExtensions.cs" />
+    <Compile Include="Helpers\PdfHelper.cs" />
+    <Compile Include="Helpers\PlatformHelper.cs" />
+    <Compile Include="Helpers\ReflectionExtensions.cs" />
+    <Compile Include="Helpers\ValueExtensions.cs" />
+    <Compile Include="Messages\MessageTypeEnum.cs" />
+    <Compile Include="Messages\OperationMessage.cs" />
+    <Compile Include="Messages\OperationMessageExtension.cs" />
+    <Compile Include="Messages\OperationResponse.cs" />
+    <Compile Include="Messages\OperationResponseException.cs" />
+    <Compile Include="Messages\OperationValuedResponse.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
-
-  <ItemGroup>
-    <None Update="_libs\gsdll32.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="_libs\gsdll32.lib">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="_libs\gsdll64.dll">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-    <None Update="_libs\gsdll64.lib">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
-    </None>
-  </ItemGroup>
-
   <ItemGroup>
     <Folder Include="Models\" />
   </ItemGroup>
-
   <ItemGroup>
-    <Reference Include="System.Web">
-      <HintPath>C:\Program Files (x86)\Reference Assemblies\Microsoft\Framework\.NETFramework\v4.7.1\System.Web.dll</HintPath>
-    </Reference>
+    <None Include="packages.config" />
   </ItemGroup>
-
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

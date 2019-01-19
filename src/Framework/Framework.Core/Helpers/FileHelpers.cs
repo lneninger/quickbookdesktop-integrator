@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 
 namespace Framework.Core.Helpers
@@ -13,7 +14,7 @@ namespace Framework.Core.Helpers
         /// <returns></returns>
         public static string GetMimeTypeByExtension(string extension)
         {
-            return MimeTypes.Core.MimeTypeMap.GetMimeType(extension);
+            return MimeTypeMap.List.MimeTypeMap.GetMimeType(extension).FirstOrDefault();
         }
     }
 }

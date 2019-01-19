@@ -9,7 +9,7 @@ namespace Framework.Core.Helpers
     public class PlatformHelper
     {
         public static PlatformEnum ApplicationRuntimePlatform() {
-            if (HostingEnvironment.AppDomainAppId != null)
+            if (HostingEnvironment.ApplicationHost != null)
             {
                 //is web app
                 return PlatformEnum.WEB;

@@ -17,7 +17,7 @@
   </ItemGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <DocumentationFile>bin\Debug\netcoreapp2.1\FocusAIRemote.xml</DocumentationFile>
+    <DocumentationFile>bin\Debug\netcoreapp2.1\quickbooks-integrator-api-doc.xml</DocumentationFile>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='QA|AnyCPU'">

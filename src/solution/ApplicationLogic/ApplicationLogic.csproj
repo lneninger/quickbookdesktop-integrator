@@ -124,6 +124,9 @@
     <Compile Include="Commands\ICommand.cs" />
     <Compile Include="Commands\ICommandAction.cs" />
     <Compile Include="Commands\ICommandFunc.cs" />
+    <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\SyncInventoryItemsCommand.cs" />
+    <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\ISyncInventoryItemsCommand.cs" />
+    <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\Models\SyncInventoryItemsOutputIventoryItemDTO.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetInventoryItems\GetInventoryItemsCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetInventoryItems\IGetInventoryItemsCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetInventoryItems\Models\GetInventoryItemsOutputIventoryItemDTO.cs" />
@@ -144,6 +147,10 @@
     <ProjectReference Include="..\..\Framework\Framework.Autofac\Framework.Autofac.csproj">
       <Project>{C36A430E-1BAF-4723-9A4F-8666AC825F1F}</Project>
       <Name>Framework.Autofac</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\..\Framework\Framework.Core\Framework.Core.csproj">
+      <Project>{021FF474-6CCE-4684-A941-A4BBA5CB56A4}</Project>
+      <Name>Framework.Core</Name>
     </ProjectReference>
     <ProjectReference Include="..\..\Framework\Framework.Logging\Framework.Logging.csproj">
       <Project>{18d5392f-f09c-4a77-aa7c-ca04cf40f79e}</Project>

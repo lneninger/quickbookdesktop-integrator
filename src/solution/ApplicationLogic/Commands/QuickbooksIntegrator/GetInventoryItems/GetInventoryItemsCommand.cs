@@ -1,17 +1,13 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Models;
+﻿using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Models;
 using ApplicationLogic.Interfaces.Repositories.Quickbooks;
 using Framework.Autofac;
+using System.Collections.Generic;
 
 namespace ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems
 {
     public class GetInventoryItemsCommand : BaseIoCDisposable, IGetInventoryItemsCommand
     {
-        public GetInventoryItemsCommand(ApplicationLogic.Interfaces.Repositories.Quickbooks.IInventoryRepository repository)
+        public GetInventoryItemsCommand(IInventoryRepository repository)
         {
             this.Repository = repository;
         }
