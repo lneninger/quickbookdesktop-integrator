@@ -1,5 +1,6 @@
 ﻿using ApplicationLogic.AppConfiguration;
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems;
+using ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems;
 using ApplicationLogic.Quickbooks;
 using Framework.Autofac;
 using Framework.Logging.Log4Net;
@@ -26,11 +27,11 @@ namespace Main.Jobs
                 var qbManager = IoCGlobal.Resolve<SessionManager>();
 
                 // Test Inventory Item Request
-                var getInventoryItemsCommand = IoCGlobal.Resolve<IGetInventoryItemsCommand>();
-                var result = getInventoryItemsCommand.Execute();
+                var syncInventoryItemsCommand = IoCGlobal.Resolve<ISyncInventoryItemsCommand>();
+                var result = syncInventoryItemsCommand.Execute();
                 Logger.Info("Sync Inventory Items with success!");
 
-                throw new NotImplementedException();
+                //throw new NotImplementedException();
             }
             catch (Exception ex)
             {

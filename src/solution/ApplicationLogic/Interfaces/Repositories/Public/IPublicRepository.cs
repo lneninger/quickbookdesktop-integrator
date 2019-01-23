@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace ApplicationLogic.Interfaces.Repositories.Database
+namespace ApplicationLogic.Interfaces.Repositories.Remote
 {
     public interface IPublicRepository
     {

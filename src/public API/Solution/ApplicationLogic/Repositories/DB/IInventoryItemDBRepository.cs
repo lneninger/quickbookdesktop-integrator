@@ -32,6 +32,13 @@ namespace ApplicationLogic.Repositories.DB
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="fullName"></param>
+        /// <returns></returns>
+        OperationResponse<DomainModel.InventoryItem> GetByFullName(string fullName);
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
         OperationResponse Insert(InventoryItem entity);

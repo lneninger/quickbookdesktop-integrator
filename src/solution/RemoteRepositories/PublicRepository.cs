@@ -1,6 +1,6 @@
 ﻿using ApplicationLogic.AppConfiguration;
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Models;
-using ApplicationLogic.Interfaces.Repositories.Database;
+using ApplicationLogic.Interfaces.Repositories.Remote;
 using Framework.Core.Messages;
 using RestSharp;
 using System;
@@ -24,12 +24,12 @@ namespace RemoteRepositories
         {
             var result = new OperationResponse();
 
-            var request = new RestRequest("inventoryitem", Method.POST);
+            var request = new RestRequest("inventoryitem/sync", Method.POST);
             request.AddJsonBody(inventoryItemDTO);
 
             try
             {
-                this.RestSharpClient.Execute(request);
+                var response = this.RestSharpClient.Execute(request);
             }
             catch (Exception ex)
             {

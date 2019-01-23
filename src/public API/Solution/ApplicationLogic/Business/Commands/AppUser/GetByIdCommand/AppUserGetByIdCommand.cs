@@ -1,10 +1,9 @@
-﻿using System;
-using EntityFrameworkCore.DbContextScope;
+﻿using ApplicationLogic.Business.Commands.AppUser.GetByIdCommand.Models;
+using ApplicationLogic.Business.Commands.AppUserRole.GetByIdCommand.Models;
 using ApplicationLogic.Repositories.DB;
-using ApplicationLogic.Business.Commands.AppUser.GetByIdCommand.Models;
+using EntityFrameworkCore.DbContextScope;
 using Framework.Core.Messages;
 using System.Linq;
-using ApplicationLogic.Business.Commands.AppUserRole.GetByIdCommand.Models;
 
 namespace ApplicationLogic.Business.Commands.AppUser.GetByIdCommand
 {

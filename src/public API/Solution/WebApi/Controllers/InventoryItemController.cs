@@ -8,19 +8,18 @@ using ApplicationLogic.Business.Commands.InventoryItem.InsertCommand;
 using ApplicationLogic.Business.Commands.InventoryItem.InsertCommand.Models;
 using ApplicationLogic.Business.Commands.InventoryItem.PageQueryCommand;
 using ApplicationLogic.Business.Commands.InventoryItem.PageQueryCommand.Models;
+using ApplicationLogic.Business.Commands.InventoryItem.SyncCommand;
+using ApplicationLogic.Business.Commands.InventoryItem.SyncCommand.Models;
 using ApplicationLogic.Business.Commands.InventoryItem.UpdateCommand;
 using ApplicationLogic.Business.Commands.InventoryItem.UpdateCommand.Models;
 using ApplicationLogic.SignalR;
 using Framework.EF.DbContextImpl.Persistance.Paging.Models;
 using Framework.SignalR;
-//using FizzWare.NBuilder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using QuickbooksIntegratorAPI.Auth;
 using System.Collections.Generic;
-//using Microsoft.AspNet.SignalR;
 using Authorization = Microsoft.AspNetCore.Authorization;
-//using Microsoft.AspNet.SignalR.Infrastructure;
 
 namespace QuickbooksIntegratorAPI.Controllers
 {
@@ -42,13 +41,13 @@ namespace QuickbooksIntegratorAPI.Controllers
         /// <param name="insertCommand">The insert command.</param>
         /// <param name="updateCommand">The update command.</param>
         /// <param name="deleteCommand">The delete command.</param>
-        public InventoryItemController(IHubContext<GlobalHub, IGlobalHub> hubContext, IInventoryItemPageQueryCommand pageQueryCommand, IInventoryItemGetAllCommand getAllCommand, IInventoryItemGetByIdCommand getByIdCommand, IInventoryItemInsertCommand insertCommand, IInventoryItemUpdateCommand updateCommand, IInventoryItemDeleteCommand deleteCommand): base(/*hubContext*/)
+        public InventoryItemController(IHubContext<GlobalHub, IGlobalHub> hubContext, IInventoryItemPageQueryCommand pageQueryCommand, IInventoryItemGetAllCommand getAllCommand, IInventoryItemGetByIdCommand getByIdCommand, IInventoryItemSyncCommand syncCommand, IInventoryItemUpdateCommand updateCommand, IInventoryItemDeleteCommand deleteCommand): base(/*hubContext*/)
         {
             this.SignalRHubContext = hubContext;
             this.PageQueryCommand = pageQueryCommand;
             this.GetAllCommand = getAllCommand;
             this.GetByIdCommand = getByIdCommand;
-            this.InsertCommand = insertCommand;
+            this.SyncCommand = syncCommand;
             this.UpdateCommand = updateCommand;
             this.DeleteCommand = deleteCommand;
         }
@@ -86,7 +85,7 @@ namespace QuickbooksIntegratorAPI.Controllers
         /// <value>
         /// The insert command.
         /// </value>
-        public IInventoryItemInsertCommand InsertCommand { get; }
+        public IInventoryItemSyncCommand SyncCommand { get; }
 
         /// <summary>
         /// Gets the update command.
@@ -148,11 +147,11 @@ namespace QuickbooksIntegratorAPI.Controllers
         /// </summary>
         /// <param name="model">The model.</param>
         /// <returns></returns>
-        [HttpPost, ProducesResponseType(200, Type = typeof(InventoryItemInsertCommandOutputDTO))]
-        [Authorization.Authorize(Policy = PermissionsEnum.InventoryItem_Manage)]
-        public IActionResult Post([FromBody]InventoryItemInsertCommandInputDTO model)
+        [HttpPost("sync"), ProducesResponseType(200, Type = typeof(InventoryItemInsertCommandOutputDTO))]
+        //[Authorization.Authorize(Policy = PermissionsEnum.InventoryItem_Manage)]
+        public IActionResult Post([FromBody]InventoryItemSyncCommandInputDTO model)
         {
-            var appResult = this.InsertCommand.Execute(model);
+            var appResult = this.SyncCommand.Execute(model);
             if(appResult.IsSucceed)
             {
                 var signalArgs = new SignalREventArgs(SignalREvents.DATA_CHANGED.Identifier, nameof(SignalREvents.DATA_CHANGED.ActionEnum.ADDED_ITEM), nameof(DomainModel.InventoryItem), appResult.Bag);

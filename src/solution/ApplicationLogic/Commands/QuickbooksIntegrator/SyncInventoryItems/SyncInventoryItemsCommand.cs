@@ -1,6 +1,6 @@
 ﻿using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems;
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Models;
-using ApplicationLogic.Interfaces.Repositories.Database;
+using ApplicationLogic.Interfaces.Repositories.Remote;
 using ApplicationLogic.Interfaces.Repositories.Quickbooks;
 using Framework.Autofac;
 using Framework.Core.Messages;
@@ -12,14 +12,14 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
 {
     public class SyncInventoryItemsCommand : BaseIoCDisposable, ISyncInventoryItemsCommand
     {
-        public SyncInventoryItemsCommand(IPublicRepository repository, GetInventoryItemsCommand getInventoryItems)
+        public SyncInventoryItemsCommand(IPublicRepository repository, IGetInventoryItemsCommand getInventoryItems)
         {
             this.Repository = repository;
             this.GetInventoryItems = getInventoryItems;
         }
 
         public IPublicRepository Repository { get; }
-        public GetInventoryItemsCommand GetInventoryItems { get; }
+        public IGetInventoryItemsCommand GetInventoryItems { get; }
 
         public OperationResponse Execute()
         {

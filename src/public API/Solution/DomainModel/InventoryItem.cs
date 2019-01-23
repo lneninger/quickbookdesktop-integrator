@@ -12,11 +12,11 @@ namespace DomainModel
 
         public string Name { get; set; }
 
-        public decimal Stock { get; set; }
+        public decimal? Stock { get; set; }
 
         public string SalesDescription { get; set; }
 
-        public decimal SalesPrice { get; set; }
+        public decimal? SalesPrice { get; set; }
 
         public DateTime? DeletedAt { get; set; }
 

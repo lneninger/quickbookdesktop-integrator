@@ -111,7 +111,7 @@ namespace Main
                .TrackInstanceEvents();
 
                 var remoteRepositoriesAssembly = typeof(PublicRepository).Assembly;
-                var remoteRepositoriesTypes = repositoryAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Repository", StringComparison.InvariantCultureIgnoreCase));
+                var remoteRepositoriesTypes = remoteRepositoriesAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Repository", StringComparison.InvariantCultureIgnoreCase));
                 builder.RegisterTypes(remoteRepositoriesTypes.ToArray())
                 .AsImplementedInterfaces()
                 .TrackInstanceEvents();

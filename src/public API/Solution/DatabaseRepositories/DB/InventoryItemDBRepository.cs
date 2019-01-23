@@ -113,6 +113,24 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
+        public OperationResponse<InventoryItem> GetByFullName(string fullName)
+        {
+            var result = new OperationResponse<DomainModel.InventoryItem>();
+            try
+            {
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
+                {
+                    result.Bag = dbLocator.Set<InventoryItem>().Where(o => o.FullName == fullName).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                result.AddException($"Error getting Product {fullName}", ex);
+            }
+
+            return result;
+        }
+
         public OperationResponse Insert(InventoryItem entity)
         {
             var result = new OperationResponse();
@@ -197,5 +215,6 @@ namespace DatabaseRepositories.DB
             return null;
         }
 
+      
     }
 }

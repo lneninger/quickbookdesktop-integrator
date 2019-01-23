@@ -18,6 +18,7 @@
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
     <DocumentationFile>bin\Debug\netcoreapp2.1\quickbooks-integrator-api-doc.xml</DocumentationFile>
+    <WarningLevel>1</WarningLevel>
   </PropertyGroup>
 
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='QA|AnyCPU'">
