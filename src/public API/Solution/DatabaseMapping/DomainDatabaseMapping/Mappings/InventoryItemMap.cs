@@ -29,6 +29,11 @@ namespace DomainDatabaseMapping.Mappings
                .HasColumnType("nvarchar(50)")
                .IsRequired(true);
 
+            builder.HasOne(t => t.IncomeAccount)
+              .WithMany()
+              .HasForeignKey(t => t.IncomeAccountId)
+              .IsRequired(false);
+
             // Seed
         }
     }

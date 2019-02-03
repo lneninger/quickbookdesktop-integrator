@@ -7,12 +7,14 @@ using Framework.Core.Messages;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using ApplicationLogic.Commands.QuickbooksIntegrator.GetAccountByIds;
+using ApplicationLogic.Commands.QuickbooksIntegrator.GetAccountByIds.Models;
 
 namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
 {
     public class SyncInventoryItemsCommand : BaseIoCDisposable, ISyncInventoryItemsCommand
     {
-        public SyncInventoryItemsCommand(IPublicRepository repository, IGetInventoryItemsCommand getInventoryItems)
+        public SyncInventoryItemsCommand(IPublicRepository repository, IGetInventoryItemsCommand getInventoryItems, IGetAccountByIdsCommand getAccountByIds)
         {
             this.Repository = repository;
             this.GetInventoryItems = getInventoryItems;
@@ -20,15 +22,20 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
 
         public IPublicRepository Repository { get; }
         public IGetInventoryItemsCommand GetInventoryItems { get; }
+        public IGetAccountByIdsCommand GetAccountByIds { get; }
 
         public OperationResponse Execute()
         {
             var result = new OperationResponse();
 
             IEnumerable<GetInventoryItemsOutputIventoryItemDTO> items = null;
+            IEnumerable<GetAccountByIdsOutputDTO> accounts = null;
             try
             {
                 items = this.GetInventoryItems.Execute();
+
+                var accountIds = items.Where(item => !string.IsNullOrWhiteSpace(item.IncomeAccountId)).Select(item => item.IncomeAccountId);
+                accounts = this.GetAccountByIds.Execute(accountIds.ToList());
             }
             catch (Exception ex)
             {
@@ -37,15 +44,13 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
 
             if (result.IsSucceed)
             {
-                var syncItems = items.Select(item => new SyncInventoryItemsInputIventoryItemDTO
+                var syncItems = new SyncInventoryItemsInputIventoryItemDTO
                 {
-                    Name = item.Name,
-                    FullName = item.FullName,
-                    Cost = item.Cost,
-                    Stock = item.Stock,
-                    SaleDescription = item.SaleDescription,
-                    SalePrice = item.SalePrice,
-                });
+                    InventoryItems = items,
+                    Accounts = accounts,
+                };
+
+               
 
                 try
                 {

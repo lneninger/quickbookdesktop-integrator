@@ -1,4 +1,5 @@
 ﻿using Framework.Autofac;
+using Framework.Logging.Log4Net;
 using Main.Helpers;
 using Main.Jobs;
 using Quartz;
@@ -19,6 +20,8 @@ namespace Main
 {
     public partial class MainService : ServiceBase
     {
+        protected LoggerCustom Logger = Framework.Logging.Log4Net.LoggerFactory.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
+
         public MainService()
         {
             InitializeComponent();
@@ -91,45 +94,69 @@ namespace Main
             if (!File.Exists(filePath))
             {
                 SQLiteConnection.CreateFile(filePath);
-                SQLiteConnection conn = null;
-                try
-                {
-                    conn = connectionFactory.CreateConnection() as SQLiteConnection;
+            }
 
-                    CreateTicketTable(conn);
-                    CreateStateTable(conn);
-                }
-                finally
+            SQLiteConnection conn = null;
+            try
+            {
+                conn = connectionFactory.CreateConnection() as SQLiteConnection;
+
+                DropTicketTable(conn);
+                DropTicketTable(conn);
+                CreateExecutionTable(conn);
+                CreateExecutionStatusTable(conn);
+            }
+            catch (Exception ex)
+            {
+                Logger.Fatal("Problem configuring internal database.", ex);
+            }
+            finally
+            {
+                if (conn != null && conn.State == System.Data.ConnectionState.Open)
                 {
-                    if (conn != null && conn.State == System.Data.ConnectionState.Open)
-                    {
-                        conn.Close();
-                    }
+                    conn.Close();
                 }
             }
         }
 
-        private void CreateTicketTable(SQLiteConnection conn)
+        private void DropStateTable(SQLiteConnection conn)
         {
-            string sql = @"CREATE TABLE [QuickbookState] (
+            string sql = @"DROP TABLE IF EXISTS [QuickbookState];";
+
+            this.CreateTable(sql, conn);
+        }
+
+        private void DropTicketTable(SQLiteConnection conn)
+        {
+            string sql = @"DROP TABLE IF EXISTS [QuickbookTicket];";
+
+            this.CreateTable(sql, conn);
+        }
+
+        private void CreateExecutionTable(SQLiteConnection conn)
+        {
+            string sql = @"CREATE TABLE IF NOT EXISTS [QuickbookExecution] (
                                   [Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-                                , [Ticket] nvarchar(100) NOT NULL COLLATE NOCASE
-                                , [Authenticated] bit NOT NULL
+                                , [Date] DATETIME NOT NULL
+                                , [StatusId]  VARCHAR(6) NOT NULL
                               );";
 
             this.CreateTable(sql, conn);
         }
 
-        private void CreateStateTable(SQLiteConnection conn)
+        private void CreateExecutionStatusTable(SQLiteConnection conn)
         {
-            string sql = @"CREATE TABLE [QuickbookTicket] (
-                                  [Id] INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL
-                                , [Ticket] nvarchar(100) NOT NULL COLLATE NOCASE
-                                , [CurrentStep] nvarchar(100) NULL COLLATE NOCASE
-                                , [Key] nvarchar(100) NULL COLLATE NOCASE
+            string sql = @"CREATE TABLE IF NOT EXISTS [ExecutionStatus] (
+                                  [Id] VARCHAR(6) PRIMARY KEY NOT NULL
+                                , [Name] VARCHAR(100) NOT NULL COLLATE NOCASE UNIQUE
                               );";
 
             this.CreateTable(sql, conn);
+
+            // Seed
+            new SQLiteCommand("INSERT OR IGNORE INTO ExecutionStatus([Id], [Name]) values('EXEC', 'Executing')-- WHERE NOT EXISTS(SELECT 1 FROM ExecutionStatus WHERE Id = 'EXEC')", conn).ExecuteNonQuery();
+            new SQLiteCommand("INSERT OR IGNORE INTO ExecutionStatus([Id], [Name]) values('SUCC', 'Success')-- WHERE NOT EXISTS(SELECT 1 FROM ExecutionStatus WHERE Id = 'SUCC')", conn).ExecuteNonQuery();
+            new SQLiteCommand("INSERT OR IGNORE INTO ExecutionStatus([Id], [Name]) values('ERROR', 'Error')-- WHERE NOT EXISTS(SELECT 1 FROM ExecutionStatus WHERE Id = 'ERROR')", conn).ExecuteNonQuery();
         }
 
         private void CreateTable(string tableCreateCommand, SQLiteConnection connection)

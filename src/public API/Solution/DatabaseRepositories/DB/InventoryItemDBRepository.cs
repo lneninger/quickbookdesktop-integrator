@@ -113,6 +113,24 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
+        public OperationResponse<IncomeAccount> GetIncomeAccountById(string id)
+        {
+            var result = new OperationResponse<DomainModel.IncomeAccount>();
+            try
+            {
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
+                {
+                    result.Bag = dbLocator.Set<IncomeAccount>().Where(o => o.Id == id).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                result.AddException($"Error getting Income Account {id}", ex);
+            }
+
+            return result;
+        }
+
         public OperationResponse<InventoryItem> GetByFullName(string fullName)
         {
             var result = new OperationResponse<DomainModel.InventoryItem>();
@@ -131,6 +149,26 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
+        public OperationResponse<IEnumerable<IncomeAccount>> GetCategories()
+        {
+            var result = new OperationResponse<IEnumerable<IncomeAccount>>();
+
+            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            {
+                try
+                {
+                    result.Bag = dbLocator.Set<IncomeAccount>().ToList();
+                }
+                catch (Exception ex)
+                {
+                    result.AddException("Error getting income accounts", ex);
+                }
+            }
+
+            return null;
+
+        }
+
         public OperationResponse Insert(InventoryItem entity)
         {
             var result = new OperationResponse();
@@ -146,31 +184,6 @@ namespace DatabaseRepositories.DB
 
             return result;
         }
-
-        //public OperationResponse<ProductUpdateCommandOutputDTO> Update(ProductUpdateCommandInputDTO input)
-        //{
-        //    var result = new OperationResponse<ProductUpdateCommandOutputDTO>();
-        //    var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
-        //    {
-        //        var entity = dbLocator.Set<IInventoryItem>().FirstOrDefault(o => o.Id == input.Id);
-        //        if (entity != null)
-        //        {
-        //            entity.Name = input.Name;
-        //        }
-
-        //        dbLocator.SaveChanges();
-
-
-        //        var dbResult = dbLocator.Set<IInventoryItem>().Where(o => o.Id == entity.Id).Select(o => new ProductUpdateCommandOutputDTO
-        //        {
-        //            Id = o.Id,
-        //            Name = o.Name
-        //        }).FirstOrDefault();
-
-        //        result.Bag = dbResult;
-        //        return result;
-        //    }
-        //}
 
         public OperationResponse Delete(InventoryItem entity)
         {
@@ -215,6 +228,6 @@ namespace DatabaseRepositories.DB
             return null;
         }
 
-      
+       
     }
 }

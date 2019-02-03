@@ -11,5 +11,8 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.SyncCommand.Models
         public double? Cost { get; set; }
         public string SaleDescription { get; set; }
         public double? SalePrice { get; set; }
+        public string IncomeAccountId { get; set; }
+        public string IncomeAccountName { get; set; }
+
     }
 }

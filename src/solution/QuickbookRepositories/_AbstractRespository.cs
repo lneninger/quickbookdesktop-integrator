@@ -43,6 +43,10 @@ namespace QuickbookRepositories
                     ICustomerQuery custQuery = requestMsgSet.AppendCustomerQueryRq();
                     custQuery.metaData.SetValue(ENmetaData.mdMetaDataOnly);
                     break;
+                case "AccountQueryRq":
+                    IAccountQuery accountQuery = requestMsgSet.AppendAccountQueryRq();
+                    accountQuery.metaData.SetValue(ENmetaData.mdMetaDataOnly);
+                    break;
                 case "ItemQueryRq":
                     IItemQuery itemQuery = requestMsgSet.AppendItemQueryRq();
                     itemQuery.metaData.SetValue(ENmetaData.mdMetaDataOnly);

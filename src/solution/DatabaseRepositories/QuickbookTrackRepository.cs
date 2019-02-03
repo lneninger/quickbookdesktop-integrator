@@ -14,18 +14,46 @@ namespace DatabaseRepositories
         {
         }
 
-        public void AddState(QuickbookState state)
+        public QuickbookExecution AddExecution()
         {
-            this.DbContext.States.Add(state);
+            try
+            {
+                var entity = new QuickbookExecution
+                {
+                    Date = DateTime.UtcNow,
+                    StatusId = ExecutionStatusEnum.Executing
+                };
+
+                var result = this.DbContext.QuickbookExecutions.Add(entity);
+                this.DbContext.SaveChanges();
+                return result;
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
-        public IEnumerable<QuickbookState> GetState(string ticket, string currentStep, string key)
+        public void SetExecutionStatus(int id, string status)
         {
-            return this.DbContext.States
-                    .Where(m => ticket == null || m.Ticket == ticket)
-                    .Where(m => currentStep == null || m.CurrentStep == currentStep)
-                    .Where(m => key == null || m.Key == key)
-                    .ToList();
+            try
+            {
+                var entity = this.DbContext.QuickbookExecutions.Find(id);
+                if (entity != null)
+                {
+                    entity.StatusId = status;
+                    this.DbContext.SaveChanges();
+                }
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        public QuickbookExecution GetExecutionById(int id)
+        {
+            return this.DbContext.QuickbookExecutions.Find(id);
         }
     }
 }

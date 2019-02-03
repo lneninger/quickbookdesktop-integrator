@@ -46,6 +46,13 @@ namespace ApplicationLogic.Repositories.DB
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="incomeAccountId"></param>
+        /// <returns></returns>
+        OperationResponse<IncomeAccount> GetIncomeAccountById(string id);
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         //OperationResponse Update(AppUserUpdateCommandInputDTO input);
@@ -63,5 +70,7 @@ namespace ApplicationLogic.Repositories.DB
         /// <param name="entity"></param>
         /// <returns></returns>
         OperationResponse LogicalDelete(InventoryItem entity);
+
+       
     }
 }

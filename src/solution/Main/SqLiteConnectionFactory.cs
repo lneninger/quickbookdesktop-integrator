@@ -17,7 +17,7 @@ namespace Main
         /// <summary>
         /// The relative SQL lite path
         /// </summary>
-        public const string RelativeSqlLitePath = "App_Data\\QBDB.db";
+        public const string RelativeSqlLitePath = @"App_Data\QBDB.db";
 
         /// <summary>
         /// Creates the connection.

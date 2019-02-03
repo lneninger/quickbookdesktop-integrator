@@ -11,6 +11,6 @@ namespace ApplicationLogic.Interfaces.Repositories.Remote
 {
     public interface IPublicRepository
     {
-        OperationResponse SendInventoryItem(IEnumerable<SyncInventoryItemsInputIventoryItemDTO> inventoryItemDTO);
+        OperationResponse SendInventoryItem(SyncInventoryItemsInputIventoryItemDTO inventoryItemDTO);
     }
 }

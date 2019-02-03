@@ -90,6 +90,21 @@ namespace DomainDatabaseMigrations.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("DomainModel.IncomeAccount", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(100);
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("IncomeAccount","INV");
+                });
+
             modelBuilder.Entity("DomainModel.InventoryItem", b =>
                 {
                     b.Property<int>("Id")
@@ -116,6 +131,8 @@ namespace DomainDatabaseMigrations.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
+                    b.Property<string>("IncomeAccountId");
+
                     b.Property<bool?>("IsDeleted");
 
                     b.Property<string>("Name")
@@ -124,9 +141,9 @@ namespace DomainDatabaseMigrations.Migrations
 
                     b.Property<string>("SalesDescription");
 
-                    b.Property<decimal>("SalesPrice");
+                    b.Property<decimal?>("SalesPrice");
 
-                    b.Property<decimal>("Stock");
+                    b.Property<decimal?>("Stock");
 
                     b.Property<DateTime?>("UpdatedAt")
                         .HasAnnotation("ColumnOrder", 102);
@@ -136,6 +153,8 @@ namespace DomainDatabaseMigrations.Migrations
                         .HasAnnotation("ColumnOrder", 103);
 
                     b.HasKey("Id");
+
+                    b.HasIndex("IncomeAccountId");
 
                     b.ToTable("InventoryItem","INV");
                 });
@@ -265,6 +284,13 @@ namespace DomainDatabaseMigrations.Migrations
                     b.ToTable("AppUserRole");
 
                     b.HasDiscriminator().HasValue("AppUserRole");
+                });
+
+            modelBuilder.Entity("DomainModel.InventoryItem", b =>
+                {
+                    b.HasOne("DomainModel.IncomeAccount", "IncomeAccount")
+                        .WithMany()
+                        .HasForeignKey("IncomeAccountId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

@@ -9,8 +9,10 @@ namespace ApplicationLogic.Interfaces.Repositories.Database
 {
     public interface IQuickbookTrackRepository: IDbRepository
     {
-        IEnumerable<QuickbookState> GetState(string ticket, string currentStep, string key);
+        QuickbookExecution GetExecutionById(int id);
 
-        void AddState(QuickbookState state);
+        QuickbookExecution AddExecution();
+
+        void SetExecutionStatus(int id, string status);
     }
 }

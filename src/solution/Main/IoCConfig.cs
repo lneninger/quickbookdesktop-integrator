@@ -105,6 +105,10 @@ namespace Main
                 .AsImplementedInterfaces()
                 .TrackInstanceEvents();
 
+                builder.RegisterType<SqLiteConnectionFactory>()
+               .AsImplementedInterfaces()
+               .TrackInstanceEvents();
+                
 
                 builder.RegisterType<QuickbookTrackRepository>()
                .AsImplementedInterfaces()

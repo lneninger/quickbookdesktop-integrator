@@ -32,7 +32,10 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.SyncCommand
                             SalesPrice = (decimal?)item.SalePrice,
                             SalesDescription = item.SaleDescription,
                             Stock = (decimal?)item.Stock,
+
                         };
+
+                        SetIncomeAccount(entityResponse, item, entity);
 
                         try
                         {
@@ -51,6 +54,8 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.SyncCommand
                         entity.SalesPrice = (decimal?)item.SalePrice;
                         entity.SalesDescription = item.SaleDescription;
                         entity.Stock = (decimal?)item.Stock;
+
+                        SetIncomeAccount(entityResponse, item, entity);
                     }
                 }
 
@@ -68,6 +73,28 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.SyncCommand
             }
 
             return result;
+        }
+
+        private void SetIncomeAccount(OperationResponse<DomainModel.InventoryItem> entityResponse, InventoryItemSyncCommandInputItemDTO item, DomainModel.InventoryItem entity)
+        {
+            // Set Income Account
+            if (!string.IsNullOrWhiteSpace(item.IncomeAccountId))
+            {
+                var incomeAccountResponse = this.Repository.GetIncomeAccountById(item.IncomeAccountId);
+                var incomeAccount = incomeAccountResponse.Bag;
+                if (incomeAccount == null)
+                {
+                    entity.IncomeAccount = new DomainModel.IncomeAccount
+                    {
+                        Id = item.IncomeAccountId,
+                        FullName = item.IncomeAccountName
+                    };
+                }
+                else
+                {
+                    entity.IncomeAccountId = item.IncomeAccountId;
+                }
+            }
         }
     }
 }

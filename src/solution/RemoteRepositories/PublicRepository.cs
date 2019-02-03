@@ -20,7 +20,7 @@ namespace RemoteRepositories
 
         public RestClient RestSharpClient { get; }
 
-        public OperationResponse SendInventoryItem(IEnumerable<SyncInventoryItemsInputIventoryItemDTO> inventoryItemDTO)
+        public OperationResponse SendInventoryItem(SyncInventoryItemsInputIventoryItemDTO inventoryItemDTO)
         {
             var result = new OperationResponse();
 

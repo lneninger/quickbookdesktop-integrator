@@ -2,6 +2,7 @@
 using ApplicationLogic.Interfaces.Repositories.Quickbooks;
 using Framework.Autofac;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems
 {
@@ -16,7 +17,11 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems
 
         public IEnumerable<GetInventoryItemsOutputIventoryItemDTO> Execute()
         {
-            return this.Repository.GetAll();
+            var items = this.Repository.GetAll();
+
+            
+
+            return items;
         }
     }
 }

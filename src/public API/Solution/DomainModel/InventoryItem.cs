@@ -21,5 +21,8 @@ namespace DomainModel
         public DateTime? DeletedAt { get; set; }
 
         public bool? IsDeleted { get; set; }
+
+        public string IncomeAccountId { get; set; }
+        public virtual IncomeAccount IncomeAccount { get; set; }
     }
 }

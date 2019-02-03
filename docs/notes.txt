@@ -37,6 +37,8 @@ Tecnical Details
 			These licenses are not for resale and cannot be used in a production environment. 
 
 			QuickBooks for Mac is not available through the NFR.
+
+			(866)293-1928
 3. Need to be compiled as x86. Otherwise the  interop will not work at all.
 4. Need to verify that XML data can be parse on any scenario of formatting.
 5. Need to create a service to pick data from Quickbooks and send it to the API. 
@@ -58,3 +60,6 @@ Total estimated: $4000.
 
 
  The system will execute the data export every one hour.
+
+ ItemInventory Request Response Examples
+ https://developer.intuit.com/app/developer/qbdesktop/docs/api-reference/iteminventoryquery
