@@ -18,6 +18,7 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
         {
             this.Repository = repository;
             this.GetInventoryItems = getInventoryItems;
+            this.GetAccountByIds = getAccountByIds;
         }
 
         public IPublicRepository Repository { get; }
@@ -34,7 +35,10 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
             {
                 items = this.GetInventoryItems.Execute();
 
-                var accountIds = items.Where(item => !string.IsNullOrWhiteSpace(item.IncomeAccountId)).Select(item => item.IncomeAccountId);
+                var accountIncomeIds = items.Where(item => !string.IsNullOrWhiteSpace(item.IncomeAccountId)).Select(item => item.IncomeAccountId);
+                var accountAssetIds = items.Where(item => !string.IsNullOrWhiteSpace(item.AssetAccountId)).Select(item => item.IncomeAccountId);
+
+                var accountIds = accountAssetIds.Concat(accountIncomeIds).Distinct();
                 accounts = this.GetAccountByIds.Execute(accountIds.ToList());
             }
             catch (Exception ex)

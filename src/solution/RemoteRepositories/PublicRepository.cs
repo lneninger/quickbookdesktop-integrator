@@ -24,7 +24,7 @@ namespace RemoteRepositories
         {
             var result = new OperationResponse();
 
-            var request = new RestRequest("inventoryitem/sync", Method.POST);
+            var request = new RestRequest("syncfromdesktop/fromDesktop", Method.POST);
             request.AddJsonBody(inventoryItemDTO);
 
             try

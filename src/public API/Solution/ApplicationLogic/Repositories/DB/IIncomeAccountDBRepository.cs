@@ -1,5 +1,5 @@
-﻿using ApplicationLogic.Business.Commands.InventoryItem.DeleteCommand.Models;
-using ApplicationLogic.Business.Commands.InventoryItem.PageQueryCommand.Models;
+﻿using ApplicationLogic.Business.Commands.IncomeAccount.DeleteCommand.Models;
+using ApplicationLogic.Business.Commands.IncomeAccount.PageQueryCommand.Models;
 using DomainModel;
 using Framework.Core.Messages;
 using Framework.EF.DbContextImpl.Persistance.Paging.Models;
@@ -7,41 +7,41 @@ using System.Collections.Generic;
 
 namespace ApplicationLogic.Repositories.DB
 {
-    public interface IInventoryItemDBRepository : IDBRepository
+    public interface IIncomeAccountDBRepository : IDBRepository
     {
         /// <summary>
         /// 
         /// </summary>
         /// <returns></returns>
-        OperationResponse<IEnumerable<InventoryItem>> GetAll();
+        OperationResponse<IEnumerable<IncomeAccount>> GetAll();
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        OperationResponse<InventoryItem> GetById(int id);
+        OperationResponse<IncomeAccount> GetById(string id);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
-        OperationResponse<PageResult<InventoryItemPageQueryCommandOutputDTO>> PageQuery(PageQuery<InventoryItemPageQueryCommandInputDTO> input);
+        OperationResponse<PageResult<IncomeAccountPageQueryCommandOutputDTO>> PageQuery(PageQuery<IncomeAccountPageQueryCommandInputDTO> input);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="fullName"></param>
         /// <returns></returns>
-        OperationResponse<DomainModel.InventoryItem> GetByFullName(string fullName);
+        OperationResponse<DomainModel.IncomeAccount> GetByFullName(string fullName);
 
         /// <summary>
         /// 
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        OperationResponse Insert(InventoryItem entity);
+        OperationResponse Insert(IncomeAccount entity);
 
         /// <summary>
         /// 
@@ -55,14 +55,14 @@ namespace ApplicationLogic.Repositories.DB
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        OperationResponse Delete(InventoryItem entity);
+        OperationResponse Delete(IncomeAccount entity);
 
         /// <summary>
         /// Logical Delete of an inventory item
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        OperationResponse LogicalDelete(InventoryItem entity);
+        OperationResponse LogicalDelete(IncomeAccount entity);
 
        
     }

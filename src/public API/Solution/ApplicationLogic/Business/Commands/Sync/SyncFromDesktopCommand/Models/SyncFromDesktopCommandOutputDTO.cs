@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace ApplicationLogic.Business.Commands.InventoryItem.SyncCommand.Models
+namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand.Models
 {
-    public class InventoryItemSyncCommandOutputDTO
+    public class SyncFromDesktopCommandOutputDTO
     {
         public int Id { get; set; }
         public string Name { get; set; }

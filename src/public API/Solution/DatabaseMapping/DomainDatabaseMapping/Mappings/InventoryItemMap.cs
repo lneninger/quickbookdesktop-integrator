@@ -34,6 +34,11 @@ namespace DomainDatabaseMapping.Mappings
               .HasForeignKey(t => t.IncomeAccountId)
               .IsRequired(false);
 
+            builder.HasOne(t => t.AssetAccount)
+              .WithMany()
+              .HasForeignKey(t => t.AssetAccountId)
+              .IsRequired(false);
+
             // Seed
         }
     }

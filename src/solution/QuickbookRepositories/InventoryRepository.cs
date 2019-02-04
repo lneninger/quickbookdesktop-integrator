@@ -20,11 +20,12 @@ namespace QuickbookRepositories
         public const string Name = "Name";
         public const string IsActive = "IsActive";
         public const string IncomeAccountRef = "IncomeAccountRef";
+        public const string AssetAccountRef = "AssetAccountRef";
+        
         public const string QuantityOnHand = "QuantityOnHand";
         public const string AverageCost = "AverageCost";
         public const string SalesDescription = "SalesDesc";
         public const string SalesPrice = "SalesPrice";
-        public const string AssetAccountRef = "AssetAccountRef";
         public const string ListID = "ListID";
 
     }
@@ -79,7 +80,7 @@ namespace QuickbookRepositories
 
                 IMsgSetResponse responseSet = this.SessionManager.doRequest(true, ref request);
                 //MessageBox.Show(responseSet.ToXMLString());
-                var result = parseAccountByIdsQueryRs(responseSet, count, 1);
+                var result = parseAccountByIdsQueryRs(responseSet, ids.Count(), 1);
                 return result.ToList();
             }
             catch (Exception e)
@@ -200,7 +201,7 @@ namespace QuickbookRepositories
                 resultItem.Cost = itemInventory.PurchaseCost?.GetValue();
                 resultItem.Stock = itemInventory.QuantityOnHand?.GetValue();
                 resultItem.IncomeAccountId = itemInventory.IncomeAccountRef?.ListID?.GetValue();
-                resultItem.IncomeAccountName = itemInventory.IncomeAccountRef?.FullName?.GetValue();
+                resultItem.AssetAccountId = itemInventory.AssetAccountRef?.ListID?.GetValue();
 
                 result.Add(resultItem);
             }
@@ -271,7 +272,7 @@ namespace QuickbookRepositories
                 {
                     return null;
                 }
-                if (responseType == ENResponseType.rtItemInventoryQueryRs)
+                if (responseType == ENResponseType.rtAccountQueryRs)
                 {
                     list = (IAccountRetList)response.Detail;
                 }
@@ -282,18 +283,26 @@ namespace QuickbookRepositories
             }
 
             GetAccountByIdsOutputDTO resultItem = null;
-            for (int i = 0; i < countOfRows; i++)
+            try
             {
-                IAccountRet itemInventory = list.GetAt(i);
-                resultItem = new GetAccountByIdsOutputDTO();
+                for (int i = 0; i < countOfRows; i++)
+                {
+                    IAccountRet itemInventory = list.GetAt(i);
+                    resultItem = new GetAccountByIdsOutputDTO();
 
-                resultItem.ListID = itemInventory.ListID?.GetValue();
-                resultItem.FullName = itemInventory.FullName?.GetValue();
-                resultItem.Name = itemInventory.Name?.GetValue();
-                resultItem.IsActive = itemInventory.IsActive?.GetValue();
+                    resultItem.Id = itemInventory.ListID?.GetValue();
+                    resultItem.FullName = itemInventory.FullName?.GetValue();
+                    resultItem.Name = itemInventory.Name?.GetValue();
+                    resultItem.IsActive = itemInventory.IsActive?.GetValue();
 
-                result.Add(resultItem);
+                    result.Add(resultItem);
+                }
             }
+            catch (Exception ex)
+            {
+                throw;
+            }
+
             return result;
         }
     }

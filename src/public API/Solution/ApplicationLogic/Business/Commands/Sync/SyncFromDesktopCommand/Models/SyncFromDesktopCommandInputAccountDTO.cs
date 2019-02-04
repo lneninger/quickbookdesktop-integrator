@@ -1,10 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
 
-namespace DomainModel
+namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand.Models
 {
-    public class IncomeAccount : AbstractBaseEntity, ILogicalDeleteEntity
+    public class SyncFromDesktopCommandInputAccountDTO
     {
         public string Id { get; set; }
 
@@ -14,8 +13,5 @@ namespace DomainModel
 
         public bool? IsActive { get; set; }
 
-        public DateTime? DeletedAt { get; set; }
-
-        public bool? IsDeleted { get; set; }
     }
 }

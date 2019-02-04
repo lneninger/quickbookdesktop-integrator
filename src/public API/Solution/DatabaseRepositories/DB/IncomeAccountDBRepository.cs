@@ -3,16 +3,16 @@ using DomainModel;
 using EntityFrameworkCore.DbContextScope;
 using FizzWare.NBuilder;
 using ApplicationLogic.Repositories.DB;
-using ApplicationLogic.Business.Commands.InventoryItem.DeleteCommand.Models;
-using ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand.Models;
-using ApplicationLogic.Business.Commands.InventoryItem.GetByIdCommand.Models;
-using ApplicationLogic.Business.Commands.InventoryItem.InsertCommand.Models;
-using ApplicationLogic.Business.Commands.InventoryItem.UpdateCommand.Models;
+using ApplicationLogic.Business.Commands.IncomeAccount.DeleteCommand.Models;
+using ApplicationLogic.Business.Commands.IncomeAccount.GetAllCommand.Models;
+using ApplicationLogic.Business.Commands.IncomeAccount.GetByIdCommand.Models;
+using ApplicationLogic.Business.Commands.IncomeAccount.InsertCommand.Models;
+using ApplicationLogic.Business.Commands.IncomeAccount.UpdateCommand.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
-using ApplicationLogic.Business.Commands.InventoryItem.PageQueryCommand.Models;
+using ApplicationLogic.Business.Commands.IncomeAccount.PageQueryCommand.Models;
 using Framework.EF.DbContextImpl.Persistance.Paging.Models;
 using LMB.PredicateBuilderExtension;
 using Framework.EF.DbContextImpl.Persistance;
@@ -25,37 +25,37 @@ using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseRepositories.DB
 {
-    public class InventoryItemDBRepository : AbstractDBRepository, IInventoryItemDBRepository
+    public class IncomeAccountDBRepository : AbstractDBRepository, IIncomeAccountDBRepository
     {
-        public InventoryItemDBRepository(IAmbientDbContextLocator ambientDbContextLocator) : base(ambientDbContextLocator)
+        public IncomeAccountDBRepository(IAmbientDbContextLocator ambientDbContextLocator) : base(ambientDbContextLocator)
         {
         }
 
-        public OperationResponse<IEnumerable<InventoryItem>> GetAll()
+        public OperationResponse<IEnumerable<IncomeAccount>> GetAll()
         {
-            var result = new OperationResponse<IEnumerable<InventoryItem>>();
+            var result = new OperationResponse<IEnumerable<IncomeAccount>>();
             try
             {
                 var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
                 {
-                    result.Bag = dbLocator.Set<InventoryItem>().AsEnumerable();
+                    result.Bag = dbLocator.Set<IncomeAccount>().AsEnumerable();
                 }
             }
             catch (Exception ex)
             {
-                result.AddException($"Error getting all Product", ex);
+                result.AddException($"Error getting all IncomeAccount", ex);
             }
 
             return result;
         }
 
-        public OperationResponse<PageResult<InventoryItemPageQueryCommandOutputDTO>> PageQuery(PageQuery<InventoryItemPageQueryCommandInputDTO> input)
+        public OperationResponse<PageResult<IncomeAccountPageQueryCommandOutputDTO>> PageQuery(PageQuery<IncomeAccountPageQueryCommandInputDTO> input)
         {
-            var result = new OperationResponse<PageResult<InventoryItemPageQueryCommandOutputDTO>>();
+            var result = new OperationResponse<PageResult<IncomeAccountPageQueryCommandOutputDTO>>();
             try
             {
                 // predicate construction
-                var predicate = PredicateBuilderExtension.True<InventoryItem>();
+                var predicate = PredicateBuilderExtension.True<IncomeAccount>();
                 if (input.CustomFilter != null)
                 {
                     var filter = input.CustomFilter;
@@ -67,19 +67,19 @@ namespace DatabaseRepositories.DB
 
                 using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
                 {
-                    var query = dbLocator.Set<InventoryItem>().AsQueryable();
+                    var query = dbLocator.Set<IncomeAccount>().AsQueryable();
 
-                    var advancedSorting = new List<SortItem<InventoryItem>>();
-                    Expression<Func<InventoryItem, object>> expression;
-                    //if (input.Sort.ContainsKey("productType"))
+                    var advancedSorting = new List<SortItem<IncomeAccount>>();
+                    Expression<Func<IncomeAccount, object>> expression;
+                    //if (input.Sort.ContainsKey("IncomeAccountType"))
                     //{
-                    //    expression = o => o.ProductType.Name;
-                    //    advancedSorting.Add(new SortItem<InventoryItem> { PropertyName = "productType", SortExpression = expression, SortOrder = "desc" });
+                    //    expression = o => o.IncomeAccountType.Name;
+                    //    advancedSorting.Add(new SortItem<IncomeAccount> { PropertyName = "IncomeAccountType", SortExpression = expression, SortOrder = "desc" });
                     //}
 
-                    var sorting = new SortingDTO<InventoryItem>(input.Sort, advancedSorting);
+                    var sorting = new SortingDTO<IncomeAccount>(input.Sort, advancedSorting);
 
-                    result.Bag = query.ProcessPagingSort<InventoryItem, InventoryItemPageQueryCommandOutputDTO>(predicate, input, sorting, o => new InventoryItemPageQueryCommandOutputDTO
+                    result.Bag = query.ProcessPagingSort<IncomeAccount, IncomeAccountPageQueryCommandOutputDTO>(predicate, input, sorting, o => new IncomeAccountPageQueryCommandOutputDTO
                     {
                         Id = o.Id,
                         Name = o.Name,
@@ -95,38 +95,56 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
-        public OperationResponse<DomainModel.InventoryItem> GetById(int id)
+        public OperationResponse<IncomeAccount> GetById(string id)
         {
-            var result = new OperationResponse<DomainModel.InventoryItem>();
+            var result = new OperationResponse<DomainModel.IncomeAccount>();
             try
             {
                 var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
                 {
-                    result.Bag = dbLocator.Set<InventoryItem>().Where(o => o.Id == id).FirstOrDefault();
+                    result.Bag = dbLocator.Set<IncomeAccount>().Where(o => o.Id == id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
-                result.AddException($"Error getting Product {id}", ex);
+                result.AddException($"Error getting Income Account {id}", ex);
             }
 
             return result;
         }
 
-       
-        public OperationResponse<InventoryItem> GetByFullName(string fullName)
+
+        public OperationResponse<IncomeAccount> GetIncomeAccountById(string id)
         {
-            var result = new OperationResponse<DomainModel.InventoryItem>();
+            var result = new OperationResponse<DomainModel.IncomeAccount>();
             try
             {
                 var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
                 {
-                    result.Bag = dbLocator.Set<InventoryItem>().Where(o => o.FullName == fullName).FirstOrDefault();
+                    result.Bag = dbLocator.Set<IncomeAccount>().Where(o => o.Id == id).FirstOrDefault();
                 }
             }
             catch (Exception ex)
             {
-                result.AddException($"Error getting Product {fullName}", ex);
+                result.AddException($"Error getting Income Account {id}", ex);
+            }
+
+            return result;
+        }
+
+        public OperationResponse<IncomeAccount> GetByFullName(string fullName)
+        {
+            var result = new OperationResponse<DomainModel.IncomeAccount>();
+            try
+            {
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
+                {
+                    result.Bag = dbLocator.Set<IncomeAccount>().Where(o => o.FullName == fullName).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                result.AddException($"Error getting IncomeAccount {fullName}", ex);
             }
 
             return result;
@@ -152,7 +170,7 @@ namespace DatabaseRepositories.DB
 
         }
 
-        public OperationResponse Insert(InventoryItem entity)
+        public OperationResponse Insert(IncomeAccount entity)
         {
             var result = new OperationResponse();
             try
@@ -162,13 +180,13 @@ namespace DatabaseRepositories.DB
             }
             catch (Exception ex)
             {
-                result.AddException($"Error adding Product", ex);
+                result.AddException($"Error adding IncomeAccount", ex);
             }
 
             return result;
         }
 
-        public OperationResponse Delete(InventoryItem entity)
+        public OperationResponse Delete(IncomeAccount entity)
         {
             var result = new OperationResponse();
 
@@ -176,11 +194,11 @@ namespace DatabaseRepositories.DB
             {
                 try
                 {
-                    dbLocator.Set<InventoryItem>().Remove(entity);
+                    dbLocator.Set<IncomeAccount>().Remove(entity);
                 }
                 catch (Exception ex)
                 {
-                    result.AddException("Error deleting Inventory Item", ex);
+                    result.AddException("Error deleting Income Account", ex);
                 }
             }
 
@@ -188,7 +206,7 @@ namespace DatabaseRepositories.DB
 
         }
 
-        public OperationResponse LogicalDelete(InventoryItem entity)
+        public OperationResponse LogicalDelete(IncomeAccount entity)
         {
             var result = new OperationResponse();
 

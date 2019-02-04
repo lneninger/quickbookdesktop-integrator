@@ -18,11 +18,15 @@ namespace DomainModel
 
         public decimal? SalesPrice { get; set; }
 
+        public string IncomeAccountId { get; set; }
+        public virtual IncomeAccount IncomeAccount { get; set; }
+
+        public string AssetAccountId { get; set; }
+        public virtual IncomeAccount AssetAccount { get; set; }
+
+
         public DateTime? DeletedAt { get; set; }
 
         public bool? IsDeleted { get; set; }
-
-        public string IncomeAccountId { get; set; }
-        public virtual IncomeAccount IncomeAccount { get; set; }
     }
 }

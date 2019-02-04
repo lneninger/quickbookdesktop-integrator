@@ -8,7 +8,7 @@ using Framework.Core.Crypto;
 using Framework.Core.Messages;
 using FluentValidation;
 
-namespace ApplicationLogic.Business.Commands.InventoryItem.SyncCommand
+namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
 {
     public class InventoryItemSyncValidator : FluentValidation.AbstractValidator<InventoryItemInsertCommandInputDTO>
     {

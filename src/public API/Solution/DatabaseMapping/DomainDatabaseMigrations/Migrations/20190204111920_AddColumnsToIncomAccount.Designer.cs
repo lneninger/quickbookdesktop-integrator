@@ -4,14 +4,16 @@ using DomainDatabaseMapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DomainDatabaseMigrations.Migrations
 {
     [DbContext(typeof(MigrationDBContext))]
-    partial class MigrationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190204111920_AddColumnsToIncomAccount")]
+    partial class AddColumnsToIncomAccount
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -140,8 +142,6 @@ namespace DomainDatabaseMigrations.Migrations
                         .HasMaxLength(6)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AssetAccountId");
-
                     b.Property<DateTime?>("CreatedAt")
                         .IsRequired()
                         .ValueGeneratedOnAdd()
@@ -183,8 +183,6 @@ namespace DomainDatabaseMigrations.Migrations
                         .HasAnnotation("ColumnOrder", 103);
 
                     b.HasKey("Id");
-
-                    b.HasIndex("AssetAccountId");
 
                     b.HasIndex("IncomeAccountId");
 
@@ -320,10 +318,6 @@ namespace DomainDatabaseMigrations.Migrations
 
             modelBuilder.Entity("DomainModel.InventoryItem", b =>
                 {
-                    b.HasOne("DomainModel.IncomeAccount", "AssetAccount")
-                        .WithMany()
-                        .HasForeignKey("AssetAccountId");
-
                     b.HasOne("DomainModel.IncomeAccount", "IncomeAccount")
                         .WithMany()
                         .HasForeignKey("IncomeAccountId");
