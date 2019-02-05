@@ -8,6 +8,8 @@ namespace DomainModel
     {
         public int Id { get; set; }
 
+        public string ExternalId { get; set; }
+
         public string FullName { get; set; }
 
         public string Name { get; set; }
@@ -18,10 +20,10 @@ namespace DomainModel
 
         public decimal? SalesPrice { get; set; }
 
-        public string IncomeAccountId { get; set; }
+        public int? IncomeAccountId { get; set; }
         public virtual IncomeAccount IncomeAccount { get; set; }
 
-        public string AssetAccountId { get; set; }
+        public int? AssetAccountId { get; set; }
         public virtual IncomeAccount AssetAccount { get; set; }
 
 

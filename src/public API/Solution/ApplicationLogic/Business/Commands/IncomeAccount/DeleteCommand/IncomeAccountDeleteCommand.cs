@@ -15,7 +15,7 @@ namespace ApplicationLogic.Business.Commands.IncomeAccount.DeleteCommand
         {
         }
 
-        public OperationResponse<IncomeAccountDeleteCommandOutputDTO> Execute(string id)
+        public OperationResponse<IncomeAccountDeleteCommandOutputDTO> Execute(int id)
         {
             var result = new OperationResponse<IncomeAccountDeleteCommandOutputDTO>();
             using (var dbContextScope = this.DbContextScopeFactory.Create())
@@ -27,6 +27,7 @@ namespace ApplicationLogic.Business.Commands.IncomeAccount.DeleteCommand
                     result.Bag = new IncomeAccountDeleteCommandOutputDTO
                     {
                         Id = getByIdResult.Bag.Id,
+                        ExternalId = getByIdResult.Bag.ExternalId,
                         Name = getByIdResult.Bag.Name
                     };
                 }

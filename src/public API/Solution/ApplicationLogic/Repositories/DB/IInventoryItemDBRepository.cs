@@ -25,6 +25,14 @@ namespace ApplicationLogic.Repositories.DB
         /// <summary>
         /// 
         /// </summary>
+        /// <param name="externalId"></param>
+        /// <returns></returns>
+        OperationResponse<InventoryItem> GetByExternalId(string externalId);
+
+
+        /// <summary>
+        /// 
+        /// </summary>
         /// <param name="input"></param>
         /// <returns></returns>
         OperationResponse<PageResult<InventoryItemPageQueryCommandOutputDTO>> PageQuery(PageQuery<InventoryItemPageQueryCommandInputDTO> input);
@@ -63,7 +71,5 @@ namespace ApplicationLogic.Repositories.DB
         /// <param name="entity"></param>
         /// <returns></returns>
         OperationResponse LogicalDelete(InventoryItem entity);
-
-       
     }
 }

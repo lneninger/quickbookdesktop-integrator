@@ -15,7 +15,7 @@ namespace ApplicationLogic.Business.Commands.IncomeAccount.GetByIdCommand
         {
         }
 
-        public OperationResponse<IncomeAccountGetByIdCommandOutputDTO> Execute(string id)
+        public OperationResponse<IncomeAccountGetByIdCommandOutputDTO> Execute(int id)
         {
             var result = new OperationResponse<IncomeAccountGetByIdCommandOutputDTO>();
             using (var dbContextScope = this.DbContextScopeFactory.Create())
@@ -28,6 +28,7 @@ namespace ApplicationLogic.Business.Commands.IncomeAccount.GetByIdCommand
                     result.Bag = new IncomeAccountGetByIdCommandOutputDTO
                     {
                         Id = getByIdResult.Bag.Id,
+                        ExternalId = getByIdResult.Bag.ExternalId,
                         Name = getByIdResult.Bag.Name,
                         
                     };

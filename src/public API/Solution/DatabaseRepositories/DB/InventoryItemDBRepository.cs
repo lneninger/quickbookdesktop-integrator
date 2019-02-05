@@ -113,7 +113,25 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
-       
+        public OperationResponse<DomainModel.InventoryItem> GetByExternalId(string externalId)
+        {
+            var result = new OperationResponse<DomainModel.InventoryItem>();
+            try
+            {
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
+                {
+                    result.Bag = dbLocator.Set<InventoryItem>().Where(o => o.ExternalId == externalId).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                result.AddException($"Error getting Product {externalId}", ex);
+            }
+
+            return result;
+        }
+
+
         public OperationResponse<InventoryItem> GetByFullName(string fullName)
         {
             var result = new OperationResponse<DomainModel.InventoryItem>();

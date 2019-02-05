@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand.Models
 {
-    public class SyncFromDesktopCommandInputAccountDTO
+    public class SyncFromDesktopCommandInputAccountIncomeDTO
     {
         public string Id { get; set; }
 

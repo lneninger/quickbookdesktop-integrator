@@ -30,16 +30,18 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
             var result = new OperationResponse();
 
             IEnumerable<GetInventoryItemsOutputIventoryItemDTO> items = null;
-            IEnumerable<GetAccountByIdsOutputDTO> accounts = null;
+            IEnumerable<GetAccountByIdsOutputDTO> accountsIncome = null;
+            IEnumerable<GetAccountByIdsOutputDTO> accountsInventory = null;
             try
             {
                 items = this.GetInventoryItems.Execute();
 
-                var accountIncomeIds = items.Where(item => !string.IsNullOrWhiteSpace(item.IncomeAccountId)).Select(item => item.IncomeAccountId);
-                var accountAssetIds = items.Where(item => !string.IsNullOrWhiteSpace(item.AssetAccountId)).Select(item => item.IncomeAccountId);
+                var accountIncomeIds = items.Where(item => !string.IsNullOrWhiteSpace(item.IncomeAccountId)).Select(item => item.IncomeAccountId).Distinct();
+                accountsIncome = this.GetAccountByIds.Execute(accountIncomeIds.ToList());
 
-                var accountIds = accountAssetIds.Concat(accountIncomeIds).Distinct();
-                accounts = this.GetAccountByIds.Execute(accountIds.ToList());
+                var accountAssetIds = items.Where(item => !string.IsNullOrWhiteSpace(item.AssetAccountId)).Select(item => item.IncomeAccountId).Distinct();
+                accountsInventory = this.GetAccountByIds.Execute(accountAssetIds.ToList());
+
             }
             catch (Exception ex)
             {
@@ -51,7 +53,8 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
                 var syncItems = new SyncInventoryItemsInputIventoryItemDTO
                 {
                     InventoryItems = items,
-                    Accounts = accounts,
+                    AccountIncomes = accountsIncome,
+                    AccountInventories = accountsInventory,
                 };
 
                

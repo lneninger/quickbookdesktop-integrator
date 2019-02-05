@@ -5,7 +5,7 @@ using System.Collections.Generic;
 
 namespace ApplicationLogic.Business.Commands.IncomeAccount.DeleteCommand
 {
-    public interface IIncomeAccountDeleteCommand : ICommandFunc<string, OperationResponse<IncomeAccountDeleteCommandOutputDTO>>
+    public interface IIncomeAccountDeleteCommand : ICommandFunc<int, OperationResponse<IncomeAccountDeleteCommandOutputDTO>>
     {
     }
 }

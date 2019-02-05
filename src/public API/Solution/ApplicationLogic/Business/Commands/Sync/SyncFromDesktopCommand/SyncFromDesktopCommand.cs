@@ -9,11 +9,13 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
 {
     public class SyncFromDesktopCommand : AbstractDBCommand<DomainModel.InventoryItem, IInventoryItemDBRepository>, ISyncFromDesktopCommand
     {
-        public IIncomeAccountDBRepository AccountRepository { get; }
+        public IIncomeAccountDBRepository IncomeAccountRepository { get; }
+        public IInventoryAccountDBRepository InventoryAccountRepository { get; }
 
-        public SyncFromDesktopCommand(IDbContextScopeFactory dbContextScopeFactory, IInventoryItemDBRepository inventoryItemTepository, IIncomeAccountDBRepository accountRepository) : base(dbContextScopeFactory, inventoryItemTepository)
+        public SyncFromDesktopCommand(IDbContextScopeFactory dbContextScopeFactory, IInventoryItemDBRepository inventoryItemTepository, IIncomeAccountDBRepository incomeAccountRepository, IInventoryAccountDBRepository inventoryAccountRepository) : base(dbContextScopeFactory, inventoryItemTepository)
         {
-            this.AccountRepository = accountRepository;
+            this.InventoryAccountRepository = inventoryAccountRepository;
+            this.IncomeAccountRepository = incomeAccountRepository;
         }
 
         public OperationResponse Execute(SyncFromDesktopCommandInputDTO input)
@@ -22,8 +24,11 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
             bool add = false;
             OperationResponse entityResponse = new OperationResponse();
 
-            var syncIncomeAccountResponse = SyncAccounts(input.Accounts);
+            var syncIncomeAccountResponse = SyncIncomeAccounts(input.AccountIncomes);
             result.AddResponse(syncIncomeAccountResponse);
+
+            var syncInventoryAccountResponse = SyncInventoryAccounts(input.AccountInventories);
+            result.AddResponse(syncInventoryAccountResponse);
 
             var syncInventoryItemsResponse = SyncInventoryItems(input.InventoryItems);
             result.AddResponse(syncInventoryItemsResponse);
@@ -39,20 +44,21 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
             {
                 foreach (var item in input)
                 {
-                    var entityResponse = this.Repository.GetByFullName(item.FullName);
+                    var entityResponse = this.Repository.GetByExternalId(item.Id);
                     result.AddResponse(entityResponse);
                     var entity = entityResponse.Bag;
                     if (entity == null)
                     {
                         entity = new DomainModel.InventoryItem
                         {
+                            ExternalId = item.Id,
                             Name = item.Name,
                             FullName = item.FullName,
                             SalesPrice = (decimal?)item.SalePrice,
                             SalesDescription = item.SaleDescription,
                             Stock = (decimal?)item.Stock,
-                            IncomeAccountId = item.IncomeAccountId,
-                            AssetAccountId = item.AssetAccountId,
+                            IncomeAccountId = this.IncomeAccountRepository.GetByExternalId(item.IncomeAccountId).Bag?.Id,
+                            AssetAccountId = this.InventoryAccountRepository.GetByExternalId(item.AssetAccountId).Bag?.Id,
                         };
 
                         //SetIncomeAccount(entityResponse, item, entity);
@@ -74,8 +80,8 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                         entity.SalesPrice = (decimal?)item.SalePrice;
                         entity.SalesDescription = item.SaleDescription;
                         entity.Stock = (decimal?)item.Stock;
-                        entity.IncomeAccountId = item.IncomeAccountId;
-                        entity.AssetAccountId = item.AssetAccountId;
+                        entity.IncomeAccountId = this.IncomeAccountRepository.GetByExternalId(item.IncomeAccountId).Bag?.Id;
+                        entity.AssetAccountId = this.InventoryAccountRepository.GetByExternalId(item.AssetAccountId).Bag?.Id;
                         //SetIncomeAccount(entityResponse, item, entity);
                     }
                 }
@@ -96,7 +102,8 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
             return result;
         }
 
-        private OperationResponse SyncAccounts(IEnumerable<SyncFromDesktopCommandInputAccountDTO> input)
+
+        private OperationResponse SyncInventoryAccounts(IEnumerable<SyncFromDesktopCommandInputAccountInventoryDTO> input)
         {
             var result = new OperationResponse();
 
@@ -104,15 +111,15 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
             {
                 foreach (var item in input)
                 {
-                    var entityResponse = this.AccountRepository.GetById(item.Id);
+                    var entityResponse = this.InventoryAccountRepository.GetByExternalId(item.Id);
                     result.AddResponse(entityResponse);
 
                     var entity = entityResponse.Bag;
                     if (entity == null)
                     {
-                        entity = new DomainModel.IncomeAccount
+                        entity = new DomainModel.InventoryAccount
                         {
-                            Id = item.Id,
+                            ExternalId = item.Id,
                             Name = item.Name,
                             FullName = item.FullName,
                             IsActive = item.IsActive,
@@ -121,7 +128,65 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
 
                         try
                         {
-                            var insertResult = this.AccountRepository.Insert(entity);
+                            var insertResult = this.InventoryAccountRepository.Insert(entity);
+                            result.AddResponse(insertResult);
+                        }
+                        catch (Exception ex)
+                        {
+                            result.AddError($"Error Adding Inventory Account {item.FullName}", ex);
+                        }
+                    }
+                    else
+                    {
+                        entity.Name = item.Name;
+                        entity.FullName = item.FullName;
+                        entity.IsActive = item.IsActive;
+                    }
+                }
+
+                try
+                {
+                    if (result.IsSucceed)
+                    {
+                        dbContextScope.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    result.AddError("Error Adding Product", ex);
+                }
+            }
+
+            return result;
+        }
+
+
+        private OperationResponse SyncIncomeAccounts(IEnumerable<SyncFromDesktopCommandInputAccountIncomeDTO> input)
+        {
+            var result = new OperationResponse();
+
+            using (var dbContextScope = this.DbContextScopeFactory.Create())
+            {
+                foreach (var item in input)
+                {
+                    var entityResponse = this.IncomeAccountRepository.GetByExternalId(item.Id);
+                    result.AddResponse(entityResponse);
+
+                    var entity = entityResponse.Bag;
+                    if (entity == null)
+                    {
+                        entity = new DomainModel.IncomeAccount
+                        {
+                            ExternalId = item.Id,
+                            Name = item.Name,
+                            FullName = item.FullName,
+                            IsActive = item.IsActive,
+
+                        };
+
+                        try
+                        {
+                            var insertResult = this.IncomeAccountRepository.Insert(entity);
                             result.AddResponse(insertResult);
                         }
                         catch (Exception ex)
@@ -131,7 +196,6 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                     }
                     else
                     {
-                        entity.Id = item.Id;
                         entity.Name = item.Name;
                         entity.FullName = item.FullName;
                         entity.IsActive = item.IsActive;

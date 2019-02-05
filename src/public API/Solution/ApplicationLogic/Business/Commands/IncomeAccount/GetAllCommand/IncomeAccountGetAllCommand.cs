@@ -27,6 +27,7 @@ namespace ApplicationLogic.Business.Commands.IncomeAccount.GetAllCommand
                     result.Bag = getAllResult.Bag.Select(entityItem => new IncomeAccountGetAllCommandOutputDTO
                     {
                         Id = entityItem.Id,
+                        ExternalId = entityItem.ExternalId,
                         Name = entityItem.Name,
                         CreatedAt = entityItem.CreatedAt
 

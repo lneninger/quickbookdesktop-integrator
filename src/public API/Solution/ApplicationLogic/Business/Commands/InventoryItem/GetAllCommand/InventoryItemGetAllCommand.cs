@@ -27,7 +27,11 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand
                     result.Bag = getAllResult.Bag.Select(entityItem => new InventoryItemGetAllCommandOutputDTO
                     {
                         Id = entityItem.Id,
+                        ExternalId = entityItem.ExternalId,
                         Name = entityItem.Name,
+                        InventoryAccountExternalId = entityItem.AssetAccount?.ExternalId,
+                        Price = entityItem.SalesPrice,
+                        Stock = entityItem.Stock,
                         CreatedAt = entityItem.CreatedAt
 
                     }).ToList();

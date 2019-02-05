@@ -29,7 +29,10 @@ namespace DomainDatabaseMapping
         /*********************************CRM  Master Tables**********************/
         // Inventory
         public DbSet<InventoryItem> InventoryItems { get; set; }
+        public DbSet<AccountType> AccountTypes { get; set; }
+        public DbSet<Account> Accounts { get; set; }
         public DbSet<IncomeAccount> IncomeAccounts { get; set; }
+        public DbSet<InventoryAccount> InventoryAccounts { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -41,7 +44,8 @@ namespace DomainDatabaseMapping
 
             // Inventory
             modelBuilder.ApplyConfiguration(new InventoryItemMap(modelBuilder));
-            modelBuilder.ApplyConfiguration(new IncomeAccountMap(modelBuilder));
+            modelBuilder.ApplyConfiguration(new AccountMap(modelBuilder));
+            modelBuilder.ApplyConfiguration(new AccountTypeMap(modelBuilder));
         }
 
 

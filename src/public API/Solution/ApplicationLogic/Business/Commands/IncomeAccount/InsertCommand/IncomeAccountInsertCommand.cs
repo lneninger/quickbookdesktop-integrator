@@ -47,6 +47,7 @@ namespace ApplicationLogic.Business.Commands.IncomeAccount.InsertCommand
                         result.Bag = new IncomeAccountInsertCommandOutputDTO
                         {
                             Id = getByIdResult.Bag.Id,
+                            ExternalId = getByIdResult.Bag.ExternalId,
                             Name = getByIdResult.Bag.Name
                         };
                     }

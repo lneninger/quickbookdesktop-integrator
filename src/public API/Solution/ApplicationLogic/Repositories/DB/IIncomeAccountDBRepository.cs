@@ -20,7 +20,15 @@ namespace ApplicationLogic.Repositories.DB
         /// </summary>
         /// <param name="id"></param>
         /// <returns></returns>
-        OperationResponse<IncomeAccount> GetById(string id);
+        OperationResponse<IncomeAccount> GetById(int id);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        /// <param name="externalId"></param>
+        /// <returns></returns>
+        OperationResponse<IncomeAccount> GetByExternalId(string externalId);
+
 
         /// <summary>
         /// 
@@ -63,7 +71,5 @@ namespace ApplicationLogic.Repositories.DB
         /// <param name="entity"></param>
         /// <returns></returns>
         OperationResponse LogicalDelete(IncomeAccount entity);
-
-       
     }
 }

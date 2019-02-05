@@ -5,14 +5,9 @@ namespace ApplicationLogic.Business.Commands.IncomeAccount.PageQueryCommand.Mode
 {
     public class IncomeAccountPageQueryCommandOutputDTO
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
+        public string ExternalId { get; set; }
         public string Name { get; set; }
-        public string ERPId { get; set; }
-        public string SalesforceId { get; set; }
         public DateTime? CreatedAt { get; set; }
-       
-        public FileItemRefOutputDTO MainPicture { get; set; }
-
-        public string ColorName { get; set; }
     }
 }

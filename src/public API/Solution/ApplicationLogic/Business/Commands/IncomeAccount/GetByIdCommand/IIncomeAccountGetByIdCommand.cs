@@ -4,7 +4,7 @@ using System;
 
 namespace ApplicationLogic.Business.Commands.IncomeAccount.GetByIdCommand
 {
-    public interface IIncomeAccountGetByIdCommand: ICommandFunc<string, OperationResponse<IncomeAccountGetByIdCommandOutputDTO>>
+    public interface IIncomeAccountGetByIdCommand: ICommandFunc<int, OperationResponse<IncomeAccountGetByIdCommandOutputDTO>>
     {
     }
 }

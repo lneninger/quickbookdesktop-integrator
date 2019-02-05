@@ -82,6 +82,7 @@ namespace DatabaseRepositories.DB
                     result.Bag = query.ProcessPagingSort<IncomeAccount, IncomeAccountPageQueryCommandOutputDTO>(predicate, input, sorting, o => new IncomeAccountPageQueryCommandOutputDTO
                     {
                         Id = o.Id,
+                        ExternalId = o.ExternalId,
                         Name = o.Name,
                         CreatedAt = o.CreatedAt,
                     });
@@ -95,7 +96,7 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
-        public OperationResponse<IncomeAccount> GetById(string id)
+        public OperationResponse<IncomeAccount> GetById(int id)
         {
             var result = new OperationResponse<DomainModel.IncomeAccount>();
             try
@@ -113,8 +114,26 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
+        public OperationResponse<IncomeAccount> GetByExternalId(string externalId)
+        {
+            var result = new OperationResponse<DomainModel.IncomeAccount>();
+            try
+            {
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
+                {
+                    result.Bag = dbLocator.Set<IncomeAccount>().Where(o => o.ExternalId == externalId).FirstOrDefault();
+                }
+            }
+            catch (Exception ex)
+            {
+                result.AddException($"Error getting Income Account {externalId}", ex);
+            }
 
-        public OperationResponse<IncomeAccount> GetIncomeAccountById(string id)
+            return result;
+        }
+
+
+        public OperationResponse<IncomeAccount> GetIncomeAccountById(int id)
         {
             var result = new OperationResponse<DomainModel.IncomeAccount>();
             try

@@ -5,7 +5,8 @@ namespace ApplicationLogic.Business.Commands.IncomeAccount.GetByIdCommand.Models
 {
     public class IncomeAccountGetByIdCommandOutputDTO
     {
-        public string Id { get; set; }
+        public int Id { get; set; }
+        public string ExternalId { get; set; }
         public string Name { get; set; }
         public string ProductColorTypeId { get; set; }
 

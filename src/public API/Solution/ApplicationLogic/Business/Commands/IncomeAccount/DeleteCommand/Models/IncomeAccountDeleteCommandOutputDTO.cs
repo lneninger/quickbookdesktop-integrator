@@ -6,11 +6,8 @@ namespace ApplicationLogic.Business.Commands.IncomeAccount.DeleteCommand.Models
     public class IncomeAccountDeleteCommandOutputDTO
     {
 
-        public IncomeAccountDeleteCommandOutputDTO()
-        {
-        }
-
-        public string Id { get; set; }
+        public int Id { get; set; }
+        public string ExternalId { get; set; }
         public string Name { get; set; }
     }
 }

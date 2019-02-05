@@ -19,6 +19,80 @@ namespace DomainDatabaseMigrations.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
+            modelBuilder.Entity("DomainModel.Account", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("AccountTypeId")
+                        .IsRequired()
+                        .HasMaxLength(10);
+
+                    b.Property<DateTime?>("CreatedAt")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasDefaultValueSql("getutcdate()")
+                        .HasAnnotation("ColumnOrder", 100);
+
+                    b.Property<string>("CreatedBy")
+                        .IsRequired()
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("nvarchar(100)")
+                        .HasDefaultValueSql("SYSTEM_USER")
+                        .HasAnnotation("ColumnOrder", 101);
+
+                    b.Property<DateTime?>("DeletedAt");
+
+                    b.Property<string>("ExternalId")
+                        .HasMaxLength(100);
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(250);
+
+                    b.Property<bool?>("IsActive");
+
+                    b.Property<bool?>("IsDeleted");
+
+                    b.Property<string>("Name");
+
+                    b.Property<DateTime?>("UpdatedAt")
+                        .HasAnnotation("ColumnOrder", 102);
+
+                    b.Property<string>("UpdatedBy")
+                        .HasColumnType("nvarchar(100)")
+                        .HasAnnotation("ColumnOrder", 103);
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("AccountTypeId");
+
+                    b.ToTable("Account","INV");
+
+                    b.HasDiscriminator<string>("AccountTypeId").HasValue("Account");
+                });
+
+            modelBuilder.Entity("DomainModel.AccountType", b =>
+                {
+                    b.Property<string>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasMaxLength(10);
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasMaxLength(50);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AccountType","INV");
+
+                    b.HasData(
+                        new { Id = "INCOME", Name = "Income Account" },
+                        new { Id = "INVENTORY", Name = "Inventory Account" }
+                    );
+                });
+
             modelBuilder.Entity("DomainModel.Identity.AppUser", b =>
                 {
                     b.Property<string>("Id")
@@ -90,49 +164,6 @@ namespace DomainDatabaseMigrations.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
-            modelBuilder.Entity("DomainModel.IncomeAccount", b =>
-                {
-                    b.Property<string>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(100);
-
-                    b.Property<DateTime?>("CreatedAt")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasDefaultValueSql("getutcdate()")
-                        .HasAnnotation("ColumnOrder", 100);
-
-                    b.Property<string>("CreatedBy")
-                        .IsRequired()
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("nvarchar(100)")
-                        .HasDefaultValueSql("SYSTEM_USER")
-                        .HasAnnotation("ColumnOrder", 101);
-
-                    b.Property<DateTime?>("DeletedAt");
-
-                    b.Property<string>("FullName")
-                        .IsRequired()
-                        .HasMaxLength(250);
-
-                    b.Property<bool?>("IsActive");
-
-                    b.Property<bool?>("IsDeleted");
-
-                    b.Property<string>("Name");
-
-                    b.Property<DateTime?>("UpdatedAt")
-                        .HasAnnotation("ColumnOrder", 102);
-
-                    b.Property<string>("UpdatedBy")
-                        .HasColumnType("nvarchar(100)")
-                        .HasAnnotation("ColumnOrder", 103);
-
-                    b.HasKey("Id");
-
-                    b.ToTable("IncomeAccount","INV");
-                });
-
             modelBuilder.Entity("DomainModel.InventoryItem", b =>
                 {
                     b.Property<int>("Id")
@@ -140,7 +171,7 @@ namespace DomainDatabaseMigrations.Migrations
                         .HasMaxLength(6)
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("AssetAccountId");
+                    b.Property<int?>("AssetAccountId");
 
                     b.Property<DateTime?>("CreatedAt")
                         .IsRequired()
@@ -157,11 +188,13 @@ namespace DomainDatabaseMigrations.Migrations
 
                     b.Property<DateTime?>("DeletedAt");
 
+                    b.Property<string>("ExternalId");
+
                     b.Property<string>("FullName")
                         .IsRequired()
                         .HasColumnType("nvarchar(50)");
 
-                    b.Property<string>("IncomeAccountId");
+                    b.Property<int?>("IncomeAccountId");
 
                     b.Property<bool?>("IsDeleted");
 
@@ -306,6 +339,26 @@ namespace DomainDatabaseMigrations.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("DomainModel.IncomeAccount", b =>
+                {
+                    b.HasBaseType("DomainModel.Account");
+
+
+                    b.ToTable("IncomeAccount");
+
+                    b.HasDiscriminator().HasValue("INCOME");
+                });
+
+            modelBuilder.Entity("DomainModel.InventoryAccount", b =>
+                {
+                    b.HasBaseType("DomainModel.Account");
+
+
+                    b.ToTable("InventoryAccount");
+
+                    b.HasDiscriminator().HasValue("INVENTORY");
+                });
+
             modelBuilder.Entity("DomainModel.Identity.AppUserRole", b =>
                 {
                     b.HasBaseType("Microsoft.AspNetCore.Identity.IdentityRole");
@@ -316,6 +369,14 @@ namespace DomainDatabaseMigrations.Migrations
                     b.ToTable("AppUserRole");
 
                     b.HasDiscriminator().HasValue("AppUserRole");
+                });
+
+            modelBuilder.Entity("DomainModel.Account", b =>
+                {
+                    b.HasOne("DomainModel.AccountType", "AccountType")
+                        .WithMany()
+                        .HasForeignKey("AccountTypeId")
+                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("DomainModel.InventoryItem", b =>
