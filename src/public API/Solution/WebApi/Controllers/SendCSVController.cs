@@ -44,7 +44,8 @@ namespace QuickbooksIntegratorAPI.Controllers
         public IInventoryItemGetAllCommand InventoryItemGetAllCommand { get; }
 
         [HttpGet("categories")]
-        public IActionResult Categories() {
+        public IActionResult Categories()
+        {
             var inventoryAccountResponse = this.InventoryAccountGetAllCommand.Execute();
             if (inventoryAccountResponse.Bag != null)
             {
@@ -56,11 +57,9 @@ namespace QuickbooksIntegratorAPI.Controllers
                     Description = listItem.Name
                 }).ToList();
 
-                using (var stream = new MemoryStream())
-                {
-                    map.WriteCsv(stream);
-                    return File(stream, "application/octet-stream", "categories.csv");
-                }
+                var result = WriteCsvToMemory(map);
+                var memoryStream = new MemoryStream(result);
+                return File(stream, "application/octet-stream", "categories.csv");
             }
 
             return this.BadRequest();
@@ -83,14 +82,27 @@ namespace QuickbooksIntegratorAPI.Controllers
                     QtyStock = listItem.Stock,
                 }).ToList();
 
-                var stream = new MemoryStream();
-                map.WriteCsv(stream);
-                return File(stream, "application/octet-stream", "categories.csv");
+                var result = WriteCsvToMemory(map);
+                var memoryStream = new MemoryStream(result);
+                return File(stream, "application/octet-stream", "us_item.csv");
             }
 
             return this.BadRequest();
         }
 
 
+
+
+        public byte[] WriteCsvToMemory<T>(IEnumerable<T> records)
+        {
+            using (var memoryStream = new MemoryStream())
+            using (var streamWriter = new StreamWriter(memoryStream))
+            using (var csvWriter = new CsvWriter(streamWriter))
+            {
+                csvWriter.WriteRecords(records);
+                streamWriter.Flush();
+                return memoryStream.ToArray();
+            }
+        }
     }
 }
