@@ -31,7 +31,7 @@ namespace DomainDatabaseMapping
                 .AddJsonFile($"appsettings.{envVariable}.json", optional: true);
 
             IConfigurationRoot config = builder.Build();
-            optionsBuilder.UseSqlServer(config.GetConnectionString("RiverdaleModel"));
+            optionsBuilder.UseSqlServer(config.GetConnectionString("ApplicationModel"));
         }
 
 

@@ -50,7 +50,7 @@ namespace QuickbooksIntegratorAPI.Controllers
             if (inventoryAccountResponse.Bag != null)
             {
                 var list = inventoryAccountResponse.Bag;
-                var map = list.Select(listItem => new Models.SendCSV.Category
+                var map = list.Select(listItem => new Models.SendCSV.CategoryModel
                 {
                     BranchID = 1002,
                     InCategoryID = listItem.ExternalId,
@@ -59,7 +59,7 @@ namespace QuickbooksIntegratorAPI.Controllers
 
                 var result = WriteCsvToMemory(map);
                 var memoryStream = new MemoryStream(result);
-                return File(stream, "application/octet-stream", "categories.csv");
+                return File(memoryStream, "application/octet-stream", "categories.csv");
             }
 
             return this.BadRequest();
@@ -72,7 +72,7 @@ namespace QuickbooksIntegratorAPI.Controllers
             if (inventoryItemResponse.Bag != null)
             {
                 var list = inventoryItemResponse.Bag;
-                var map = list.Select(listItem => new Models.SendCSV.InventoryItem
+                var map = list.Select(listItem => new Models.SendCSV.InventoryItemModel
                 {
                     BranchID = 1002,
                     InItemId = listItem.ExternalId,
@@ -84,15 +84,57 @@ namespace QuickbooksIntegratorAPI.Controllers
 
                 var result = WriteCsvToMemory(map);
                 var memoryStream = new MemoryStream(result);
-                return File(stream, "application/octet-stream", "us_item.csv");
+                return File(memoryStream, "application/octet-stream", "us_item.csv");
+            }
+
+            return this.BadRequest();
+        }
+
+        [HttpGet("pricelevel")]
+        public IActionResult PriceLevel()
+        {
+            var inventoryItemResponse = this.InventoryItemGetAllCommand.Execute();
+            if (inventoryItemResponse.Bag != null)
+            {
+                var list = inventoryItemResponse.Bag;
+                var map = new int[] { 0 }.Select(listItem => new Models.SendCSV.PriceLevelModel
+                {
+                    branchID = 1002,
+                    InPriceLevelId = 0,
+                    PriceLevel = 0,
+                }).ToList();
+
+                var result = WriteCsvToMemory(map);
+                var memoryStream = new MemoryStream(result);
+                return File(memoryStream, "application/octet-stream", "us_pricelevel.csv");
             }
 
             return this.BadRequest();
         }
 
 
+        [HttpGet("itempricelevel")]
+        public IActionResult ItemPriceLevel()
+        {
+            var inventoryItemResponse = this.InventoryItemGetAllCommand.Execute();
+            if (inventoryItemResponse.Bag != null)
+            {
+                var list = inventoryItemResponse.Bag;
+                var map = list.Select(listItem => new Models.SendCSV.ItemPriceLevelModel
+                {
+                    branchID = 1002,
+                    ExItemId = listItem.ExternalId,
+                    ExPriceLeverlId = 0,
+                    Price = listItem.Price,
+                }).ToList();
 
+                var result = WriteCsvToMemory(map);
+                var memoryStream = new MemoryStream(result);
+                return File(memoryStream, "application/octet-stream", "us_pricelevel.csv");
+            }
 
+            return this.BadRequest();
+        }
         public byte[] WriteCsvToMemory<T>(IEnumerable<T> records)
         {
             using (var memoryStream = new MemoryStream())

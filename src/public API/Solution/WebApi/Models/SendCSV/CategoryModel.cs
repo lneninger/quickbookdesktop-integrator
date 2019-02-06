@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace QuickbooksIntegratorAPI.Models.SendCSV
 {
-    public class Category
+    public class CategoryModel
     {
         public int BranchID { get; set; }
         public string InCategoryID { get; set; }

@@ -54,8 +54,8 @@ namespace QuickbooksIntegratorAPI
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
-            this.ConnectionString = Configuration.GetConnectionString("RiverdaleModel");
-            Logger.Info($"Main Database Connection - RiverdaleModel: {this.ConnectionString}");
+            this.ConnectionString = Configuration.GetConnectionString("ApplicationModel");
+            Logger.Info($"Main Database Connection - ApplicationModel: {this.ConnectionString}");
 
         }
 
