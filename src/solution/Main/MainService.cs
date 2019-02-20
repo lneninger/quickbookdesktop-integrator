@@ -27,14 +27,17 @@ namespace Main
             InitializeComponent();
         }
 
-        public void DebugStart()
+        public void InteractiveStart(bool useQuartz = false)
         {
             IoCConfig.Init();
             this.CreateDatabaseFile();
 
             var scheduler = AsyncHelpers.RunSync<IScheduler>(this.ConfigureJobs);
             var job = IoCGlobal.Resolve<SendInventoryJob>();
+            Console.WriteLine($"Initializing Job Execution");
             job.Execute(null);
+            Console.WriteLine($"Finishing Job Execution");
+
         }
 
         protected override void OnStart(string[] args)
@@ -83,6 +86,8 @@ namespace Main
 
         private void CreateDatabaseFile()
         {
+            Logger.Info($"Creating Database File SQLite");
+
             var connectionFactory = new SqLiteConnectionFactory();
             var filePath = connectionFactory.GetFilePath();
             var directory = Path.GetDirectoryName(filePath);

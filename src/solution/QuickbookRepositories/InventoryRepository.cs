@@ -44,6 +44,7 @@ namespace QuickbookRepositories
             int count = getCount(request);
             try
             {
+                Logger.Info($"Parsing response with {count} Inventory Items");
                 //MessageBox.Show(requestSet.ToXMLString());
                 var query = buildInventoryItemQueryRq(new string[] { Properties.FullName, Properties.Name, Properties.IsActive, Properties.QuantityOnHand, Properties.AverageCost, Properties.SalesDescription, Properties.SalesPrice, Properties.IncomeAccountRef, Properties.AssetAccountRef }, null);
                 IMsgSetResponse responseSet = this.SessionManager.doRequest(true, ref query);
@@ -202,6 +203,8 @@ namespace QuickbookRepositories
                 resultItem.Stock = itemInventory.QuantityOnHand?.GetValue();
                 resultItem.IncomeAccountId = itemInventory.IncomeAccountRef?.ListID?.GetValue();
                 resultItem.AssetAccountId = itemInventory.AssetAccountRef?.ListID?.GetValue();
+
+                Logger.Info($"Parsed item {resultItem.FullName}");
 
                 result.Add(resultItem);
             }

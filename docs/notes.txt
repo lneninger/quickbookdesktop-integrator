@@ -63,3 +63,14 @@ Total estimated: $4000.
 
  ItemInventory Request Response Examples
  https://developer.intuit.com/app/developer/qbdesktop/docs/api-reference/iteminventoryquery
+
+
+
+
+
+Integrator
+. To test the dcata transfer in the public API, access these URLs:
+ http://qbintegratorapitest.hipalanet.com/api/sendcsv/categories
+ http://qbintegratorapitest.hipalanet.com/api/sendcsv/items
+ http://qbintegratorapitest.hipalanet.com/api/sendcsv/pricelevel
+ http://qbintegratorapitest.hipalanet.com/api/sendcsv/itempricelevel

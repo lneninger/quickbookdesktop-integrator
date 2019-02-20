@@ -30,6 +30,11 @@ namespace RemoteRepositories
             try
             {
                 var response = this.RestSharpClient.Execute(request);
+                if (!response.IsSuccessful)
+                {
+                    result.AddError($"Error sending data to {this.RestSharpClient.BaseUrl}/{response.Request.Resource}");
+                    result.AddError(response.ErrorMessage);
+                }
             }
             catch (Exception ex)
             {
