@@ -63,19 +63,39 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
                     AccountInventories = accountsInventory,
                 };
 
-               
+
 
                 try
                 {
-                    result.AddResponse(this.Repository.SendInventoryItem(syncItems));
-                    if (!result.IsSucceed)
+                    int pagingSize = 20;
+                    int index = 0;
+                    string errorMessage = "";
+                    SyncInventoryItemsInputIventoryItemDTO selectedItems = null;
+                    do
                     {
-                        Logger.Error($"Error sending data to public API");
-                        result.Messages.Where(o => o.MessageType == MessageTypeEnum.Error).ToList().ForEach(error =>
+                        selectedItems = new SyncInventoryItemsInputIventoryItemDTO
                         {
-                            Logger.Error(error.Message);
-                        });
+                            AccountIncomes = syncItems.AccountIncomes,
+                            AccountInventories = syncItems.AccountInventories,
+                            InventoryItems = syncItems.InventoryItems.OrderBy(item => item.Name).Skip(index * pagingSize).Take(pagingSize).ToList()
+                        };
+
+                        result.AddResponse(this.Repository.SendInventoryItem(selectedItems));
+                        if (!result.IsSucceed)
+                        {
+                            Logger.Error($"Error sending data to public API");
+                            result.Messages.Where(o => o.MessageType == MessageTypeEnum.Error).ToList().ForEach(error =>
+                            {
+                                Logger.Error(error.Message);
+                                errorMessage += " " + errorMessage;
+                            });
+
+                            throw new Exception(errorMessage);
+                        }
+
+                        index++;
                     }
+                    while (selectedItems.InventoryItems.Count() > 0);
                 }
                 catch (Exception ex)
                 {

@@ -76,7 +76,7 @@ namespace QuickbooksIntegratorAPI.Controllers
                 {
                     BranchID = 1002,
                     InItemId = listItem.ExternalId,
-                    ItemId = listItem.ExternalId,
+                    ItemId = listItem.SaleDescription,
                     ExCategoryId = listItem.InventoryAccountExternalId,
                     Price1 = listItem.Price,
                     QtyStock = listItem.Stock,

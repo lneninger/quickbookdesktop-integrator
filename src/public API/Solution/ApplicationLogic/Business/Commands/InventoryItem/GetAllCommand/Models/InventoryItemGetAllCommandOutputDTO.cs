@@ -12,5 +12,6 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand.Models
         public DateTime? CreatedAt { get; set; }
         public decimal? Price { get; set; }
         public decimal? Stock { get; set; }
+        public string SaleDescription { get; set; }
     }
 }

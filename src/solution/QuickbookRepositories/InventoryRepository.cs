@@ -46,7 +46,7 @@ namespace QuickbookRepositories
             {
                 Logger.Info($"Parsing response with {count} Inventory Items");
                 //MessageBox.Show(requestSet.ToXMLString());
-                var query = buildInventoryItemQueryRq(new string[] { Properties.FullName, Properties.Name, Properties.IsActive, Properties.QuantityOnHand, Properties.AverageCost, Properties.SalesDescription, Properties.SalesPrice, Properties.IncomeAccountRef, Properties.AssetAccountRef }, null);
+                var query = buildInventoryItemQueryRq(new string[] { Properties.ListID, Properties.FullName, Properties.Name, Properties.IsActive, Properties.QuantityOnHand, Properties.AverageCost, Properties.SalesDescription, Properties.SalesPrice, Properties.IncomeAccountRef, Properties.AssetAccountRef }, null);
                 IMsgSetResponse responseSet = this.SessionManager.doRequest(true, ref query);
                 //MessageBox.Show(responseSet.ToXMLString());
                 var result = parseInventoryItemQueryRs(responseSet, count, 1);

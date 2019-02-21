@@ -2,6 +2,7 @@
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Models;
 using ApplicationLogic.Interfaces.Repositories.Remote;
 using Framework.Core.Messages;
+using Framework.Logging.Log4Net;
 using RestSharp;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,7 @@ namespace RemoteRepositories
             this.RestSharpClient = new RestSharp.RestClient(appConfig.APIBaseURL);
         }
 
+        protected LoggerCustom Logger = Framework.Logging.Log4Net.LoggerFactory.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
         public RestClient RestSharpClient { get; }
 
         public OperationResponse SendInventoryItem(SyncInventoryItemsInputIventoryItemDTO inventoryItemDTO)
@@ -34,6 +36,7 @@ namespace RemoteRepositories
                 {
                     result.AddError($"Error sending data to {this.RestSharpClient.BaseUrl}/{response.Request.Resource}");
                     result.AddError(response.ErrorMessage);
+                    Logger.Error(response.ErrorMessage);
                 }
             }
             catch (Exception ex)

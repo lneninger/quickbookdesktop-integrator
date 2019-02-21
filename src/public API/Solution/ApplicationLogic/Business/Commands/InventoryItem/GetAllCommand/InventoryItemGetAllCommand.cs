@@ -30,6 +30,7 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand
                         ExternalId = entityItem.ExternalId,
                         Name = entityItem.Name,
                         InventoryAccountExternalId = entityItem.AssetAccount?.ExternalId,
+                        SaleDescription = entityItem.SalesDescription,
                         Price = entityItem.SalesPrice,
                         Stock = entityItem.Stock,
                         CreatedAt = entityItem.CreatedAt
