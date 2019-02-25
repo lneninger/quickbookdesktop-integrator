@@ -99,7 +99,7 @@ namespace Main
                 .AsImplementedInterfaces()
                 .TrackInstanceEvents();
 
-                var repositoryAssembly = typeof(InventoryRepository).Assembly;
+                var repositoryAssembly = typeof(GeneralRepository).Assembly;
                 var repositoryTypes = repositoryAssembly.GetTypes().Where(type => type.IsClass && type.Name.EndsWith("Repository", StringComparison.InvariantCultureIgnoreCase));
                 builder.RegisterTypes(repositoryTypes.ToArray())
                 .AsImplementedInterfaces()

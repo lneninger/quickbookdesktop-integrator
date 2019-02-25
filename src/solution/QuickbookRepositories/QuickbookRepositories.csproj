@@ -164,7 +164,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="_AbstractRespository.cs" />
-    <Compile Include="InventoryRepository.cs" />
+    <Compile Include="GeneralRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

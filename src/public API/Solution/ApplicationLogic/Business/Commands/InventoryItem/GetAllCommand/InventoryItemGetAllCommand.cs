@@ -11,15 +11,20 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand
 {
     public class InventoryItemGetAllCommand : AbstractDBCommand<DomainModel.InventoryItem, IInventoryItemDBRepository>, IInventoryItemGetAllCommand
     {
-        public InventoryItemGetAllCommand(IDbContextScopeFactory dbContextScopeFactory, IInventoryItemDBRepository repository) : base(dbContextScopeFactory, repository)
+        public InventoryItemGetAllCommand(IDbContextScopeFactory dbContextScopeFactory, IInventoryItemDBRepository repository, IInventoryAccountDBRepository inventoryAccountRepository) : base(dbContextScopeFactory, repository)
         {
+            this.InventoryAccountRepository = inventoryAccountRepository;
         }
+
+        public IInventoryAccountDBRepository InventoryAccountRepository { get; }
 
         public OperationResponse<IEnumerable<InventoryItemGetAllCommandOutputDTO>> Execute()
         {
             var result = new OperationResponse<IEnumerable<InventoryItemGetAllCommandOutputDTO>>();
             using (var dbContextScope = this.DbContextScopeFactory.Create())
             {
+                var inventoryAcountsResult = this.InventoryAccountRepository.GetAll();
+                result.AddResponse(inventoryAcountsResult);
                 var getAllResult = this.Repository.GetAll();
                 result.AddResponse(getAllResult);
                 if (result.IsSucceed)
@@ -29,13 +34,21 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand
                         Id = entityItem.Id,
                         ExternalId = entityItem.ExternalId,
                         Name = entityItem.Name,
-                        InventoryAccountExternalId = entityItem.AssetAccount?.ExternalId,
+                        AssetAccountId = entityItem.AssetAccountId, 
+                        //InventoryAccountExternalId = inventoryAcountsResult.Bag.FirstOrDefault(invAccount => invAccount.Id == entityItem.AssetAccountId)?.ExternalId,// entityItem.AssetAccount?.ExternalId,
                         SaleDescription = entityItem.SalesDescription,
                         Price = entityItem.SalesPrice,
                         Stock = entityItem.Stock,
                         CreatedAt = entityItem.CreatedAt
 
                     }).ToList();
+
+
+                    var inventoryAcounts = inventoryAcountsResult.Bag.ToList();
+                    foreach (var item in result.Bag) {
+                        item.InventoryAccountExternalId = inventoryAcounts.FirstOrDefault(invAccount => invAccount.Id == item.AssetAccountId)?.ExternalId;// entityItem.AssetAccount?.ExternalId,
+
+                    }
                 }
             }
 

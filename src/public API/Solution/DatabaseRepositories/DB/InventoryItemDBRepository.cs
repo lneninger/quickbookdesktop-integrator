@@ -38,7 +38,7 @@ namespace DatabaseRepositories.DB
             {
                 var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
                 {
-                    result.Bag = dbLocator.Set<InventoryItem>().AsEnumerable();
+                    result.Bag = dbLocator.Set<InventoryItem>().AsNoTracking().AsEnumerable();
                 }
             }
             catch (Exception ex)

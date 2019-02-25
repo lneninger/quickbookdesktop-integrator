@@ -138,6 +138,9 @@
     <Compile Include="Commands\QuickbooksIntegrator\GetAccountById\GetAccountByIdCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetAccountById\IGetAccountByIdCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetAccountById\Models\GetAccountByIdOutputDTO.cs" />
+    <Compile Include="Commands\QuickbooksIntegrator\GetPriceLevels\GetPriceLevelsCommand.cs" />
+    <Compile Include="Commands\QuickbooksIntegrator\GetPriceLevels\IGetPriceLevelsCommand.cs" />
+    <Compile Include="Commands\QuickbooksIntegrator\GetPriceLevels\Models\GetPriceLevelsOutputPriceLevelItemDTO.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\SyncInventoryItemsCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\ISyncInventoryItemsCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\Models\SyncInventoryItemsInputIventoryItemDTO.cs" />
@@ -147,7 +150,7 @@
     <Compile Include="Interfaces\Repositories\Public\IPublicRepository.cs" />
     <Compile Include="Interfaces\Repositories\Database\IDbRepository.cs" />
     <Compile Include="Interfaces\Repositories\Database\IQuickbookTrackRepository.cs" />
-    <Compile Include="Interfaces\Repositories\Quickbook\IInventoryItemRepository.cs" />
+    <Compile Include="Interfaces\Repositories\Quickbook\IGeneralRepository.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Quickbooks\Defaults.cs" />
     <Compile Include="Quickbooks\ENEdition.cs" />

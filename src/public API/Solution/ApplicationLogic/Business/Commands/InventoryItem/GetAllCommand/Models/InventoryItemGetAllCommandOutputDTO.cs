@@ -13,5 +13,6 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand.Models
         public decimal? Price { get; set; }
         public decimal? Stock { get; set; }
         public string SaleDescription { get; set; }
+        public int? AssetAccountId { get; set; }
     }
 }

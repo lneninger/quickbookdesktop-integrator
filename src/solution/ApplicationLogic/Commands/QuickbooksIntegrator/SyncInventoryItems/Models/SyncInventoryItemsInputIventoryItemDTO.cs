@@ -1,4 +1,5 @@
 ﻿using ApplicationLogic.Commands.QuickbooksIntegrator.GetAccountByIds.Models;
+using ApplicationLogic.Commands.QuickbooksIntegrator.GetPriceLevels.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -10,6 +11,7 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Model
     public class SyncInventoryItemsInputIventoryItemDTO
     {
         public IEnumerable<GetInventoryItemsOutputIventoryItemDTO> InventoryItems { get; set; }
+        public IEnumerable<GetPriceLevelsOutputPriceLevelItemDTO> PriceLevels { get; set; }
         public IEnumerable<GetAccountByIdsOutputDTO> AccountIncomes { get; set; }
         public IEnumerable<GetAccountByIdsOutputDTO> AccountInventories { get; set; }
     }

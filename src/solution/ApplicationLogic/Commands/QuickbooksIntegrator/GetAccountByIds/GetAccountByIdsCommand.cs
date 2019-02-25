@@ -8,12 +8,12 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.GetAccountByIds
 {
     public class GetAccountByIdsCommand : BaseIoCDisposable, IGetAccountByIdsCommand
     {
-        public GetAccountByIdsCommand(IInventoryItemRepository repository)
+        public GetAccountByIdsCommand(IGeneralRepository repository)
         {
             this.Repository = repository;
         }
 
-        public IInventoryItemRepository Repository { get; }
+        public IGeneralRepository Repository { get; }
 
         public List<GetAccountByIdsOutputDTO> Execute(List<string> ids)
         {

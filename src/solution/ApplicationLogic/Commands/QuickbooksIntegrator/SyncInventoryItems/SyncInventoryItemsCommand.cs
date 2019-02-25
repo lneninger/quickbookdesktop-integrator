@@ -10,6 +10,8 @@ using System.Linq;
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetAccountByIds;
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetAccountByIds.Models;
 using Framework.Logging.Log4Net;
+using ApplicationLogic.Commands.QuickbooksIntegrator.GetPriceLevels.Models;
+using ApplicationLogic.Commands.QuickbooksIntegrator.GetPriceLevels;
 
 namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
 {
@@ -17,15 +19,17 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
     {
         protected LoggerCustom Logger = Framework.Logging.Log4Net.LoggerFactory.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
-        public SyncInventoryItemsCommand(IPublicRepository repository, IGetInventoryItemsCommand getInventoryItems, IGetAccountByIdsCommand getAccountByIds)
+        public SyncInventoryItemsCommand(IPublicRepository repository, IGetInventoryItemsCommand getInventoryItems, IGetPriceLevelsCommand getPriceLevels, IGetAccountByIdsCommand getAccountByIds)
         {
             this.Repository = repository;
+            this.GetPriceLevels = getPriceLevels;
             this.GetInventoryItems = getInventoryItems;
             this.GetAccountByIds = getAccountByIds;
         }
 
         public IPublicRepository Repository { get; }
         public IGetInventoryItemsCommand GetInventoryItems { get; }
+        public IGetPriceLevelsCommand GetPriceLevels { get; }
         public IGetAccountByIdsCommand GetAccountByIds { get; }
 
         public OperationResponse Execute()
@@ -33,11 +37,15 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
             var result = new OperationResponse();
 
             IEnumerable<GetInventoryItemsOutputIventoryItemDTO> items = null;
+            IEnumerable<GetPriceLevelsOutputPriceLevelItemDTO> priceLevels = null;
             IEnumerable<GetAccountByIdsOutputDTO> accountsIncome = null;
             IEnumerable<GetAccountByIdsOutputDTO> accountsInventory = null;
             try
             {
                 items = this.GetInventoryItems.Execute();
+
+                priceLevels = this.GetPriceLevels.Execute();
+
 
                 var accountIncomeIds = items.Where(item => !string.IsNullOrWhiteSpace(item.IncomeAccountId)).Select(item => item.IncomeAccountId).Distinct();
                 accountsIncome = this.GetAccountByIds.Execute(accountIncomeIds.ToList());
@@ -59,11 +67,10 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
                 var syncItems = new SyncInventoryItemsInputIventoryItemDTO
                 {
                     InventoryItems = items,
+                    PriceLevels = priceLevels,
                     AccountIncomes = accountsIncome,
                     AccountInventories = accountsInventory,
                 };
-
-
 
                 try
                 {
@@ -77,6 +84,7 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
                         {
                             AccountIncomes = syncItems.AccountIncomes,
                             AccountInventories = syncItems.AccountInventories,
+                            PriceLevels = syncItems.PriceLevels,
                             InventoryItems = syncItems.InventoryItems.OrderBy(item => item.Name).Skip(index * pagingSize).Take(pagingSize).ToList()
                         };
 

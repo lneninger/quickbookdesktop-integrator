@@ -67,7 +67,10 @@ namespace QuickbookRepositories
                     IItemInventoryQuery itemInventoryQuery = requestMsgSet.AppendItemInventoryQueryRq();
                     itemInventoryQuery.metaData.SetValue(ENmetaData.mdMetaDataOnly);
                     break;
-                    
+                case "PriceLevelQueryRq":
+                    IPriceLevelQuery priceLevelQuery = requestMsgSet.AppendPriceLevelQueryRq();
+                    priceLevelQuery.metaData.SetValue(ENmetaData.mdMetaDataOnly);
+                    break;
                 default:
                     break;
             }

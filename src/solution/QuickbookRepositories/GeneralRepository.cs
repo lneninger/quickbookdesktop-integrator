@@ -1,6 +1,7 @@
 ﻿using ApplicationLogic.Commands.QuickbooksIntegrator.GetAccountById.Models;
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetAccountByIds.Models;
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Models;
+using ApplicationLogic.Commands.QuickbooksIntegrator.GetPriceLevels.Models;
 using ApplicationLogic.Interfaces.Repositories.Database;
 using ApplicationLogic.Interfaces.Repositories.Quickbooks;
 using ApplicationLogic.Quickbooks;
@@ -28,16 +29,22 @@ namespace QuickbookRepositories
         public const string SalesPrice = "SalesPrice";
         public const string ListID = "ListID";
 
+        public const string PriceLevelType = "PriceLevelType";
+        public const string ORPriceLevelRet = "ORPriceLevelRet";
+        public const string PriceLevelPerItemRetCurrency = "PriceLevelPerItemRetCurrency";
+        
+
+
     }
 
 
-    public class InventoryRepository : AbstractRespository, IInventoryItemRepository
+    public class GeneralRepository : AbstractRespository, IGeneralRepository
     {
-        public InventoryRepository(SessionManager sessionManager) : base(sessionManager)
+        public GeneralRepository(SessionManager sessionManager) : base(sessionManager)
         {
 
         }
-        public IEnumerable<GetInventoryItemsOutputIventoryItemDTO> GetAll()
+        public IEnumerable<GetInventoryItemsOutputIventoryItemDTO> InventoryItemGetAll()
         {
             string request = "ItemInventoryQueryRq";
             //connectToQB();
@@ -254,7 +261,6 @@ namespace QuickbookRepositories
             return result;
         }
 
-
         private IEnumerable<GetAccountByIdsOutputDTO> parseAccountByIdsQueryRs(IMsgSetResponse responseMsgSet, int countOfRows, int arraySize)
         {
             var result = new List<GetAccountByIdsOutputDTO>();
@@ -308,6 +314,102 @@ namespace QuickbookRepositories
 
             return result;
         }
+
+
+
+
+
+
+        public IEnumerable<GetPriceLevelsOutputPriceLevelItemDTO> PriceLevelGetAll()
+        {
+            string request = "PriceLevelQueryRq";
+            //connectToQB();
+            int count = getCount(request);
+            try
+            {
+                Logger.Info($"Parsing response with {count} Price Level Items");
+                //MessageBox.Show(requestSet.ToXMLString());
+                var query = buildPriceLevelQueryRq(new string[] { Properties.ListID, Properties.Name, Properties.IsActive, Properties.PriceLevelType, Properties.ORPriceLevelRet, Properties.PriceLevelPerItemRetCurrency }, null);
+                IMsgSetResponse responseSet = this.SessionManager.doRequest(true, ref query);
+                //MessageBox.Show(responseSet.ToXMLString());
+                var result = parsePriceLevelQueryRs(responseSet, count, 1);
+                return result;
+            }
+            catch (Exception e)
+            {
+                this.Logger.Error(e);
+                return null;
+            }
+            finally
+            {
+                this.SessionManager.closeConnection();
+            }
+        }
+
+        private IMsgSetRequest buildPriceLevelQueryRq(string[] includeRetElement, string fullName)
+        {
+            IMsgSetRequest requestMsgSet = this.SessionManager.getMsgSetRequest();
+            requestMsgSet.Attributes.OnError = ENRqOnError.roeContinue;
+            IPriceLevelQuery itemQuery = requestMsgSet.AppendPriceLevelQueryRq();
+
+            for (int x = 0; x < includeRetElement.Length; x++)
+            {
+                itemQuery.IncludeRetElementList.Add(includeRetElement[x]);
+            }
+            return requestMsgSet;
+        }
+
+
+        private IEnumerable<GetPriceLevelsOutputPriceLevelItemDTO> parsePriceLevelQueryRs(IMsgSetResponse responseMsgSet, int countOfRows, int arraySize)
+        {
+            var result = new List<GetPriceLevelsOutputPriceLevelItemDTO>();
+            IResponseList responseList = responseMsgSet.ResponseList;
+            if (responseList == null)
+            {
+                return result;
+            }
+
+            IResponse response = responseList.GetAt(0);
+
+            ENResponseType responseType = (ENResponseType)response.Type.GetValue();
+            IPriceLevelRetList list = null;
+            int statusCode = response.StatusCode;
+            if (statusCode == 0)
+            {
+                if (response.Detail == null)
+                {
+                    return null;
+                }
+                if (responseType == ENResponseType.rtPriceLevelQueryRs)
+                {
+                    list = (IPriceLevelRetList)response.Detail;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+
+            GetPriceLevelsOutputPriceLevelItemDTO resultItem = null;
+            for (int i = 0; i < countOfRows; i++)
+            {
+                IPriceLevelRet priceLevel = list.GetAt(i);
+                resultItem = new GetPriceLevelsOutputPriceLevelItemDTO();
+
+                resultItem.Id = priceLevel.ListID?.GetValue();
+                resultItem.Name = priceLevel.Name?.GetValue();
+                resultItem.PriceLevelType = priceLevel.PriceLevelType?.GetValue() == 0 ? "FixedPercentage" : "PerItem";
+                resultItem.PriceLevelPercentage = priceLevel.ORPriceLevelRet?.PriceLevelFixedPercentage?.GetValue();
+                //resultItem.PriceLevelPercentage = priceLevel.ORPriceLevelRet?.PriceLevelPerItemRetCurrency?.PriceLevelPerItemRetList;
+                resultItem.IsActive = priceLevel.IsActive?.GetValue() ?? false;
+
+                Logger.Info($"Parsed price level {resultItem.Name}");
+
+                result.Add(resultItem);
+            }
+            return result;
+        }
+
     }
 
 
