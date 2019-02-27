@@ -7,7 +7,7 @@ namespace QuickbooksIntegratorAPI.Auth
 {
     public class PermissionsEnum
     {
-        // Customer
+        /// Inventory Item
         /// <summary>
         /// 
         /// </summary>
@@ -22,6 +22,23 @@ namespace QuickbooksIntegratorAPI.Auth
         /// 
         /// </summary>
         public const string InventoryItem_Manage = nameof(Enum.InventoryItem_Manage);
+
+
+        /// Price Level
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string PriceLevel_Read = nameof(Enum.PriceLevel_Read);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string PriceLevel_Modify = nameof(Enum.PriceLevel_Modify);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string PriceLevel_Manage = nameof(Enum.PriceLevel_Manage);
 
 
         // User
@@ -76,6 +93,21 @@ namespace QuickbooksIntegratorAPI.Auth
             /// </summary>
             InventoryItem_Manage,
 
+            // InventoryItem
+            /// <summary>
+            /// 
+            /// </summary>
+            PriceLevel_Read,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            PriceLevel_Modify,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            PriceLevel_Manage,
 
             // User
             /// <summary>

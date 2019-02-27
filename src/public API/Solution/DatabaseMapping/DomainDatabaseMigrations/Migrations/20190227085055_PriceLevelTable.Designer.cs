@@ -4,14 +4,16 @@ using DomainDatabaseMapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DomainDatabaseMigrations.Migrations
 {
     [DbContext(typeof(MigrationDBContext))]
-    partial class MigrationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190227085055_PriceLevelTable")]
+    partial class PriceLevelTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -275,32 +277,6 @@ namespace DomainDatabaseMigrations.Migrations
                     b.ToTable("PriceLevel","INV");
                 });
 
-            modelBuilder.Entity("DomainModel.PriceLevelInventoryItem", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasMaxLength(6)
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<decimal?>("CustomPrice");
-
-                    b.Property<decimal?>("CustomPricePercent");
-
-                    b.Property<int>("InventoryItemId");
-
-                    b.Property<int>("PriceLevelId");
-
-                    b.Property<short?>("Type");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("InventoryItemId");
-
-                    b.HasIndex("PriceLevelId");
-
-                    b.ToTable("PriceLevelInventoryItem","INV");
-                });
-
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
                 {
                     b.Property<string>("Id")
@@ -465,19 +441,6 @@ namespace DomainDatabaseMigrations.Migrations
                     b.HasOne("DomainModel.IncomeAccount", "IncomeAccount")
                         .WithMany()
                         .HasForeignKey("IncomeAccountId");
-                });
-
-            modelBuilder.Entity("DomainModel.PriceLevelInventoryItem", b =>
-                {
-                    b.HasOne("DomainModel.InventoryItem", "InventoryItem")
-                        .WithMany()
-                        .HasForeignKey("InventoryItemId")
-                        .OnDelete(DeleteBehavior.Cascade);
-
-                    b.HasOne("DomainModel.PriceLevel", "PriceLevel")
-                        .WithMany("InventoryItems")
-                        .HasForeignKey("PriceLevelId")
-                        .OnDelete(DeleteBehavior.Cascade);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

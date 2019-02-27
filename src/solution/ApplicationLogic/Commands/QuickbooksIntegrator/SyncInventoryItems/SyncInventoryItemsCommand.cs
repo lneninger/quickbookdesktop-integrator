@@ -74,9 +74,22 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
 
                 try
                 {
+                    result.AddResponse(this.Repository.SendInventoryItem(syncItems));
+                    if (!result.IsSucceed)
+                    {
+                        Logger.Error($"Error sending data to public API");
+                        string errorMessage = "";
+                        result.Messages.Where(o => o.MessageType == MessageTypeEnum.Error).ToList().ForEach(error =>
+                        {
+                            Logger.Error(error.Message);
+                            errorMessage += " " + errorMessage;
+                        });
+                        throw new Exception(result.Messages.ToList()[0].Message);
+                    }
+
+                    /*
                     int pagingSize = 20;
                     int index = 0;
-                    string errorMessage = "";
                     SyncInventoryItemsInputIventoryItemDTO selectedItems = null;
                     do
                     {
@@ -104,6 +117,7 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
                         index++;
                     }
                     while (selectedItems.InventoryItems.Count() > 0);
+                    */
                 }
                 catch (Exception ex)
                 {

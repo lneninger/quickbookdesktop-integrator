@@ -42,7 +42,7 @@ namespace ApplicationLogic.Repositories.DB
         /// </summary>
         /// <param name="fullName"></param>
         /// <returns></returns>
-        OperationResponse<DomainModel.PriceLevel> GetByFullName(string fullName);
+        OperationResponse<DomainModel.PriceLevel> GetByName(string fullName);
 
         /// <summary>
         /// 

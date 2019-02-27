@@ -18,6 +18,8 @@ namespace DomainModel
 
         public decimal? PriceLevelPercentage { get; set; }
 
+        public virtual ICollection<PriceLevelInventoryItem> InventoryItems { get; set; }
+
         public DateTime? DeletedAt { get; set; }
 
         public bool? IsDeleted { get; set; }

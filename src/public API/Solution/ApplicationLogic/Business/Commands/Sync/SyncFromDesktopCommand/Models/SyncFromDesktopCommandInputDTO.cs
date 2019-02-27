@@ -8,5 +8,6 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand.Models
         public List<SyncFromDesktopCommandInputInventoryItemDTO> InventoryItems { get; set; }
         public List<SyncFromDesktopCommandInputAccountIncomeDTO> AccountIncomes { get; set; }
         public List<SyncFromDesktopCommandInputAccountInventoryDTO> AccountInventories { get; set; }
+        public List<SyncFromDesktopCommandInputPriceLevelDTO> PriceLevels { get; set; }
     }
 }

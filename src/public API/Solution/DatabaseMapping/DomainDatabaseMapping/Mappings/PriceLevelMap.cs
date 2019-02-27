@@ -6,14 +6,14 @@ using System;
 
 namespace DomainDatabaseMapping.Mappings
 {
-    public class PriceLevelMap : BaseAbstractMap, IEntityTypeConfiguration<InventoryItem>
+    public class PriceLevelMap : BaseAbstractMap, IEntityTypeConfiguration<PriceLevel>
     {
 
-        public PriceLevelMap(ModelBuilder modelBuilder): base(modelBuilder)
+        public PriceLevelMap(ModelBuilder modelBuilder) : base(modelBuilder)
         {
         }
 
-        public void Configure(EntityTypeBuilder<InventoryItem> builder)
+        public void Configure(EntityTypeBuilder<PriceLevel> builder)
         {
             builder.ToTable("PriceLevel", SCHEMAS.INVENTORY);
             builder.HasKey(t => t.Id);
@@ -21,23 +21,23 @@ namespace DomainDatabaseMapping.Mappings
             builder.Property(t => t.Id)
                 .HasMaxLength(6);
 
+            builder.Property(t => t.ExternalId)
+                .HasMaxLength(32);
+
             builder.Property(t => t.Name)
                .HasColumnType("nvarchar(50)")
-               .IsRequired(true);
+               .IsRequired();
 
-            builder.Property(t => t.FullName)
-               .HasColumnType("nvarchar(50)")
-               .IsRequired(true);
+            builder.Property(t => t.IsActive)
+               .IsRequired();
 
-            builder.HasOne(t => t.IncomeAccount)
-              .WithMany()
-              .HasForeignKey(t => t.IncomeAccountId)
+            builder.Property(t => t.PriceLevelPercentage)
               .IsRequired(false);
 
-            builder.HasOne(t => t.AssetAccount)
-              .WithMany()
-              .HasForeignKey(t => t.AssetAccountId)
-              .IsRequired(false);
+            builder.Property(t => t.PriceLevelType)
+                .HasMaxLength(15)
+              .IsRequired();
+
 
             // Seed
         }

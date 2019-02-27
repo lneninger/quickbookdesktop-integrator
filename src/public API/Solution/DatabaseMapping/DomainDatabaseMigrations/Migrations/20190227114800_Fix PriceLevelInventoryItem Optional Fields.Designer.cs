@@ -4,14 +4,16 @@ using DomainDatabaseMapping;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace DomainDatabaseMigrations.Migrations
 {
     [DbContext(typeof(MigrationDBContext))]
-    partial class MigrationDBContextModelSnapshot : ModelSnapshot
+    [Migration("20190227114800_Fix PriceLevelInventoryItem Optional Fields")]
+    partial class FixPriceLevelInventoryItemOptionalFields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -287,6 +289,12 @@ namespace DomainDatabaseMigrations.Migrations
                     b.Property<decimal?>("CustomPricePercent");
 
                     b.Property<int>("InventoryItemId");
+
+                    b.Property<string>("ItemFullName");
+
+                    b.Property<string>("ItemId");
+
+                    b.Property<string>("Name");
 
                     b.Property<int>("PriceLevelId");
 

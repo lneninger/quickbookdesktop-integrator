@@ -140,6 +140,7 @@
     <Compile Include="Commands\QuickbooksIntegrator\GetAccountById\Models\GetAccountByIdOutputDTO.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetPriceLevels\GetPriceLevelsCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetPriceLevels\IGetPriceLevelsCommand.cs" />
+    <Compile Include="Commands\QuickbooksIntegrator\GetPriceLevels\Models\GetPriceLevelsOutputPriceLevelInventorytemDTO.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\GetPriceLevels\Models\GetPriceLevelsOutputPriceLevelItemDTO.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\SyncInventoryItemsCommand.cs" />
     <Compile Include="Commands\QuickbooksIntegrator\SyncInventoryItems\ISyncInventoryItemsCommand.cs" />

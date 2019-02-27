@@ -22,7 +22,7 @@ namespace QuickbookRepositories
         public const string IsActive = "IsActive";
         public const string IncomeAccountRef = "IncomeAccountRef";
         public const string AssetAccountRef = "AssetAccountRef";
-        
+
         public const string QuantityOnHand = "QuantityOnHand";
         public const string AverageCost = "AverageCost";
         public const string SalesDescription = "SalesDesc";
@@ -32,7 +32,7 @@ namespace QuickbookRepositories
         public const string PriceLevelType = "PriceLevelType";
         public const string ORPriceLevelRet = "ORPriceLevelRet";
         public const string PriceLevelPerItemRetCurrency = "PriceLevelPerItemRetCurrency";
-        
+
 
 
     }
@@ -352,10 +352,10 @@ namespace QuickbookRepositories
             requestMsgSet.Attributes.OnError = ENRqOnError.roeContinue;
             IPriceLevelQuery itemQuery = requestMsgSet.AppendPriceLevelQueryRq();
 
-            for (int x = 0; x < includeRetElement.Length; x++)
-            {
-                itemQuery.IncludeRetElementList.Add(includeRetElement[x]);
-            }
+            //for (int x = 0; x < includeRetElement.Length; x++)
+            //{
+            //    itemQuery.IncludeRetElementList.Add(includeRetElement[x]);
+            //}
             return requestMsgSet;
         }
 
@@ -391,6 +391,7 @@ namespace QuickbookRepositories
             }
 
             GetPriceLevelsOutputPriceLevelItemDTO resultItem = null;
+            int? itemCount = 0;
             for (int i = 0; i < countOfRows; i++)
             {
                 IPriceLevelRet priceLevel = list.GetAt(i);
@@ -402,6 +403,25 @@ namespace QuickbookRepositories
                 resultItem.PriceLevelPercentage = priceLevel.ORPriceLevelRet?.PriceLevelFixedPercentage?.GetValue();
                 //resultItem.PriceLevelPercentage = priceLevel.ORPriceLevelRet?.PriceLevelPerItemRetCurrency?.PriceLevelPerItemRetList;
                 resultItem.IsActive = priceLevel.IsActive?.GetValue() ?? false;
+
+                itemCount = priceLevel.ORPriceLevelRet?.PriceLevelPerItemRetCurrency?.PriceLevelPerItemRetList?.Count;
+                if (itemCount != null)
+                {
+                    IPriceLevelPerItemRet priceLevelItem;
+                    for (var priceLevelInventoryItemIndex = 0; priceLevelInventoryItemIndex < itemCount.Value; priceLevelInventoryItemIndex++)
+                    {
+                        priceLevelItem = priceLevel.ORPriceLevelRet.PriceLevelPerItemRetCurrency.PriceLevelPerItemRetList?.GetAt(priceLevelInventoryItemIndex);
+                        resultItem.InventoryItems.Add(new GetPriceLevelsOutputPriceLevelInventorytemDTO
+                        {
+                            ItemId = priceLevelItem.ItemRef.ListID.GetValue(),
+                            ItemFullName = priceLevelItem.ItemRef.FullName.GetValue(),
+                            Type = priceLevelItem.ItemRef.Type?.GetValue(),
+                            CustomPrice = priceLevelItem.ORORCustomPrice.CustomPrice?.GetValue(),
+                            CustomPricePercent = priceLevelItem.ORORCustomPrice.CustomPricePercent?.GetValue(),
+                        });
+                    }
+                }
+
 
                 Logger.Info($"Parsed price level {resultItem.Name}");
 

@@ -35,7 +35,6 @@ namespace ApplicationLogic.Business.Commands.PriceLevel.GetAllCommand
                         ExternalId = entityItem.ExternalId,
                         Name = entityItem.Name,
                         PriceLevelType = entityItem.PriceLevelType,
-                        //InventoryAccountExternalId = inventoryAcountsResult.Bag.FirstOrDefault(invAccount => invAccount.Id == entityItem.AssetAccountId)?.ExternalId,// entityItem.AssetAccount?.ExternalId,
                         IsActive = entityItem.IsActive,
                         PriceLevelPercentage = entityItem.PriceLevelPercentage,
                         CreatedAt = entityItem.CreatedAt

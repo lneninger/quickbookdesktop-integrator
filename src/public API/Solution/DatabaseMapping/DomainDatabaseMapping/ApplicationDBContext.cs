@@ -33,6 +33,8 @@ namespace DomainDatabaseMapping
         public DbSet<Account> Accounts { get; set; }
         public DbSet<IncomeAccount> IncomeAccounts { get; set; }
         public DbSet<InventoryAccount> InventoryAccounts { get; set; }
+        public DbSet<PriceLevel> PriceLevels { get; set; }
+        public DbSet<PriceLevelInventoryItem> PriceLevelInventoryItems { get; set; }
 
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,6 +48,8 @@ namespace DomainDatabaseMapping
             modelBuilder.ApplyConfiguration(new InventoryItemMap(modelBuilder));
             modelBuilder.ApplyConfiguration(new AccountMap(modelBuilder));
             modelBuilder.ApplyConfiguration(new AccountTypeMap(modelBuilder));
+            modelBuilder.ApplyConfiguration(new PriceLevelMap(modelBuilder));
+            modelBuilder.ApplyConfiguration(new PriceLevelInventoryItemMap(modelBuilder));
         }
 
 
