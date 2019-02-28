@@ -2,6 +2,7 @@
 using ApplicationLogic.Business.Commands.InventoryItem.DeleteCommand.Models;
 using ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand;
 using ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand.Models;
+using ApplicationLogic.Business.Commands.InventoryItem.GetAllWithPriceLevelCommand;
 using ApplicationLogic.Business.Commands.InventoryItem.GetByIdCommand;
 using ApplicationLogic.Business.Commands.InventoryItem.GetByIdCommand.Models;
 using ApplicationLogic.Business.Commands.InventoryItem.InsertCommand;
@@ -39,7 +40,7 @@ namespace QuickbooksIntegratorAPI.Controllers
         /// <param name="insertCommand">The insert command.</param>
         /// <param name="updateCommand">The update command.</param>
         /// <param name="deleteCommand">The delete command.</param>
-        public InventoryItemController(IHubContext<GlobalHub, IGlobalHub> hubContext, IInventoryItemPageQueryCommand pageQueryCommand, IInventoryItemGetAllCommand getAllCommand, IInventoryItemGetByIdCommand getByIdCommand, IInventoryItemUpdateCommand updateCommand, IInventoryItemDeleteCommand deleteCommand): base(/*hubContext*/)
+        public InventoryItemController(IHubContext<GlobalHub, IGlobalHub> hubContext, IInventoryItemPageQueryCommand pageQueryCommand, IInventoryItemGetAllWithPriceLevelCommand getAllCommand, IInventoryItemGetByIdCommand getByIdCommand, IInventoryItemUpdateCommand updateCommand, IInventoryItemDeleteCommand deleteCommand): base(/*hubContext*/)
         {
             this.SignalRHubContext = hubContext;
             this.PageQueryCommand = pageQueryCommand;
@@ -55,7 +56,7 @@ namespace QuickbooksIntegratorAPI.Controllers
         /// <value>
         /// The get all command.
         /// </value>
-        public IInventoryItemGetAllCommand GetAllCommand { get; }
+        public IInventoryItemGetAllWithPriceLevelCommand GetAllCommand { get; }
 
         /// <summary>
         /// 

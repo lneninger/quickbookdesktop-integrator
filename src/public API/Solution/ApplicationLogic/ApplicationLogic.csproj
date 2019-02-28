@@ -9,12 +9,21 @@
     <Compile Remove="%40Commons\**" />
     <Compile Remove="Business\Commands\AppUser\AuthenticateCommand\**" />
     <Compile Remove="Business\Commands\AppUser\RegisterCommand\**" />
+    <Compile Remove="Business\Commands\PriceLevelInventoryItem\DeleteCommand\**" />
+    <Compile Remove="Business\Commands\PriceLevelInventoryItem\GetByIdCommand\**" />
+    <Compile Remove="Business\Commands\PriceLevelInventoryItem\InsertCommand\**" />
     <EmbeddedResource Remove="%40Commons\**" />
     <EmbeddedResource Remove="Business\Commands\AppUser\AuthenticateCommand\**" />
     <EmbeddedResource Remove="Business\Commands\AppUser\RegisterCommand\**" />
+    <EmbeddedResource Remove="Business\Commands\PriceLevelInventoryItem\DeleteCommand\**" />
+    <EmbeddedResource Remove="Business\Commands\PriceLevelInventoryItem\GetByIdCommand\**" />
+    <EmbeddedResource Remove="Business\Commands\PriceLevelInventoryItem\InsertCommand\**" />
     <None Remove="%40Commons\**" />
     <None Remove="Business\Commands\AppUser\AuthenticateCommand\**" />
     <None Remove="Business\Commands\AppUser\RegisterCommand\**" />
+    <None Remove="Business\Commands\PriceLevelInventoryItem\DeleteCommand\**" />
+    <None Remove="Business\Commands\PriceLevelInventoryItem\GetByIdCommand\**" />
+    <None Remove="Business\Commands\PriceLevelInventoryItem\InsertCommand\**" />
   </ItemGroup>
 
   <ItemGroup>

@@ -8,7 +8,7 @@ namespace QuickbooksIntegratorAPI.Models.SendCSV
     public class PriceLevelModel
     {
         public int branchID { get; set; }
-        public int InPriceLevelId { get; set; }
-        public decimal PriceLevel { get; set; }
+        public string InPriceLevelId { get; set; }
+        public string PriceLevel { get; set; }
     }
 }

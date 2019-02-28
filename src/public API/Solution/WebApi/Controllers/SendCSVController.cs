@@ -1,5 +1,7 @@
 ﻿using ApplicationLogic.Business.Commands.InventoryAccount.GetAllCommand;
 using ApplicationLogic.Business.Commands.InventoryItem.GetAllCommand;
+using ApplicationLogic.Business.Commands.InventoryItem.GetAllWithPriceLevelCommand;
+using ApplicationLogic.Business.Commands.PriceLevel.GetAllCommand;
 using ApplicationLogic.SignalR;
 using CsvHelper;
 using CsvHelper.Fluent;
@@ -32,16 +34,20 @@ namespace QuickbooksIntegratorAPI.Controllers
         /// <param name="insertCommand">The insert command.</param>
         /// <param name="updateCommand">The update command.</param>
         /// <param name="deleteCommand">The delete command.</param>
-        public SendCSVController(IHubContext<GlobalHub, IGlobalHub> hubContext, IInventoryAccountGetAllCommand inventoryAccountGetAllCommand, IInventoryItemGetAllCommand inventoryItemGetAllCommand) : base(/*hubContext*/)
+        public SendCSVController(IHubContext<GlobalHub, IGlobalHub> hubContext, IInventoryAccountGetAllCommand inventoryAccountGetAllCommand, IInventoryItemGetAllCommand inventoryItemGetAllCommand, IInventoryItemGetAllWithPriceLevelCommand inventoryItemGetAllWithPriceLevelCommand, IPriceLevelGetAllCommand priceLevelGetAllCommand) : base(/*hubContext*/)
         {
             this.SignalRHubContext = hubContext;
             this.InventoryAccountGetAllCommand = inventoryAccountGetAllCommand;
             this.InventoryItemGetAllCommand = inventoryItemGetAllCommand;
+            this.PriceLevelGetAllCommand = priceLevelGetAllCommand;
+            this.InventoryItemGetAllWithPriceLevelCommand = inventoryItemGetAllWithPriceLevelCommand;
         }
 
         public IHubContext<GlobalHub, IGlobalHub> SignalRHubContext { get; }
         public IInventoryAccountGetAllCommand InventoryAccountGetAllCommand { get; }
         public IInventoryItemGetAllCommand InventoryItemGetAllCommand { get; }
+        public IPriceLevelGetAllCommand PriceLevelGetAllCommand { get; }
+        public IInventoryItemGetAllWithPriceLevelCommand InventoryItemGetAllWithPriceLevelCommand { get; }
 
         [HttpGet("categories")]
         public IActionResult Categories()
@@ -90,18 +96,18 @@ namespace QuickbooksIntegratorAPI.Controllers
             return this.BadRequest();
         }
 
-        [HttpGet("pricelevel")]
-        public IActionResult PriceLevel()
+        [HttpGet("pricelevels")]
+        public IActionResult PriceLevels()
         {
-            var inventoryItemResponse = this.InventoryItemGetAllCommand.Execute();
-            if (inventoryItemResponse.Bag != null)
+            var priceLevelResponse = this.PriceLevelGetAllCommand.Execute();
+            if (priceLevelResponse.Bag != null)
             {
-                var list = inventoryItemResponse.Bag;
-                var map = new int[] { 0 }.Select(listItem => new Models.SendCSV.PriceLevelModel
+                var list = priceLevelResponse.Bag;
+                var map = list.Select(listItem => new Models.SendCSV.PriceLevelModel
                 {
                     branchID = 1002,
-                    InPriceLevelId = 0,
-                    PriceLevel = 0,
+                    InPriceLevelId = listItem.ExternalId,
+                    PriceLevel = listItem.Name,
                 }).ToList();
 
                 var result = WriteCsvToMemory(map);
@@ -116,7 +122,7 @@ namespace QuickbooksIntegratorAPI.Controllers
         [HttpGet("itempricelevel")]
         public IActionResult ItemPriceLevel()
         {
-            var inventoryItemResponse = this.InventoryItemGetAllCommand.Execute();
+            var inventoryItemResponse = this.InventoryItemGetAllWithPriceLevelCommand.Execute();
             if (inventoryItemResponse.Bag != null)
             {
                 var list = inventoryItemResponse.Bag;
@@ -124,8 +130,8 @@ namespace QuickbooksIntegratorAPI.Controllers
                 {
                     branchID = 1002,
                     ExItemId = listItem.ExternalId,
-                    ExPriceLeverlId = 0,
-                    Price = listItem.Price,
+                    ExPriceLeverlId = listItem.PriceLevelExternalId,
+                    Price = listItem.PriceLevelCustomPrice ?? listItem.Price ?? 0,
                 }).ToList();
 
                 var result = WriteCsvToMemory(map);
