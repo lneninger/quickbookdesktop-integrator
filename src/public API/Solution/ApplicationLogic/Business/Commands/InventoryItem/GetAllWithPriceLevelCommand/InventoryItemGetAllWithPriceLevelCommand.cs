@@ -26,7 +26,7 @@ namespace ApplicationLogic.Business.Commands.InventoryItem.GetAllWithPriceLevelC
             using (var dbContextScope = this.DbContextScopeFactory.Create())
             {
                 var inventoryAcountsResult = this.InventoryAccountDBRepository.GetAll();
-                var priceLevelItemsResult = this.PriceLevelInventoryItemDBRepository.GetAll();
+                var priceLevelItemsResult = this.PriceLevelInventoryItemDBRepository.GetAllWithPriceLevel();
                 result.AddResponse(inventoryAcountsResult);
                 var getAllResult = this.Repository.GetAll();
                 result.AddResponse(getAllResult);

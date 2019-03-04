@@ -74,26 +74,34 @@ namespace QuickbooksIntegratorAPI.Controllers
         [HttpGet("items")]
         public IActionResult Items()
         {
-            var inventoryItemResponse = this.InventoryItemGetAllCommand.Execute();
-            if (inventoryItemResponse.Bag != null)
+            try
             {
-                var list = inventoryItemResponse.Bag;
-                var map = list.Select(listItem => new Models.SendCSV.InventoryItemModel
+                var inventoryItemResponse = this.InventoryItemGetAllCommand.Execute();
+                if (inventoryItemResponse.Bag != null)
                 {
-                    BranchID = 1002,
-                    InItemId = listItem.ExternalId,
-                    ItemId = listItem.SaleDescription,
-                    ExCategoryId = listItem.InventoryAccountExternalId,
-                    Price1 = listItem.Price,
-                    QtyStock = listItem.Stock,
-                }).ToList();
+                    var list = inventoryItemResponse.Bag;
+                    var map = list.Select(listItem => new Models.SendCSV.InventoryItemModel
+                    {
+                        BranchID = 1002,
+                        InItemId = listItem.ExternalId,
+                        ItemId = listItem.SaleDescription,
+                        ExCategoryId = listItem.InventoryAccountExternalId,
+                        Price1 = listItem.Price,
+                        QtyStock = listItem.Stock,
+                    }).ToList();
 
-                var result = WriteCsvToMemory(map);
-                var memoryStream = new MemoryStream(result);
-                return File(memoryStream, "application/octet-stream", "us_item.csv");
+                    var result = WriteCsvToMemory(map);
+                    var memoryStream = new MemoryStream(result);
+                    return File(memoryStream, "application/octet-stream", "us_item.csv");
+                }
+
+                return this.BadRequest();
             }
-
-            return this.BadRequest();
+            catch (Exception ex)
+            {
+                Logger.Fatal("Error retireving items", ex);
+                throw;
+            }
         }
 
         [HttpGet("pricelevels")]
@@ -119,7 +127,7 @@ namespace QuickbooksIntegratorAPI.Controllers
         }
 
 
-        [HttpGet("itempricelevel")]
+        [HttpGet("itempricelevels")]
         public IActionResult ItemPriceLevel()
         {
             var inventoryItemResponse = this.InventoryItemGetAllWithPriceLevelCommand.Execute();

@@ -12,15 +12,25 @@ namespace Main
 {
     static class Program
     {
+
+        private static AutoResetEvent StopEvent = new AutoResetEvent(false);
+
         /// <summary>
         /// The main entry point for the application.
         /// </summary>
-        static void Main()
+        static void Main(params string[] args)
         {
             if (Environment.UserInteractive)
             {
-                ShowMenu();
-
+                if (args.Any(arg => arg.ToUpper() == "RUN"))
+                {
+                    new MainService().InteractiveStart();
+                    Console.ReadKey();
+                }
+                else
+                {
+                    ShowMenu();
+                }
             }
             else
             {
@@ -79,13 +89,30 @@ namespace Main
                     break;
             }
 
-            Console.WriteLine("Press Enter to Finish...");
+            Console.CancelKeyPress += new ConsoleCancelEventHandler(myHandler);
+
+
+            while (true)
+            {
+                Thread.Sleep(500);
+            }
+
+        }
+
+        private static void myHandler(object sender, ConsoleCancelEventArgs args)
+        {
+            Console.ForegroundColor = ConsoleColor.Green;
+            Console.WriteLine($"Application Stopping.");
+            Console.ResetColor();
+            Thread.Sleep(1500);
+            args.Cancel = true;
+        }
+
+        private static void WaitStop() {
             Console.ReadLine();
             Console.WriteLine("Application will stop");
-            Thread.Sleep(1500);
-
-            Console.ResetColor();
         }
+
 
         private static bool ServiceIsInstalled(string serviceName)
         {
@@ -110,12 +137,12 @@ namespace Main
                         {
                 new MainService()
                         };
-#if (DEBUG)
-            ((MainService)ServicesToRun[0]).InteractiveStart();
-#else
+//#if (DEBUG)
+//            ((MainService)ServicesToRun[0]).InteractiveStart();
+//#else
 
             ServiceBase.Run(ServicesToRun);
-#endif
+//#endif
         }
 
 

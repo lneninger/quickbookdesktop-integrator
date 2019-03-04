@@ -15,6 +15,9 @@ namespace ApplicationLogic.Repositories.DB
         /// <returns></returns>
         OperationResponse<IEnumerable<PriceLevelInventoryItem>> GetAll();
 
+
+        OperationResponse<IEnumerable<PriceLevelInventoryItem>> GetAllWithPriceLevel();
+
         /// <summary>
         /// 
         /// </summary>

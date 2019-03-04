@@ -49,6 +49,25 @@ namespace DatabaseRepositories.DB
             return result;
         }
 
+
+        public OperationResponse<IEnumerable<PriceLevelInventoryItem>> GetAllWithPriceLevel()
+        {
+            var result = new OperationResponse<IEnumerable<PriceLevelInventoryItem>>();
+            try
+            {
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
+                {
+                    result.Bag = dbLocator.Set<PriceLevelInventoryItem>().Include(t => t.PriceLevel).AsEnumerable();
+                }
+            }
+            catch (Exception ex)
+            {
+                result.AddException($"Error getting all PriceLevelInventoryItem", ex);
+            }
+
+            return result;
+        }
+
         public OperationResponse<PageResult<PriceLevelInventoryItemPageQueryCommandOutputDTO>> PageQuery(PageQuery<PriceLevelInventoryItemPageQueryCommandInputDTO> input)
         {
             var result = new OperationResponse<PageResult<PriceLevelInventoryItemPageQueryCommandOutputDTO>>();
@@ -166,6 +185,7 @@ namespace DatabaseRepositories.DB
 
         }
 
+
         //public OperationResponse LogicalDelete(PriceLevelInventoryItem entity)
         //{
         //    var result = new OperationResponse();
@@ -189,6 +209,6 @@ namespace DatabaseRepositories.DB
         //    return null;
         //}
 
-       
+
     }
 }

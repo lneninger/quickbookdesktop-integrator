@@ -11,13 +11,14 @@ using System.Threading.Tasks;
 
 namespace Main.Jobs
 {
+    [DisallowConcurrentExecution()]
     public class SendInventoryJob : IJob
     {
         protected LoggerCustom Logger = Framework.Logging.Log4Net.LoggerFactory.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
-       
+
         public Task Execute(IJobExecutionContext context)
         {
-            Logger.Info($"Executing Job");
+            Console.WriteLine($"Initializing Job Execution");
             IQuickbookTrackRepository quickbookTrackRepository = null;
             QuickbookExecution currentExecution = null;
             try
@@ -45,6 +46,8 @@ namespace Main.Jobs
                 //throw new NotImplementedException();
                 Logger.Info($"Saving Local Execution");
                 quickbookTrackRepository.SetExecutionStatus(currentExecution.Id, ExecutionStatusEnum.Success);
+
+                Console.WriteLine($"Finishing Job Execution");
             }
             catch (Exception ex)
             {

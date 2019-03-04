@@ -4,7 +4,7 @@ using System.Text;
 
 namespace DomainModel
 {
-    public class PriceLevelInventoryItem : AbstractBaseEntity, ILogicalDeleteEntity
+    public class PriceLevelInventoryItem
     {
         public int Id { get; set; }
         public int InventoryItemId { get; set; }
@@ -16,8 +16,5 @@ namespace DomainModel
         public short? Type { get; set; }
         public decimal? CustomPrice { get; set; }
         public decimal? CustomPricePercent { get; set; }
-
-        public DateTime? DeletedAt { get; set; }
-        public bool? IsDeleted { get; set; }
     }
 }

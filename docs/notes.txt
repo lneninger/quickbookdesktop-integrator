@@ -74,3 +74,8 @@ Integrator
  http://qbintegratorapitest.hipalanet.com/api/sendcsv/items
  http://qbintegratorapitest.hipalanet.com/api/sendcsv/pricelevel
  http://qbintegratorapitest.hipalanet.com/api/sendcsv/itempricelevel
+
+ http://localhost:5000/api/sendcsv/categories
+ http://localhost:5000/api/sendcsv/items
+ http://localhost:5000/api/sendcsv/pricelevel
+ http://localhost:5000/api/sendcsv/itempricelevel

@@ -1,4 +1,5 @@
-﻿using Framework.Autofac;
+﻿using ApplicationLogic.AppConfiguration;
+using Framework.Autofac;
 using Framework.Logging.Log4Net;
 using Main.Helpers;
 using Main.Jobs;
@@ -22,6 +23,8 @@ namespace Main
     {
         protected LoggerCustom Logger = Framework.Logging.Log4Net.LoggerFactory.Create(System.Reflection.MethodBase.GetCurrentMethod().DeclaringType);
 
+        public static IScheduler Scheduler { get; private set; }
+
         public MainService()
         {
             InitializeComponent();
@@ -32,20 +35,28 @@ namespace Main
             IoCConfig.Init();
             this.CreateDatabaseFile();
 
-            var scheduler = AsyncHelpers.RunSync<IScheduler>(this.ConfigureJobs);
+            MainService.Scheduler = AsyncHelpers.RunSync<IScheduler>(this.ConfigureJobs);
             var job = IoCGlobal.Resolve<SendInventoryJob>();
-            Console.WriteLine($"Initializing Job Execution");
-            job.Execute(null);
-            Console.WriteLine($"Finishing Job Execution");
+            MainService.Scheduler.Start();
+            
 
         }
 
         protected override void OnStart(string[] args)
         {
+            var userIdentity = System.Security.Principal.WindowsIdentity.GetCurrent();
+            var userPrincipal = new System.Security.Principal.WindowsPrincipal(userIdentity);
+            //var userPrincipal = Thread.CurrentPrincipal as System.Security.Principal.WindowsPrincipal;// System.Security.Principal.WindowsIdentity.GetCurrent();
+            if (userPrincipal.IsInRole(System.Security.Principal.WindowsBuiltInRole.Administrator))
+            {
+                Logger.Fatal("User is not running the app as Administrator");
+                //throw new SystemException("User is not running the app as Administrator");
+            }
+
             IoCConfig.Init();
             this.CreateDatabaseFile();
-            var scheduler = AsyncHelpers.RunSync<IScheduler>(this.ConfigureQuartz);
-            scheduler.Start();
+            MainService.Scheduler = AsyncHelpers.RunSync<IScheduler>(this.ConfigureQuartz);
+            MainService.Scheduler.Start();
 
         }
 
@@ -63,19 +74,34 @@ namespace Main
 
         private async Task<IScheduler> ConfigureJobs(IScheduler scheduler)
         {
-            var job = JobBuilder.Create<SendInventoryJob>().WithIdentity("Heartbeat", "Maintenance").Build();
-            var trigger = TriggerBuilder.Create()
-                .WithIdentity("Heartbeat", "Maintenance")
-                .StartNow()
-                .WithSchedule(SimpleScheduleBuilder.RepeatSecondlyForTotalCount(1)).Build();
-            //.WithSchedule(SimpleScheduleBuilder.RepeatSecondlyForever(2)).Build();
-            var cts = new CancellationTokenSource();
-
-            if (scheduler == null)
+            try
             {
-                scheduler = IoCGlobal.Resolve<IScheduler>();
+                var appConfig = IoCGlobal.Resolve<AppConfig>();
+
+                var job = JobBuilder.Create<SendInventoryJob>().WithIdentity("SendInventory", "QUICKBOOKS").Build();
+                var trigger = TriggerBuilder.Create()
+                    .WithIdentity("SendInventory", "QUICKBOOKS")
+                     .WithCronSchedule(appConfig.QuartzScheduler)
+                    .StartNow()
+
+                //.WithSchedule(CronExpression. SimpleScheduleBuilder.RepeatSecondlyForTotalCount(1)).Build();
+                //.WithSchedule(SimpleScheduleBuilder.RepeatSecondlyForever(2))
+                .Build();
+
+                var cts = new CancellationTokenSource();
+
+                if (scheduler == null)
+                {
+                    scheduler = IoCGlobal.Resolve<IScheduler>();
+                }
+
+                await scheduler.ScheduleJob(job, trigger, cts.Token).ConfigureAwait(false);
             }
-            await scheduler.ScheduleJob(job, trigger, cts.Token).ConfigureAwait(true);
+            catch (Exception ex)
+            {
+                Logger.Fatal("Fatal error initializing integration execution", ex);
+            }
+
             return scheduler;
         }
 
