@@ -13,6 +13,7 @@ namespace ApplicationLogic.AppConfiguration
         private const string QuickbooksApplicationNameKey = "QBAppName";
         private const string APIBaseURLKey = "APIBaseURL";
         private const string QuartzSchedulerKey = "QuartzScheduler";
+        private const string QBFileNameKey = "QBFileName";
 
         public AppConfig()
         {
@@ -31,15 +32,22 @@ namespace ApplicationLogic.AppConfiguration
                 throw new ConfigurationErrorsException($"Application configuration key doesn't exists: {QuartzSchedulerKey}");
             }
 
+            if (!ConfigurationManager.AppSettings.AllKeys.Contains(QBFileNameKey))
+            {
+                throw new ConfigurationErrorsException($"Application configuration key doesn't exists: {QBFileNameKey}");
+            }
+
             this.QuickbooksApplicationID = ConfigurationManager.AppSettings[QuickbooksApplicationIdKey];
             this.QuickbooksApplicationName = ConfigurationManager.AppSettings[QuickbooksApplicationNameKey];
             this.APIBaseURL = ConfigurationManager.AppSettings[APIBaseURLKey];
             this.QuartzScheduler = ConfigurationManager.AppSettings[QuartzSchedulerKey];
+            this.QBFileName = ConfigurationManager.AppSettings[QBFileNameKey];
         }
 
         public string QuickbooksApplicationID { get; }
         public string QuickbooksApplicationName { get; }
         public string APIBaseURL { get; }
         public string QuartzScheduler { get; }
+        public string QBFileName { get; }
     }
 }

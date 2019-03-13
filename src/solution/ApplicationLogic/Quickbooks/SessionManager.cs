@@ -88,6 +88,7 @@ namespace ApplicationLogic.Quickbooks
                 _appId = appId;
                 _appName = appName;
                 _connType = connType;
+                this._qbFile = this.AppConfig.QBFileName;
 
                 // determine the most recent version of the SDK supported by the backend QuickBooks
                 // instance.
@@ -291,8 +292,9 @@ namespace ApplicationLogic.Quickbooks
             try
             {
                 if (!_connOpen)
+                {
                     openConnection(false, this.AppConfig.QuickbooksApplicationID, this.AppConfig.QuickbooksApplicationName, _connType);
-                ;
+                }
 
                 // If a session is already open, do not create another one
                 if (!_sessionOpen)
@@ -424,7 +426,7 @@ namespace ApplicationLogic.Quickbooks
             // very first version of the SDK supported the HostQuery request.  Note that the
             // return of beginSession does not need to be checked because an Exception will be
             // thrown if the object cannot be obtained.
-            IMsgSetRequest msgset = beginSession(false, "", ENOpenMode.omDontCare).
+            IMsgSetRequest msgset = beginSession(false, this._qbFile, ENOpenMode.omDontCare).
                    CreateMsgSetRequest(QBEdition.getEdition(Defaults.EDITION), 1, 0);
 
             if (msgset == null)

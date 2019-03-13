@@ -72,8 +72,8 @@ Integrator
 . To test the dcata transfer in the public API, access these URLs:
  http://qbintegratorapitest.hipalanet.com/api/sendcsv/categories
  http://qbintegratorapitest.hipalanet.com/api/sendcsv/items
- http://qbintegratorapitest.hipalanet.com/api/sendcsv/pricelevel
- http://qbintegratorapitest.hipalanet.com/api/sendcsv/itempricelevel
+ http://qbintegratorapitest.hipalanet.com/api/sendcsv/pricelevels
+ http://qbintegratorapitest.hipalanet.com/api/sendcsv/itempricelevels
 
  http://localhost:5000/api/sendcsv/categories
  http://localhost:5000/api/sendcsv/items
