@@ -306,6 +306,11 @@ namespace ApplicationLogic.Quickbooks
             }
             catch (Exception e)
             {
+                //if (_connOpen)
+                //{
+                //    closeConnection(false);
+                //}
+
                 _sessionOpen = false;
 
                 if (logError)

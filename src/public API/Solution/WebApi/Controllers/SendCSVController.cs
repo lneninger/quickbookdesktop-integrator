@@ -58,7 +58,7 @@ namespace QuickbooksIntegratorAPI.Controllers
                 var list = inventoryAccountResponse.Bag;
                 var map = list.Select(listItem => new Models.SendCSV.CategoryModel
                 {
-                    BranchID = 1002,
+                    BranchID = 1,
                     InCategoryID = listItem.ExternalId,
                     Description = listItem.Name
                 }).ToList();
@@ -82,7 +82,7 @@ namespace QuickbooksIntegratorAPI.Controllers
                     var list = inventoryItemResponse.Bag;
                     var map = list.Select(listItem => new Models.SendCSV.InventoryItemModel
                     {
-                        BranchID = 1002,
+                        BranchID = 1,
                         InItemId = listItem.Name,
                         ItemId = listItem.SaleDescription,
                         ExCategoryId = listItem.InventoryAccountExternalId,
@@ -113,7 +113,7 @@ namespace QuickbooksIntegratorAPI.Controllers
                 var list = priceLevelResponse.Bag;
                 var map = list.Select(listItem => new Models.SendCSV.PriceLevelModel
                 {
-                    branchID = 1002,
+                    branchID = 1,
                     InPriceLevelId = listItem.ExternalId,
                     PriceLevel = listItem.Name,
                 }).ToList();
@@ -136,7 +136,7 @@ namespace QuickbooksIntegratorAPI.Controllers
                 var list = inventoryItemResponse.Bag;
                 var map = list.Select(listItem => new Models.SendCSV.ItemPriceLevelModel
                 {
-                    branchID = 1002,
+                    branchID = 1,
                     ExItemId = listItem.Name,
                     ExPriceLeverlId = listItem.PriceLevelExternalId,
                     Price = listItem.PriceLevelCustomPrice ?? listItem.Price ?? 0,
