@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration.Install;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.ServiceProcess;
 using System.Text;
 using System.Threading;
@@ -20,6 +21,8 @@ namespace Main
         /// </summary>
         static void Main(params string[] args)
         {
+            SetConsoleCtrlHandler(new HandlerRoutine(ConsoleEventCallback), true);
+
             if (Environment.UserInteractive)
             {
                 if (args.Any(arg => arg.ToUpper() == "RUN"))
@@ -146,5 +149,69 @@ namespace Main
         }
 
 
+
+
+
+        #region unmanaged
+
+        // Declare the SetConsoleCtrlHandler function
+
+        // as external and receiving a delegate.
+
+
+
+        static ConsoleEventDelegate handler;
+
+        [DllImport("Kernel32")]
+        public static extern bool SetConsoleCtrlHandler(ConsoleEventDelegate Handler, bool Add);
+
+
+
+        // A delegate type to be used as the handler routine
+
+        // for SetConsoleCtrlHandler.
+
+        public delegate bool HandlerRoutine(CtrlTypes CtrlType);
+
+
+        private static void OnProcessExit()
+        {
+            throw new NotImplementedException();
+        }
+
+        static bool ConsoleEventCallback(int eventType)
+        {
+            if (eventType == 2)
+            {
+                OnProcessExit();
+            }
+            return false;
+        }
+
+      
+
+        // An enumerated type for the control messages
+
+        // sent to the handler routine.
+
+        public enum CtrlTypes
+
+        {
+
+            CTRL_C_EVENT = 0,
+
+            CTRL_BREAK_EVENT,
+
+            CTRL_CLOSE_EVENT,
+
+            CTRL_LOGOFF_EVENT = 5,
+
+            CTRL_SHUTDOWN_EVENT
+
+        }
+
+
+
+        #endregion
     }
 }
