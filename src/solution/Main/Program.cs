@@ -38,7 +38,7 @@ namespace Main
                 if (args.Any(arg => arg.ToUpper() == "RUN"))
                 {
                     new MainService().InteractiveStart();
-                    Console.ReadKey();
+                    // Console.ReadKey();
                 }
                 else
                 {
