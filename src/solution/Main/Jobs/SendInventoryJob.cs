@@ -26,28 +26,32 @@ namespace Main.Jobs
                 quickbookTrackRepository = IoCGlobal.Resolve<IQuickbookTrackRepository>();
                 currentExecution = quickbookTrackRepository.AddExecution();
 
-                // Test Quickbook SessionManager
-                Logger.Info($"Initializing QB Manager");
-                var qbManager = IoCGlobal.Resolve<SessionManager>();
+                //// Test Quickbook SessionManager
+                //Logger.Info($"Initializing QB Manager");
+                //using (var qbManager = IoCGlobal.Resolve<SessionManager>())
+                //{
 
-                // Test Inventory Item Request
-                var syncInventoryItemsCommand = IoCGlobal.Resolve<ISyncInventoryItemsCommand>();
-                Logger.Info($"Creating Synchronization Manager");
-                var result = syncInventoryItemsCommand.Execute();
-                if (result.IsSucceed)
-                {
-                    Logger.Info("Sync Inventory Items with success!");
-                }
-                else
-                {
-                    Logger.Error("Finishing inventory items synchronization unsuccessful!");
-                }
+                    // Test Inventory Item Request
+                    using (var syncInventoryItemsCommand = IoCGlobal.Resolve<ISyncInventoryItemsCommand>())
+                    {
+                        Logger.Info($"Creating Synchronization Manager");
+                        var result = syncInventoryItemsCommand.Execute();
+                        if (result.IsSucceed)
+                        {
+                            Logger.Info("Sync Inventory Items with success!");
+                        }
+                        else
+                        {
+                            Logger.Error("Finishing inventory items synchronization unsuccessful!");
+                        }
 
-                //throw new NotImplementedException();
-                Logger.Info($"Saving Local Execution");
-                quickbookTrackRepository.SetExecutionStatus(currentExecution.Id, ExecutionStatusEnum.Success);
+                        //throw new NotImplementedException();
+                        Logger.Info($"Saving Local Execution");
+                        quickbookTrackRepository.SetExecutionStatus(currentExecution.Id, ExecutionStatusEnum.Success);
 
-                Console.WriteLine($"Finishing Job Execution");
+                        Console.WriteLine($"Finishing Job Execution");
+                    }
+                //}
             }
             catch (Exception ex)
             {

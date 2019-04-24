@@ -1,4 +1,6 @@
-﻿using System;
+﻿using ApplicationLogic.Quickbooks;
+using Framework.Autofac;
+using System;
 using System.Collections.Generic;
 using System.Configuration.Install;
 using System.Linq;
@@ -8,12 +10,18 @@ using System.ServiceProcess;
 using System.Text;
 using System.Threading;
 using System.Threading.Tasks;
+using static Main.ApplicationEvents;
 
 namespace Main
 {
     static class Program
     {
+        #region Trap application termination
+        [DllImport("Kernel32")]
+        public static extern bool SetConsoleCtrlHandler(ApplicationEvents.EventHandler handler, bool add);
 
+        static bool exitSystem = false;
+        static ApplicationEvents.EventHandler _applicationEventHandler;
         private static AutoResetEvent StopEvent = new AutoResetEvent(false);
 
         /// <summary>
@@ -21,7 +29,9 @@ namespace Main
         /// </summary>
         static void Main(params string[] args)
         {
-            SetConsoleCtrlHandler(new HandlerRoutine(ConsoleEventCallback), true);
+            // Some biolerplate to react to close window event, CTRL-C, kill, etc
+            _applicationEventHandler += new ApplicationEvents.EventHandler(ApplicationEventHandler);
+            SetConsoleCtrlHandler(_applicationEventHandler, true);
 
             if (Environment.UserInteractive)
             {
@@ -149,69 +159,56 @@ namespace Main
         }
 
 
-
-
-
-        #region unmanaged
-
-        // Declare the SetConsoleCtrlHandler function
-
-        // as external and receiving a delegate.
-
-
-
-        static ConsoleEventDelegate handler;
-
-        [DllImport("Kernel32")]
-        public static extern bool SetConsoleCtrlHandler(ConsoleEventDelegate Handler, bool Add);
-
-
-
-        // A delegate type to be used as the handler routine
-
-        // for SetConsoleCtrlHandler.
-
-        public delegate bool HandlerRoutine(CtrlTypes CtrlType);
-
-
-        private static void OnProcessExit()
+        private static bool ApplicationEventHandler(CtrlType sig)
         {
-            throw new NotImplementedException();
-        }
+            Console.WriteLine("Exiting system due to external CTRL-C, or process kill, or shutdown");
 
-        static bool ConsoleEventCallback(int eventType)
-        {
-            if (eventType == 2)
+            //do your cleanup here
+            switch (sig)
             {
-                OnProcessExit();
+                case CtrlType.CTRL_SHUTDOWN_EVENT:
+                    using (var qbManager = IoCGlobal.Resolve<SessionManager>())
+                    {
+                        qbManager.closeConnection();
+                    }
+                    break;
             }
-            return false;
+            Thread.Sleep(5000); //simulate some cleanup delay
+
+            Console.WriteLine("Cleanup complete");
+
+            //allow main to run off
+            exitSystem = true;
+
+            //shutdown right away so there are no lingering threads
+            Environment.Exit(-1);
+
+            return true;
         }
 
-      
+    }
 
-        // An enumerated type for the control messages
 
-        // sent to the handler routine.
 
-        public enum CtrlTypes
 
+    public class ApplicationEvents {
+
+
+        
+        public delegate bool EventHandler(CtrlType sig);
+
+        public enum CtrlType
         {
-
             CTRL_C_EVENT = 0,
-
-            CTRL_BREAK_EVENT,
-
-            CTRL_CLOSE_EVENT,
-
+            CTRL_BREAK_EVENT = 1,
+            CTRL_CLOSE_EVENT = 2,
             CTRL_LOGOFF_EVENT = 5,
-
-            CTRL_SHUTDOWN_EVENT
-
+            CTRL_SHUTDOWN_EVENT = 6
         }
 
-
-
+        
         #endregion
+
     }
 }
+

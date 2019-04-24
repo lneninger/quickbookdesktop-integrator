@@ -35,10 +35,18 @@ namespace Main
             IoCConfig.Init();
             this.CreateDatabaseFile();
 
-            MainService.Scheduler = AsyncHelpers.RunSync<IScheduler>(this.ConfigureJobs);
-            var job = IoCGlobal.Resolve<SendInventoryJob>();
-            MainService.Scheduler.Start();
-            
+            if (useQuartz)
+            {
+                MainService.Scheduler = AsyncHelpers.RunSync<IScheduler>(this.ConfigureJobs);
+                MainService.Scheduler.Start();
+            }
+            else
+            {
+                var job = IoCGlobal.Resolve<SendInventoryJob>();
+                job.Execute(null);
+            }
+
+
 
         }
 
