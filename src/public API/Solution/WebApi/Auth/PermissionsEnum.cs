@@ -11,6 +11,22 @@ namespace QuickbooksIntegratorAPI.Auth
         /// <summary>
         /// 
         /// </summary>
+        public const string IntegrationProcess_Read = nameof(Enum.IntegrationProcess_Read);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string IntegrationProcess_Modify = nameof(Enum.IntegrationProcess_Modify);
+
+        /// <summary>
+        /// 
+        /// </summary>
+        public const string IntegrationProcess_Manage = nameof(Enum.IntegrationProcess_Manage);
+
+        /// Inventory Item
+        /// <summary>
+        /// 
+        /// </summary>
         public const string InventoryItem_Read = nameof(Enum.InventoryItem_Read);
 
         /// <summary>
@@ -77,6 +93,22 @@ namespace QuickbooksIntegratorAPI.Auth
         /// </summary>
         public enum Enum
         {
+            // IntegrationProcess
+            /// <summary>
+            /// 
+            /// </summary>
+            IntegrationProcess_Read,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            IntegrationProcess_Modify,
+
+            /// <summary>
+            /// 
+            /// </summary>
+            IntegrationProcess_Manage,
+
             // InventoryItem
             /// <summary>
             /// 
