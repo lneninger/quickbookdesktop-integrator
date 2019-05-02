@@ -7,6 +7,9 @@ namespace DomainModel
     public class PriceLevelInventoryItem : AbstractBaseEntity, ILogicalDeleteEntity
     {
         public int Id { get; set; }
+
+        public int? LastIntegrationProcessId { get; set; }
+
         public int InventoryItemId { get; set; }
         public virtual InventoryItem InventoryItem { get; set; }
 
@@ -19,7 +22,5 @@ namespace DomainModel
 
         public DateTime? DeletedAt { get; set; }
         public bool? IsDeleted { get; set; }
-        public int LastIntegrationProcess { get; set; }
-        public int LastIntegrationProcessId { get; set; }
     }
 }

@@ -12,6 +12,7 @@ using ApplicationLogic.Commands.QuickbooksIntegrator.GetAccountByIds.Models;
 using Framework.Logging.Log4Net;
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetPriceLevels.Models;
 using ApplicationLogic.Commands.QuickbooksIntegrator.GetPriceLevels;
+using ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems.Models;
 
 namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
 {
@@ -40,8 +41,12 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
             IEnumerable<GetPriceLevelsOutputPriceLevelItemDTO> priceLevels = null;
             IEnumerable<GetAccountByIdsOutputDTO> accountsIncome = null;
             IEnumerable<GetAccountByIdsOutputDTO> accountsInventory = null;
+
+            IntegrationProcessDTO integrationProcess = null;
             try
             {
+                integrationProcess = this.Repository.RequestIntegrationProcess()?.Bag;
+
                 items = this.GetInventoryItems.Execute();
 
                 priceLevels = this.GetPriceLevels.Execute();
@@ -66,6 +71,7 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.SyncInventoryItems
             {
                 var syncItems = new SyncInventoryItemsInputIventoryItemDTO
                 {
+                    IntegrationProcessId = integrationProcess.Id,
                     InventoryItems = items,
                     PriceLevels = priceLevels,
                     AccountIncomes = accountsIncome,

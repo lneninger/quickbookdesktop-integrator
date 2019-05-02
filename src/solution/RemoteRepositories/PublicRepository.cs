@@ -32,6 +32,8 @@ namespace RemoteRepositories
             var result = new OperationResponse<IntegrationProcessDTO>();
 
             var request = new RestRequest("syncfromdesktop/requestintegrationprocess", Method.POST);
+            request.AddJsonBody(new { });
+
 
             try
             {

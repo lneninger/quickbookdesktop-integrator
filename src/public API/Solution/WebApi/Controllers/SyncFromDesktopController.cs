@@ -29,6 +29,7 @@ namespace QuickbooksIntegratorAPI.Controllers
         {
             this.SignalRHubContext = hubContext;
             this.SyncFromDesktopCommand = syncFromDesktopCommand;
+            this.IntegrationProcessInsertCommand = integrationProcessInsertCommand;
         }
 
         
@@ -55,11 +56,10 @@ namespace QuickbooksIntegratorAPI.Controllers
         /// </summary>
         /// <param name="model">The model.</param>
         [HttpPost("requestintegrationprocess"), ProducesResponseType(200, Type = typeof(IntegrationProcessInsertCommandOutputDTO))]
-        [Authorization.Authorize(Policy = PermissionsEnum.IntegrationProcess_Modify, Roles = Constants.Strings.JwtClaims.Administrator)]
         public IActionResult IntegrationProcessPost([FromBody]IntegrationProcessInsertCommandInputDTO model)
         {
             var appResult = this.IntegrationProcessInsertCommand.Execute(model);
-            return appResult.IsSucceed ? (IActionResult)this.Ok(appResult) : (IActionResult)this.BadRequest(appResult);
+            return appResult.IsSucceed ? (IActionResult)this.Ok(appResult.Bag) : (IActionResult)this.BadRequest(appResult.Bag);
         }
 
         /// <summary>

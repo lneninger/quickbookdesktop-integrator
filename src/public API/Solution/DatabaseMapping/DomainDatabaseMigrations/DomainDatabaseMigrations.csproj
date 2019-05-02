@@ -19,6 +19,9 @@
     <Compile Remove="Migrations\20190113121655_AddTable ProductAllowedColorType.cs" />
     <Compile Remove="Migrations\20190113122302_AddTable ProductAllowedColorType.cs" />
     <Compile Remove="Migrations\20190113122616_AddTable ProductAllowedColorType.cs" />
+    <Compile Remove="Migrations\20190502021230_New last integration process id.cs" />
+    <Compile Remove="Migrations\20190502021531_New last integration process id.cs" />
+    <Compile Remove="Migrations\20190502021557_New last integration process id.cs" />
   </ItemGroup>
 
   <ItemGroup>

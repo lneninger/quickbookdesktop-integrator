@@ -6,6 +6,5 @@ namespace DomainModel
 {
     public class IncomeAccount : Account
     {
-        public int LastIntegrationProcessId { get; set; }
     }
 }
