@@ -24,26 +24,25 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
         public OperationResponse Execute(SyncFromDesktopCommandInputDTO input)
         {
             var result = new OperationResponse<SyncFromDesktopCommandOutputDTO>();
-            bool add = false;
             OperationResponse entityResponse = new OperationResponse();
 
-            var syncIncomeAccountResponse = SyncIncomeAccounts(input.AccountIncomes);
+            var syncIncomeAccountResponse = SyncIncomeAccounts(input.IntegrationProcessId, input.AccountIncomes);
             result.AddResponse(syncIncomeAccountResponse);
 
-            var syncInventoryAccountResponse = SyncInventoryAccounts(input.AccountInventories);
+            var syncInventoryAccountResponse = SyncInventoryAccounts(input.IntegrationProcessId, input.AccountInventories);
             result.AddResponse(syncInventoryAccountResponse);
 
-            var syncInventoryItemsResponse = SyncInventoryItems(input.InventoryItems);
+            var syncInventoryItemsResponse = SyncInventoryItems(input.IntegrationProcessId, input.InventoryItems);
             result.AddResponse(syncInventoryItemsResponse);
 
 
-            var syncPriceLevelsResponse = SyncPriceLevels(input.PriceLevels);
+            var syncPriceLevelsResponse = SyncPriceLevels(input.IntegrationProcessId, input.PriceLevels);
             result.AddResponse(syncInventoryItemsResponse);
 
             return result;
         }
 
-        private OperationResponse SyncInventoryItems(IEnumerable<SyncFromDesktopCommandInputInventoryItemDTO> input)
+        private OperationResponse SyncInventoryItems(int integrationProcessId, IEnumerable<SyncFromDesktopCommandInputInventoryItemDTO> input)
         {
             var result = new OperationResponse();
 
@@ -59,6 +58,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                         entity = new DomainModel.InventoryItem
                         {
                             ExternalId = item.Id,
+                            LastIntegrationProcessId = integrationProcessId,
                             Name = item.Name,
                             FullName = item.FullName,
                             SalesPrice = (decimal?)item.SalePrice,
@@ -82,6 +82,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                     }
                     else
                     {
+                        entity.LastIntegrationProcessId = integrationProcessId;
                         entity.Name = item.Name;
                         entity.FullName = item.FullName;
                         entity.SalesPrice = (decimal?)item.SalePrice;
@@ -109,7 +110,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
             return result;
         }
 
-        private OperationResponse SyncInventoryAccounts(IEnumerable<SyncFromDesktopCommandInputAccountInventoryDTO> input)
+        private OperationResponse SyncInventoryAccounts(int integrationProcessId, IEnumerable<SyncFromDesktopCommandInputAccountInventoryDTO> input)
         {
             var result = new OperationResponse();
 
@@ -125,6 +126,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                     {
                         entity = new DomainModel.InventoryAccount
                         {
+                            LastIntegrationProcessId = integrationProcessId,
                             ExternalId = item.Id,
                             Name = item.Name,
                             FullName = item.FullName,
@@ -144,6 +146,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                     }
                     else
                     {
+                        entity.LastIntegrationProcessId = integrationProcessId;
                         entity.Name = item.Name;
                         entity.FullName = item.FullName;
                         entity.IsActive = item.IsActive;
@@ -167,7 +170,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
         }
 
 
-        private OperationResponse SyncIncomeAccounts(IEnumerable<SyncFromDesktopCommandInputAccountIncomeDTO> input)
+        private OperationResponse SyncIncomeAccounts(int integrationProcessId, IEnumerable<SyncFromDesktopCommandInputAccountIncomeDTO> input)
         {
             var result = new OperationResponse();
 
@@ -183,6 +186,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                     {
                         entity = new DomainModel.IncomeAccount
                         {
+                            LastIntegrationProcessId = integrationProcessId,
                             ExternalId = item.Id,
                             Name = item.Name,
                             FullName = item.FullName,
@@ -202,6 +206,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                     }
                     else
                     {
+                        entity.LastIntegrationProcessId = integrationProcessId;
                         entity.Name = item.Name;
                         entity.FullName = item.FullName;
                         entity.IsActive = item.IsActive;
@@ -224,7 +229,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
             return result;
         }
 
-        private OperationResponse SyncPriceLevels(IEnumerable<SyncFromDesktopCommandInputPriceLevelDTO> input)
+        private OperationResponse SyncPriceLevels(int integrationProcessId, IEnumerable<SyncFromDesktopCommandInputPriceLevelDTO> input)
         {
             var result = new OperationResponse();
 
@@ -244,6 +249,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                             IsActive = item.IsActive,
                             PriceLevelPercentage = item.PriceLevelPercentage,
                             PriceLevelType = item.PriceLevelType,
+                            LastIntegrationProcessId = integrationProcessId
                         };
 
                         entity.InventoryItems = item.InventoryItems.Select(iItem => new DomainModel.PriceLevelInventoryItem
@@ -253,6 +259,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                             CustomPrice = iItem.CustomPrice,
                             CustomPricePercent = iItem.CustomPricePercent,
                             Type = iItem.Type,
+                            LastIntegrationProcessId = integrationProcessId
                         }).ToList();
                         //SetIncomeAccount(entityResponse, item, entity);
 
@@ -268,6 +275,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                     }
                     else
                     {
+                        entity.LastIntegrationProcessId = integrationProcessId;
                         entity.Name = item.Name;
                         entity.Name = item.Name;
                         entity.IsActive = item.IsActive;
@@ -289,6 +297,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                                         CustomPrice = inventoryItem.CustomPrice,
                                         CustomPricePercent = inventoryItem.CustomPricePercent,
                                         Type = inventoryItem.Type,
+                                        LastIntegrationProcessId = integrationProcessId
                                     });
                                 }
                                 else
@@ -296,6 +305,7 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                                     existingInventoryItem.CustomPrice = inventoryItem.CustomPrice;
                                     existingInventoryItem.CustomPricePercent = inventoryItem.CustomPricePercent;
                                     existingInventoryItem.Type = inventoryItem.Type;
+                                    existingInventoryItem.LastIntegrationProcessId = integrationProcessId;
                                 }
                             }
                         });

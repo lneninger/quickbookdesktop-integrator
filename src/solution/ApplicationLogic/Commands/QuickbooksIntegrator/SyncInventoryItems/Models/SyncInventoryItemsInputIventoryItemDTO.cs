@@ -10,6 +10,7 @@ namespace ApplicationLogic.Commands.QuickbooksIntegrator.GetInventoryItems.Model
 {
     public class SyncInventoryItemsInputIventoryItemDTO
     {
+        public int IntegrationProcessId { get; set; }
         public IEnumerable<GetInventoryItemsOutputIventoryItemDTO> InventoryItems { get; set; }
         public IEnumerable<GetPriceLevelsOutputPriceLevelItemDTO> PriceLevels { get; set; }
         public IEnumerable<GetAccountByIdsOutputDTO> AccountIncomes { get; set; }

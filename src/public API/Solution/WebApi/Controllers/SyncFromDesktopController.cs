@@ -1,4 +1,6 @@
-﻿using ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand;
+﻿using ApplicationLogic.Business.Commands.IntegrationProcess.InsertCommand;
+using ApplicationLogic.Business.Commands.IntegrationProcess.InsertCommand.Models;
+using ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand;
 using ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand.Models;
 using ApplicationLogic.SignalR;
 using Framework.EF.DbContextImpl.Persistance.Paging.Models;
@@ -19,17 +21,11 @@ namespace QuickbooksIntegratorAPI.Controllers
     [Route("api/syncfromdesktop")]
     public class SyncFromDesktopController : BaseController
     {
-        /// <summary>
-        /// Initializes a new instance of the <see cref="InventoryItemController"/> class.
-        /// </summary>
+        /// <summary>Initializes a new instance of the <see cref="InventoryItemController"/> class.</summary>
         /// <param name="hubContext"></param>
-        /// <param name="pageQueryCommand">The page query command</param>
-        /// <param name="getAllCommand">The get all command.</param>
-        /// <param name="getByIdCommand">The get by identifier command.</param>
-        /// <param name="insertCommand">The insert command.</param>
-        /// <param name="updateCommand">The update command.</param>
-        /// <param name="deleteCommand">The delete command.</param>
-        public SyncFromDesktopController(IHubContext<GlobalHub, IGlobalHub> hubContext, ISyncFromDesktopCommand syncFromDesktopCommand): base(/*hubContext*/)
+        /// <param name="syncFromDesktopCommand"></param>
+        /// <param name="integrationProcessInsertCommand"></param>
+        public SyncFromDesktopController(IHubContext<GlobalHub, IGlobalHub> hubContext, ISyncFromDesktopCommand syncFromDesktopCommand, IIntegrationProcessInsertCommand integrationProcessInsertCommand) : base(/*hubContext*/)
         {
             this.SignalRHubContext = hubContext;
             this.SyncFromDesktopCommand = syncFromDesktopCommand;
@@ -49,6 +45,22 @@ namespace QuickbooksIntegratorAPI.Controllers
         /// The insert command.
         /// </value>
         public ISyncFromDesktopCommand SyncFromDesktopCommand { get; }
+
+        /// <summary>Gets the insert command.</summary>
+        /// <value>The insert command.</value>
+        public IIntegrationProcessInsertCommand IntegrationProcessInsertCommand { get; }
+
+        /// <summary>
+        /// Puts the specified model.
+        /// </summary>
+        /// <param name="model">The model.</param>
+        [HttpPost("requestintegrationprocess"), ProducesResponseType(200, Type = typeof(IntegrationProcessInsertCommandOutputDTO))]
+        [Authorization.Authorize(Policy = PermissionsEnum.IntegrationProcess_Modify, Roles = Constants.Strings.JwtClaims.Administrator)]
+        public IActionResult IntegrationProcessPost([FromBody]IntegrationProcessInsertCommandInputDTO model)
+        {
+            var appResult = this.IntegrationProcessInsertCommand.Execute(model);
+            return appResult.IsSucceed ? (IActionResult)this.Ok(appResult) : (IActionResult)this.BadRequest(appResult);
+        }
 
         /// <summary>
         /// Posts the specified model.

@@ -10,6 +10,8 @@ namespace DomainModel
 
         public string ExternalId { get; set; }
 
+        public int LastIntegrationProcessId { get; set; }
+
         public string Name { get; set; }
 
         public string PriceLevelType { get; set; }

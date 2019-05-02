@@ -6,6 +6,5 @@ namespace DomainModel
 {
     public class InventoryAccount : Account
     {
-        
     }
 }

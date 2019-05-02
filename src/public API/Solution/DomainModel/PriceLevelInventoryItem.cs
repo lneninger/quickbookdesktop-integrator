@@ -19,5 +19,7 @@ namespace DomainModel
 
         public DateTime? DeletedAt { get; set; }
         public bool? IsDeleted { get; set; }
+        public int LastIntegrationProcess { get; set; }
+        public int LastIntegrationProcessId { get; set; }
     }
 }
