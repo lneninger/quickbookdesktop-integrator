@@ -1,27 +1,19 @@
-﻿using DomainDatabaseMapping;
+﻿using ApplicationLogic.Business.Commands.PriceLevel.PageQueryCommand.Models;
+using ApplicationLogic.Repositories.DB;
+using DomainDatabaseMapping;
 using DomainModel;
 using EntityFrameworkCore.DbContextScope;
 using FizzWare.NBuilder;
-using ApplicationLogic.Repositories.DB;
-using ApplicationLogic.Business.Commands.PriceLevel.DeleteCommand.Models;
-using ApplicationLogic.Business.Commands.PriceLevel.GetAllCommand.Models;
-using ApplicationLogic.Business.Commands.PriceLevel.GetByIdCommand.Models;
-using ApplicationLogic.Business.Commands.PriceLevel.InsertCommand.Models;
-using ApplicationLogic.Business.Commands.PriceLevel.UpdateCommand.Models;
+using Framework.Core.Messages;
+using Framework.EF.DbContextImpl.Persistance;
+using Framework.EF.DbContextImpl.Persistance.Models.Sorting;
+using Framework.EF.DbContextImpl.Persistance.Paging.Models;
+using LMB.PredicateBuilderExtension;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Text;
-using ApplicationLogic.Business.Commands.PriceLevel.PageQueryCommand.Models;
-using Framework.EF.DbContextImpl.Persistance.Paging.Models;
-using LMB.PredicateBuilderExtension;
-using Framework.EF.DbContextImpl.Persistance;
-using Framework.EF.DbContextImpl.Persistance.Models.Sorting;
 using System.Linq.Expressions;
-using Framework.Core.Messages;
-using ApplicationLogic.Business.Commons.DTOs;
-using Microsoft.EntityFrameworkCore.ChangeTracking;
-using Microsoft.EntityFrameworkCore;
 
 namespace DatabaseRepositories.DB
 {
@@ -65,27 +57,25 @@ namespace DatabaseRepositories.DB
                     }
                 }
 
-                using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+                var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+                var query = dbLocator.Set<PriceLevel>().AsQueryable();
+
+                var advancedSorting = new List<SortItem<PriceLevel>>();
+                Expression<Func<PriceLevel, object>> expression;
+                //if (input.Sort.ContainsKey("productType"))
+                //{
+                //    expression = o => o.ProductType.Name;
+                //    advancedSorting.Add(new SortItem<PriceLevel> { PropertyName = "productType", SortExpression = expression, SortOrder = "desc" });
+                //}
+
+                var sorting = new SortingDTO<PriceLevel>(input.Sort, advancedSorting);
+
+                result.Bag = query.ProcessPagingSort<PriceLevel, PriceLevelPageQueryCommandOutputDTO>(predicate, input, sorting, o => new PriceLevelPageQueryCommandOutputDTO
                 {
-                    var query = dbLocator.Set<PriceLevel>().AsQueryable();
-
-                    var advancedSorting = new List<SortItem<PriceLevel>>();
-                    Expression<Func<PriceLevel, object>> expression;
-                    //if (input.Sort.ContainsKey("productType"))
-                    //{
-                    //    expression = o => o.ProductType.Name;
-                    //    advancedSorting.Add(new SortItem<PriceLevel> { PropertyName = "productType", SortExpression = expression, SortOrder = "desc" });
-                    //}
-
-                    var sorting = new SortingDTO<PriceLevel>(input.Sort, advancedSorting);
-
-                    result.Bag = query.ProcessPagingSort<PriceLevel, PriceLevelPageQueryCommandOutputDTO>(predicate, input, sorting, o => new PriceLevelPageQueryCommandOutputDTO
-                    {
-                        Id = o.Id,
-                        Name = o.Name,
-                        CreatedAt = o.CreatedAt,
-                    });
-                }
+                    Id = o.Id,
+                    Name = o.Name,
+                    CreatedAt = o.CreatedAt,
+                });
             }
             catch (Exception ex)
             {
@@ -170,16 +160,14 @@ namespace DatabaseRepositories.DB
         {
             var result = new OperationResponse();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+            try
             {
-                try
-                {
-                    dbLocator.Set<PriceLevel>().Remove(entity);
-                }
-                catch (Exception ex)
-                {
-                    result.AddException("Error deleting Price Level", ex);
-                }
+                dbLocator.Set<PriceLevel>().Remove(entity);
+            }
+            catch (Exception ex)
+            {
+                result.AddException("Error deleting Price Level", ex);
             }
 
             return null;
@@ -190,25 +178,23 @@ namespace DatabaseRepositories.DB
         {
             var result = new OperationResponse();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+            try
             {
-                try
+                if (!(entity.IsDeleted ?? false))
                 {
-                    if (!(entity.IsDeleted ?? false))
-                    {
-                        entity.DeletedAt = DateTime.UtcNow;
-                        dbLocator.SaveChanges();
-                    }
+                    entity.DeletedAt = DateTime.UtcNow;
+                    dbLocator.SaveChanges();
                 }
-                catch (Exception ex)
-                {
-                    result.AddException("Error voiding Price Level", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                result.AddException("Error voiding Price Level", ex);
             }
 
             return null;
         }
 
-       
+
     }
 }

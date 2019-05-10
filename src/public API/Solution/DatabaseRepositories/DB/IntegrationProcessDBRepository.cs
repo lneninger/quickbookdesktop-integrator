@@ -92,7 +92,7 @@ namespace DatabaseRepositories.DB
         {
             var result = new OperationResponse<IEnumerable<IntegrationProcess>>();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
             {
                 try
                 {
@@ -128,7 +128,7 @@ namespace DatabaseRepositories.DB
         {
             var result = new OperationResponse();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
             {
                 try
                 {

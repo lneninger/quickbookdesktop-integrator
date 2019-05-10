@@ -65,7 +65,7 @@ namespace DatabaseRepositories.DB
                     }
                 }
 
-                using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+                var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
                 {
                     var query = dbLocator.Set<InventoryItem>().AsQueryable();
 
@@ -154,16 +154,14 @@ namespace DatabaseRepositories.DB
         {
             var result = new OperationResponse<IEnumerable<IncomeAccount>>();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+            try
             {
-                try
-                {
-                    result.Bag = dbLocator.Set<IncomeAccount>().ToList();
-                }
-                catch (Exception ex)
-                {
-                    result.AddException("Error getting income accounts", ex);
-                }
+                result.Bag = dbLocator.Set<IncomeAccount>().ToList();
+            }
+            catch (Exception ex)
+            {
+                result.AddException("Error getting income accounts", ex);
             }
 
             return null;
@@ -190,45 +188,66 @@ namespace DatabaseRepositories.DB
         {
             var result = new OperationResponse();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+            try
             {
-                try
-                {
-                    dbLocator.Set<InventoryItem>().Remove(entity);
-                }
-                catch (Exception ex)
-                {
-                    result.AddException("Error deleting Inventory Item", ex);
-                }
+                dbLocator.Set<InventoryItem>().Remove(entity);
+            }
+            catch (Exception ex)
+            {
+                result.AddException("Error deleting Inventory Item", ex);
             }
 
             return null;
 
         }
 
-        public OperationResponse LogicalDelete(InventoryItem entity)
+        public OperationResponse LogicalDelete(params InventoryItem[] entities)
         {
             var result = new OperationResponse();
+            var atLeastOne = false;
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+            try
             {
-                try
+                entities.ToList().ForEach(entity =>
                 {
                     if (!(entity.IsDeleted ?? false))
                     {
                         entity.DeletedAt = DateTime.UtcNow;
-                        dbLocator.SaveChanges();
+                        entity.IsDeleted = true;
+                        atLeastOne = true;
                     }
-                }
-                catch (Exception ex)
+                });
+
+                if (atLeastOne)
                 {
-                    result.AddException("Error voiding Inventory Item", ex);
+                    dbLocator.SaveChanges();
                 }
             }
+            catch (Exception ex)
+            {
+                result.AddException("Error voiding Inventory Item", ex);
+            }
 
-            return null;
+            return result;
         }
 
-       
+        public OperationResponse<IEnumerable<InventoryItem>> GetNotInIntegrationProcess(int integrationProcessId)
+        {
+            var result = new OperationResponse<IEnumerable<InventoryItem>>();
+
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+            try
+            {
+                result.Bag = dbLocator.Set<InventoryItem>().Where(o => o.LastIntegrationProcessId != integrationProcessId).ToList();
+            }
+            catch (Exception ex)
+            {
+                result.AddException($"Error getting Inventory Items not in integration proccess {integrationProcessId}", ex);
+            }
+
+            return result;
+        }
     }
 }

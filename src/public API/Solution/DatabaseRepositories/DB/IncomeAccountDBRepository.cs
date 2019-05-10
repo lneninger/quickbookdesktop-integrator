@@ -65,7 +65,7 @@ namespace DatabaseRepositories.DB
                     }
                 }
 
-                using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+                var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
                 {
                     var query = dbLocator.Set<IncomeAccount>().AsQueryable();
 
@@ -173,7 +173,7 @@ namespace DatabaseRepositories.DB
         {
             var result = new OperationResponse<IEnumerable<IncomeAccount>>();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
             {
                 try
                 {
@@ -209,8 +209,7 @@ namespace DatabaseRepositories.DB
         {
             var result = new OperationResponse();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
-            {
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
                 try
                 {
                     dbLocator.Set<IncomeAccount>().Remove(entity);
@@ -219,7 +218,6 @@ namespace DatabaseRepositories.DB
                 {
                     result.AddException("Error deleting Income Account", ex);
                 }
-            }
 
             return null;
 
@@ -229,8 +227,7 @@ namespace DatabaseRepositories.DB
         {
             var result = new OperationResponse();
 
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
-            {
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
                 try
                 {
                     if (!(entity.IsDeleted ?? false))
@@ -243,7 +240,6 @@ namespace DatabaseRepositories.DB
                 {
                     result.AddException("Error voiding Inventory Item", ex);
                 }
-            }
 
             return null;
         }

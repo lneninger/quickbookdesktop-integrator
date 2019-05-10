@@ -70,6 +70,13 @@ namespace ApplicationLogic.Repositories.DB
         /// </summary>
         /// <param name="entity"></param>
         /// <returns></returns>
-        OperationResponse LogicalDelete(InventoryItem entity);
+        OperationResponse LogicalDelete(params InventoryItem[] entities);
+
+        /// <summary>
+        /// Gets the not in integration process inventory items.
+        /// </summary>
+        /// <param name="integrationProcessId">The integration process identifier.</param>
+        /// <returns></returns>
+        OperationResponse<IEnumerable<InventoryItem>> GetNotInIntegrationProcess(int integrationProcessId);
     }
 }

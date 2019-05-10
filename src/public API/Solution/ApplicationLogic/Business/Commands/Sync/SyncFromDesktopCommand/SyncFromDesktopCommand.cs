@@ -36,10 +36,22 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
             result.AddResponse(syncInventoryItemsResponse);
 
 
+
             var syncPriceLevelsResponse = SyncPriceLevels(input.IntegrationProcessId, input.PriceLevels);
             result.AddResponse(syncInventoryItemsResponse);
 
             return result;
+        }
+
+        private void MarkInventoryItemsAsDisabled(int integrationProcessId)
+        {
+            var result = new OperationResponse();
+
+            var entityResponse = this.Repository.GetNotInIntegrationProcess(integrationProcessId);
+            if (entityResponse.IsSucceed)
+            {
+                this.Repository.LogicalDelete(entityResponse.Bag.ToArray());
+            }
         }
 
         private OperationResponse SyncInventoryItems(int integrationProcessId, IEnumerable<SyncFromDesktopCommandInputInventoryItemDTO> input)
@@ -90,6 +102,8 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                         entity.Stock = (decimal?)item.Stock;
                         entity.IncomeAccountId = this.IncomeAccountRepository.GetByExternalId(item.IncomeAccountId).Bag?.Id;
                         entity.AssetAccountId = this.InventoryAccountRepository.GetByExternalId(item.AssetAccountId).Bag?.Id;
+                        entity.IsDeleted = false;
+                        entity.DeletedAt = null;
                         //SetIncomeAccount(entityResponse, item, entity);
                     }
                 }
@@ -104,6 +118,11 @@ namespace ApplicationLogic.Business.Commands.Sync.SyncFromDesktopCommand
                 catch (Exception ex)
                 {
                     result.AddError("Error Adding Inventory Item", ex);
+                }
+
+                if (result.IsSucceed)
+                {
+                    MarkInventoryItemsAsDisabled(integrationProcessId);
                 }
             }
 

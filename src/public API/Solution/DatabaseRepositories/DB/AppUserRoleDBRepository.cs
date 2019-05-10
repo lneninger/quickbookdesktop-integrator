@@ -36,15 +36,13 @@ namespace DatabaseRepositories.DB
             var result = new OperationResponse<IEnumerable<AppUserRoleGetAllCommandOutputDTO>>();
             try
             {
-                using (var dbLocator = AmbientDbContextLocator.Get<IdentityDBContext>())
+                var dbLocator = AmbientDbContextLocator.Get<IdentityDBContext>();
+                result.Bag = dbLocator.Set<IdentityRole>().Select(entityItem => new AppUserRoleGetAllCommandOutputDTO
                 {
-                    result.Bag = dbLocator.Set<IdentityRole>().Select(entityItem => new AppUserRoleGetAllCommandOutputDTO
-                    {
-                        Id = entityItem.Id,
-                        Name = entityItem.Name,
-                        NormalizedName = entityItem.NormalizedName,
-                    }).ToList();
-                }
+                    Id = entityItem.Id,
+                    Name = entityItem.Name,
+                    NormalizedName = entityItem.NormalizedName,
+                }).ToList();
             }
             catch (Exception ex)
             {
@@ -70,30 +68,28 @@ namespace DatabaseRepositories.DB
                     }
                 }
 
-                using (var dbLocator = this.AmbientDbContextLocator.Get<IdentityDBContext>())
+                var dbLocator = this.AmbientDbContextLocator.Get<IdentityDBContext>();
+                var query = dbLocator.Set<IdentityRole>().AsQueryable();
+
+
+                var advancedSorting = new List<SortItem<IdentityRole>>();
+                Expression<Func<IdentityRole, object>> expression;
+                //if (input.Sort.ContainsKey("email"))
+                //{
+                //    expression = o => o.AppUserRoleThirdPartyAppSettings.Where(third => third.ThirdPartyAppTypeId == ThirdPartyAppTypeEnum.BusinessERP).SingleOrDefault().ThirdPartyAppUserRoleId;
+                //    advancedSorting.Add(new SortItem<AppUserRole> { PropertyName = "erpId", SortExpression = expression, SortOrder = "desc" });
+                //}
+
+                var sorting = new SortingDTO<IdentityRole>(input.Sort, advancedSorting);
+
+                result.Bag = query.ProcessPagingSort<IdentityRole, AppUserRolePageQueryCommandOutputDTO>(predicate, input, sorting, o => new AppUserRolePageQueryCommandOutputDTO
                 {
-                    var query = dbLocator.Set<IdentityRole>().AsQueryable();
+                    Id = o.Id,
+                    Name = o.Name,
+                    NormalizedName = o.NormalizedName,
+                });
 
-
-                    var advancedSorting = new List<SortItem<IdentityRole>>();
-                    Expression<Func<IdentityRole, object>> expression;
-                    //if (input.Sort.ContainsKey("email"))
-                    //{
-                    //    expression = o => o.AppUserRoleThirdPartyAppSettings.Where(third => third.ThirdPartyAppTypeId == ThirdPartyAppTypeEnum.BusinessERP).SingleOrDefault().ThirdPartyAppUserRoleId;
-                    //    advancedSorting.Add(new SortItem<AppUserRole> { PropertyName = "erpId", SortExpression = expression, SortOrder = "desc" });
-                    //}
-
-                    var sorting = new SortingDTO<IdentityRole>(input.Sort, advancedSorting);
-
-                    result.Bag = query.ProcessPagingSort<IdentityRole, AppUserRolePageQueryCommandOutputDTO>(predicate, input, sorting, o => new AppUserRolePageQueryCommandOutputDTO
-                    {
-                        Id = o.Id,
-                        Name = o.Name,
-                        NormalizedName = o.NormalizedName,
-                    });
-
-                    return result;
-                }
+                return result;
             }
             catch (Exception ex)
             {
@@ -129,7 +125,8 @@ namespace DatabaseRepositories.DB
                     {
                         RoleId = roleClaim.RoleId,
                         PermissionId = roleClaim.ClaimValue,
-                    }).ToList()*/;
+                    }).ToList()*/
+                    ;
                 }
             }
             catch (Exception ex)
@@ -211,20 +208,18 @@ namespace DatabaseRepositories.DB
                     NormalizedName = input.NormalizedName,
                 };
 
-                using (var dbLocator = AmbientDbContextLocator.Get<IdentityDBContext>())
+                var dbLocator = AmbientDbContextLocator.Get<IdentityDBContext>();
+                dbLocator.Add(entity);
+                dbLocator.SaveChanges();
+
+                var dto = dbLocator.Set<IdentityRole>().Where(o => o.Id == entity.Id).Select(o => new AppUserRoleInsertCommandOutputDTO
                 {
-                    dbLocator.Add(entity);
-                    dbLocator.SaveChanges();
+                    Id = o.Id,
+                    Name = o.Name,
+                    NormalizedName = o.NormalizedName,
+                }).FirstOrDefault();
 
-                    var dto = dbLocator.Set<IdentityRole>().Where(o => o.Id == entity.Id).Select(o => new AppUserRoleInsertCommandOutputDTO
-                    {
-                        Id = o.Id,
-                        Name = o.Name,
-                        NormalizedName = o.NormalizedName,
-                    }).FirstOrDefault();
-
-                    result.Bag = dto;
-                }
+                result.Bag = dto;
             }
             catch (Exception ex)
             {
@@ -237,20 +232,40 @@ namespace DatabaseRepositories.DB
         public OperationResponse<AppUserRoleUpdateCommandOutputDTO> Update(AppUserRoleUpdateCommandInputDTO input)
         {
             var result = new OperationResponse<AppUserRoleUpdateCommandOutputDTO>();
-            using (var dbLocator = AmbientDbContextLocator.Get<IdentityDBContext>())
+            var dbLocator = AmbientDbContextLocator.Get<IdentityDBContext>();
+            var entity = dbLocator.Set<IdentityRole>().FirstOrDefault(o => o.Id == input.Id);
+            if (entity != null)
             {
-                var entity = dbLocator.Set<IdentityRole>().FirstOrDefault(o => o.Id == input.Id);
-                if (entity != null)
-                {
-                    entity.Id = input.Id;
-                    entity.Name = input.Name;
-                    entity.NormalizedName = input.NormalizedName;
-                }
+                entity.Id = input.Id;
+                entity.Name = input.Name;
+                entity.NormalizedName = input.NormalizedName;
+            }
 
+            dbLocator.SaveChanges();
+
+
+            var dbResult = dbLocator.Set<IdentityRole>().Where(o => o.Id == entity.Id).Select(o => new AppUserRoleUpdateCommandOutputDTO
+            {
+                Id = o.Id,
+                Name = o.Name,
+                NormalizedName = o.NormalizedName,
+            }).FirstOrDefault();
+
+            result.Bag = dbResult;
+            return result;
+        }
+
+        public OperationResponse<AppUserRoleDeleteCommandOutputDTO> Delete(string id)
+        {
+            var result = new OperationResponse<AppUserRoleDeleteCommandOutputDTO>();
+            var dbLocator = this.AmbientDbContextLocator.Get<IdentityDBContext>();
+            var entity = dbLocator.Set<IdentityRole>().FirstOrDefault(o => o.Id == id);
+            if (entity != null)
+            {
+                dbLocator.Entry(entity).State = EntityState.Deleted;
                 dbLocator.SaveChanges();
 
-
-                var dbResult = dbLocator.Set<IdentityRole>().Where(o => o.Id == entity.Id).Select(o => new AppUserRoleUpdateCommandOutputDTO
+                var dbResult = dbLocator.Set<IdentityRole>().Where(o => o.Id == entity.Id).Select(o => new AppUserRoleDeleteCommandOutputDTO
                 {
                     Id = o.Id,
                     Name = o.Name,
@@ -260,55 +275,31 @@ namespace DatabaseRepositories.DB
                 result.Bag = dbResult;
                 return result;
             }
-        }
-
-        public OperationResponse<AppUserRoleDeleteCommandOutputDTO> Delete(string id)
-        {
-            var result = new OperationResponse<AppUserRoleDeleteCommandOutputDTO>();
-            using (var dbLocator = this.AmbientDbContextLocator.Get<IdentityDBContext>())
-            {
-                var entity = dbLocator.Set<IdentityRole>().FirstOrDefault(o => o.Id == id);
-                if (entity != null)
-                {
-                    dbLocator.Entry(entity).State = EntityState.Deleted;
-                    dbLocator.SaveChanges();
-
-                    var dbResult = dbLocator.Set<IdentityRole>().Where(o => o.Id == entity.Id).Select(o => new AppUserRoleDeleteCommandOutputDTO
-                    {
-                        Id = o.Id,
-                        Name = o.Name,
-                        NormalizedName = o.NormalizedName,
-                    }).FirstOrDefault();
-
-                    result.Bag = dbResult;
-                    return result;
-                }
-            }
 
             return null;
         }
 
         public OperationResponse<AppUserRoleGetByNameCommandOutputDTO> GetByName(string name)
         {
-                var result = new OperationResponse<AppUserRoleGetByNameCommandOutputDTO>();
-                try
+            var result = new OperationResponse<AppUserRoleGetByNameCommandOutputDTO>();
+            try
+            {
+                var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
                 {
-                    var dbLocator = AmbientDbContextLocator.Get<ApplicationDBContext>();
+                    result.Bag = dbLocator.Set<IdentityRole>().Where(o => o.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).Select(entityItem => new AppUserRoleGetByNameCommandOutputDTO
                     {
-                        result.Bag = dbLocator.Set<IdentityRole>().Where(o => o.Name.Equals(name, StringComparison.InvariantCultureIgnoreCase)).Select(entityItem => new AppUserRoleGetByNameCommandOutputDTO
-                        {
-                            Id = entityItem.Id,
-                            Name = entityItem.Name,
-                            NormalizedName = entityItem.NormalizedName,
-                        }).FirstOrDefault();
-                    }
+                        Id = entityItem.Id,
+                        Name = entityItem.Name,
+                        NormalizedName = entityItem.NormalizedName,
+                    }).FirstOrDefault();
                 }
-                catch (Exception ex)
-                {
-                    result.AddException($"Error Geting User {name}", ex);
-                }
+            }
+            catch (Exception ex)
+            {
+                result.AddException($"Error Geting User {name}", ex);
+            }
 
-                return result;
+            return result;
         }
     }
 }

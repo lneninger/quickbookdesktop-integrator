@@ -79,17 +79,25 @@ namespace DomainDatabaseMapping
         //     This method will automatically call Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.DetectChanges
         //     to discover any changes to entity instances before saving to the underlying database.
         //     This can be disabled via Microsoft.EntityFrameworkCore.ChangeTracking.ChangeTracker.AutoDetectChangesEnabled.
-        public override int SaveChanges() {
+        public override int SaveChanges()
+        {
 
-            var entries = this.ChangeTracker.Entries().Where(t => typeof(AbstractBaseEntity).IsAssignableFrom(t.Entity.GetType()));
-            var modifiedEntries = entries.Where(entry => entry.State == EntityState.Modified);
-            foreach (var entry in modifiedEntries)
+            try
             {
-                ((AbstractBaseEntity)entry.Entity).UpdatedAt = DateTime.UtcNow;
+                var entries = this.ChangeTracker.Entries().Where(t => typeof(AbstractBaseEntity).IsAssignableFrom(t.Entity.GetType()));
+                var modifiedEntries = entries.Where(entry => entry.State == EntityState.Modified);
+                foreach (var entry in modifiedEntries)
+                {
+                    ((AbstractBaseEntity)entry.Entity).UpdatedAt = DateTime.UtcNow;
+                }
+
+
+                return base.SaveChanges();
             }
-
-
-            return base.SaveChanges();
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
     }

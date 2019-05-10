@@ -69,8 +69,7 @@ namespace DatabaseRepositories.DB
                     }
                 }
 
-                using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
-                {
+                var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
                     var query = dbLocator.Set<AppUser>().AsQueryable();
 
 
@@ -94,7 +93,6 @@ namespace DatabaseRepositories.DB
                     });
 
                     return result;
-                }
             }
             catch (Exception ex)
             {
@@ -225,24 +223,22 @@ namespace DatabaseRepositories.DB
         public OperationResponse<AppUserDeleteCommandOutputDTO> Delete(string id)
         {
             var result = new OperationResponse<AppUserDeleteCommandOutputDTO>();
-            using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
+            var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+            var entity = dbLocator.Set<AppUser>().FirstOrDefault(o => o.Id == id);
+            if (entity != null)
             {
-                var entity = dbLocator.Set<AppUser>().FirstOrDefault(o => o.Id == id);
-                if (entity != null)
+                entity.DeletedAt = DateTime.UtcNow;
+                dbLocator.SaveChanges();
+
+                var dbResult = dbLocator.Set<AppUser>().Where(o => o.Id == entity.Id).Select(o => new AppUserDeleteCommandOutputDTO
                 {
-                    entity.DeletedAt = DateTime.UtcNow;
-                    dbLocator.SaveChanges();
+                    Id = o.Id,
+                    UserName = o.UserName,
+                    CreatedAt = o.CreatedAt
+                }).FirstOrDefault();
 
-                    var dbResult = dbLocator.Set<AppUser>().Where(o => o.Id == entity.Id).Select(o => new AppUserDeleteCommandOutputDTO
-                    {
-                        Id = o.Id,
-                        UserName = o.UserName,
-                        CreatedAt = o.CreatedAt
-                    }).FirstOrDefault();
-
-                    result.Bag = dbResult;
-                    return result;
-                }
+                result.Bag = dbResult;
+                return result;
             }
 
             return null;
@@ -288,10 +284,8 @@ namespace DatabaseRepositories.DB
             var result = new OperationResponse<bool>();
             try
             {
-                using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
-                {
-                    result.Bag = 0 == dbLocator.Set<AppUser>().Count(o => o.NormalizedEmail.Equals(email));
-                }
+                var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+                result.Bag = 0 == dbLocator.Set<AppUser>().Count(o => o.NormalizedEmail.Equals(email));
             }
             catch (Exception)
             {
@@ -305,10 +299,8 @@ namespace DatabaseRepositories.DB
             var result = new OperationResponse<bool>();
             try
             {
-                using (var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>())
-                {
-                    result.Bag = 0 == dbLocator.Set<AppUser>().Count(o => o.NormalizedUserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase));
-                }
+                var dbLocator = this.AmbientDbContextLocator.Get<ApplicationDBContext>();
+                result.Bag = 0 == dbLocator.Set<AppUser>().Count(o => o.NormalizedUserName.Equals(userName, StringComparison.InvariantCultureIgnoreCase));
 
             }
             catch (Exception)

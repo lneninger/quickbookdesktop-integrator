@@ -8,6 +8,7 @@ using Framework.SignalR;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using QuickbooksIntegratorAPI.Auth;
+using System;
 using System.Collections.Generic;
 using Authorization = Microsoft.AspNetCore.Authorization;
 
@@ -58,8 +59,15 @@ namespace QuickbooksIntegratorAPI.Controllers
         [HttpPost("requestintegrationprocess"), ProducesResponseType(200, Type = typeof(IntegrationProcessInsertCommandOutputDTO))]
         public IActionResult IntegrationProcessPost([FromBody]IntegrationProcessInsertCommandInputDTO model)
         {
-            var appResult = this.IntegrationProcessInsertCommand.Execute(model);
-            return appResult.IsSucceed ? (IActionResult)this.Ok(appResult.Bag) : (IActionResult)this.BadRequest(appResult.Bag);
+            try
+            {
+                var appResult = this.IntegrationProcessInsertCommand.Execute(model);
+                return appResult.IsSucceed ? (IActionResult)this.Ok(appResult.Bag) : (IActionResult)this.BadRequest(appResult.Bag);
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
         }
 
         /// <summary>
